@@ -55,8 +55,6 @@
 @endsection
 
 @section('scripts')
-<script src="js/combox.js"></script>
-
 <script type="text/javascript">
   jQuery(function($) {
     //initiate dataTables plugin
@@ -64,19 +62,7 @@
     $('#table-causas')
     //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
     .dataTable( {
-      
 
-      //,
-      //"sScrollY": "200px",
-      //"bPaginate": false,
-
-      //"sScrollX": "100%",
-      //"sScrollXInner": "120%",
-      //"bScrollCollapse": true,
-      //Note: if you are applying horizontal scrolling (sScrollX) on a ".table-bordered"
-      //you may want to wrap the table inside a "div.dataTables_borderWrap" element
-
-      //"iDisplayLength": 50
       } );
     //oTable1.fnAdjustColumnSizing();
 
