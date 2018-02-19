@@ -26,7 +26,7 @@
 
     <div class="form-group">
       <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-      <button class="btn btn-danger" type="reset">Cancelar<i class="fa fa-times"></i></button>
+      <a href="/prioridades"><button class="btn btn-danger" type="button">Cancelar<i class="fa fa-times"></i></button></a>
   </div>
 </div>
     {!!Form::close()!!}

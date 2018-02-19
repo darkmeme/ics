@@ -8,7 +8,7 @@
 
 
 <div class="col-lg-3">
-  <a href=""data-target="#modal-create-tarjeta" data-toggle="modal"> <button class="btn btn-danger">Nueva</button></a>
+  <a href=""data-target="#modal-create-tarjeta" data-toggle="modal"> <button class="btn btn-info">Nueva</button></a>
 </div>
 
 
@@ -22,6 +22,7 @@
   <div class="table-header">
     Listado de tarjetas realizadas"
   </div>
+<div class="table-responsive">
 
       <table class="table table-bordered text-center table-striped table-hover" id="table-tarjetas">
         <thead>
@@ -42,7 +43,6 @@
           <th>Finalizado</th>
           <th>Estatus</th>
           <th>Opciones</th>
-          </div>
         </thead>
 
 
@@ -83,7 +83,7 @@
         @include('tarjetas.modal')
         @endforeach
       </table>
-
+        </div>
 </div>
 </div>
 @include('tarjetas.create')
@@ -93,6 +93,8 @@
 @section('scripts')
 <script src="js/combox.js"></script>
 <script type="text/javascript">
+
+
   jQuery(function($) {
     //initiate dataTables plugin
     var oTable1 =
@@ -224,7 +226,7 @@
     $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
 
     //select/deselect all rows according to table header checkbox
-    $('#dynamic-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+    $('#table-tarjetas > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
       var th_checked = this.checked;//checkbox inside "TH" table header
 
       $(this).closest('table').find('tbody > tr').each(function(){
@@ -235,42 +237,18 @@
     });
 
     //select/deselect a row when the checkbox is checked/unchecked
-    $('#dynamic-table').on('click', 'td input[type=checkbox]' , function(){
+    $('#table-tarjetas').on('click', 'td input[type=checkbox]' , function(){
       var row = $(this).closest('tr').get(0);
       if(!this.checked) tableTools_obj.fnSelect(row);
       else tableTools_obj.fnDeselect($(this).closest('tr').get(0));
     });
 
 
-
-
-      $(document).on('click', '#dynamic-table .dropdown-toggle', function(e) {
+      $(document).on('click', '#table-tarjetas .dropdown-toggle', function(e) {
       e.stopImmediatePropagation();
       e.stopPropagation();
       e.preventDefault();
     });
-
-
-    //And for the first simple table, which doesn't have TableTools or dataTables
-    //select/deselect all rows according to table header checkbox
-    var active_class = 'active';
-    $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-      var th_checked = this.checked;//checkbox inside "TH" table header
-
-      $(this).closest('table').find('tbody > tr').each(function(){
-        var row = this;
-        if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-        else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-      });
-    });
-
-    //select/deselect a row when the checkbox is checked/unchecked
-    $('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-      var $row = $(this).closest('tr');
-      if(this.checked) $row.addClass(active_class);
-      else $row.removeClass(active_class);
-    });
-
 
 
     /********************************/

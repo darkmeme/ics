@@ -17,7 +17,7 @@
 
       {!!Form::open(array('url'=>'causas','method'=>'POST','autocomplete'=>'off'))!!}
       {{Form::token()}}
-      
+
       <h3 class="header smaller lighter blue">Crear Nueva Causa</h3>
 
     <div class="form-group">
@@ -27,7 +27,7 @@
 
     <div class="form-group">
       <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-      <button class="btn btn-danger" type="reset">Cancelar<i class="fa fa-times"></i></button>
+      <a href="/causas"><button class="btn btn-danger" type="button">Cancelar<i class="fa fa-times"></i></button></a>
     </div>
   </div>
 </div>

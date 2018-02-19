@@ -20,6 +20,7 @@
       Lista de Equipos"
     </div>
 
+<div class="table-responsive">
       <table class="table table-bordered text-center table-striped table-hover" id="table-equipos">
         <thead>
           <th>Id</th>
@@ -54,6 +55,7 @@
            @include('equipos.modal')
         @endforeach
       </table>
+      </div>
     </div>
   </div>
 
@@ -69,7 +71,7 @@
     $('#table-equipos')
     //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
     .dataTable( {
-    
+
 
       //,
       //"sScrollY": "200px",

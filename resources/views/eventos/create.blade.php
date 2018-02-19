@@ -21,7 +21,7 @@
     {{Form::token()}}
 <h3 class="header smaller lighter blue">Crear Nuevo Evento</h3>
 
-    
+
     <div class="form-group">
       <label for="nombre">Evento</label>
       <input type="text" name="eventos" class="form-control" placeholder="Eventos..." required>
@@ -29,7 +29,7 @@
 
     <div class="form-group">
       <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-      <button class="btn btn-danger" type="reset">Cancelar<i class="fa fa-times"></i></button>
+      <a href="/eventos"><button class="btn btn-danger" type="button">Cancelar<i class="fa fa-times"></i></button></a>
     </div>
 
     {!!Form::close()!!}
