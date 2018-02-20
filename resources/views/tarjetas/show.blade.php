@@ -9,12 +9,12 @@
       </div>
     <div class="row">
       <div class="col-lg-7 col-xs-12">
-        {{--<h5><strong>Asignada a: </strong>{{$tarjetas->empleado_asignado->nombre}} </h5>--}}
+        {{--<h5><strong>Asignada a: </strong>{{$tarjetas->user_asignado->name}} </h5>--}}
         <h5><strong>Status: </strong>{{$tarjetas->status}} </h5>
         <h5><strong>Fecha: </strong>{{$tarjetas->created_at}} </h5>
         <h5><strong>Area: </strong>{{$tarjetas->area->nombre}} </h5>
         <h5><strong>Planta: </strong>{{$tarjetas->planta->nombre}} </h5>
-        <h5><strong>Nombre Empleado: </strong>{{$tarjetas->empleado->nombre}} </h5>
+        <h5><strong>Nombre Empleado: </strong>{{$tarjetas->user->name}} </h5>
         <h5><strong>Equipo: </strong>{{$tarjetas->equipo->nombre}} </h5>
         <h5><strong>Turno: </strong>{{$tarjetas->turno}} </h5>
         <h5><strong>Prioridad: </strong>{{$tarjetas->prioridad}} </h5>
@@ -24,8 +24,8 @@
         <h5><strong>Descripcion del Reporte: </strong>{{$tarjetas->descripcion_reporte}} </h5>
         <h5><strong>Fecha de Cierre: </strong>{{$tarjetas->fecha_cierre}} </h5>
         <h5><strong>Solucion Implementada: </strong>{{$tarjetas->solucion_implementada}} </h5>
-        <h5><strong>Asignada A: </strong>{{$tarjetas->asignado->nombre}} </h5>
-        <h5><strong>Realizada por: </strong>{{$tarjetas->terminado->nombre}} </h5>
+        <h5><strong>Asignada A: </strong>{{$tarjetas->asignado->name}} </h5>
+        <h5><strong>Realizada por: </strong>{{$tarjetas->terminado->name}} </h5>
       </div>
       <div class="col-lg-5 col-xs-12">
 <a href=""data-target="#modal-asignar" data-toggle="modal"> <button class="btn btn-info">Reasignar</button></a>
@@ -57,8 +57,8 @@
             <label for="nombre">Empleados</label>
             <select class="form-control" id="select-empleado" name="empleado_id" class="form-control">
               <option value="">Seleccione Empleado</option>
-              @foreach($empleados as $e)
-              <option value="{{$e->id}}">{{$e->nombre}}</option>
+              @foreach($user as $u)
+              <option value="{{$u->id}}">{{$u->name}}</option>
               @endforeach
             </select>
 

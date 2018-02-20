@@ -35,7 +35,7 @@
           <td>{{$empleado->nombre}}</td>
           <td>{{$empleado->codigoempleado}}</td>
           <td>{{$empleado->puesto->nombre}}</td>
-            <td>{{$empleado->rol->nombre}}</td>
+            <td>{{$empleado->rol->name}}</td>
           <td>
             <a href="{{URL::action('EmpleadosController@edit',$empleado->id)}}"> <button class="btn btn-info">Editar</button></a>
               <a href=""data-target="#modal-delete-{{$empleado->id}}" data-toggle="modal"> <button class="btn btn-danger">Eliminar</button></a>

@@ -52,7 +52,7 @@
           <td>{{$t->area->nombre}}</td>
           <td>{{$t->planta->nombre}}</td>
           <td>{{$t->created_at}}</td>
-          {{--<td>{{$t->empleado->nombre}}</td>--}}
+          {{--<td>{{$t->user->name}}</td>--}}
           <td>{{$t->equipo->nombre}}</td>
           {{--<td>{{$t->turno}}</td>--}}
           <td>{{$t->prioridad}}</td>
@@ -73,10 +73,14 @@
               <a class="green" href="#">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-
+              @can('borrar_tarjetas')
               <a class="red" href="" data-target="#modal-delete-{{$t->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
+              @else
+              <h3>Usted no puede eliminar esta nota</h3>
+              @endcan
+
             </div>
           </td>
         </tr>
@@ -173,6 +177,8 @@
                 print this table.\
                 <br />Press <b>escape</b> when finished.</p>",
         }
+
+
           ]
       } );
     //we put a container before our table and append TableTools element to it

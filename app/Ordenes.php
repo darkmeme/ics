@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ordenes extends Model
 {
     protected $table='ordenes';
-    protected $fillable=['descripcion','empleado_id','planta_id','equipo_id','asignado',
+    protected $fillable=['descripcion','user_id','planta_id','equipo_id','asignado',
   'Fecha_ejecucion'];
 
   public function planta()

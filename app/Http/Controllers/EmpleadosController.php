@@ -18,12 +18,19 @@ use RegistersUsers;
   public function __construct()
   {
       $this->middleware('auth');
+      //$this->middleware(['role:administrador']);
+      //$this->middleware(['role:Administrador','permission:publish articles|edit articles']);
+
   }
+
+
 
     public function index(Request $request)
     {
+$roles = $user->getRoleNames(); // Returns a collection
+       dd($$roles);
       $empleados=Empleado::with('Rol')->get();
-      // dd($empleados);
+
       return view('empleados.index',compact('empleados'));
     }
 

@@ -43,9 +43,9 @@ role="dialog" tabindex="1" id="modal-create-tarjeta">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
         <select class="form-control" name="empleado_id" required class="form-control">
-          <option value="{{ Auth::user()->id }}">{{ Auth::user()->nombre }}</option>
-          @foreach($empleados as $e)
-          <option value="{{$e->id}}">{{$e->nombre}}</option>
+          <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
+          @foreach($users as $u)
+          <option value="{{$u->id}}">{{$u->name}}</option>
           @endforeach
         </select>
       </div>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TarjetasModel;
 use App\AreasModel;
-use App\Empleado;
+use App\User;
 use App\EquiposModel;
 use App\PlantasModel;
 use App\EventosModel;
@@ -25,7 +25,7 @@ class TarjetasController extends Controller
 
     public function index(Request $request)
     {
-      $empleados=Empleado::All();
+      $users=User::All();
       $equipos=EquiposModel::All();
       $plantas=PlantasModel::ALL();
       $eventos=EventosModel::ALL();
@@ -36,7 +36,7 @@ class TarjetasController extends Controller
       //->orderBy('id','desc')
       //->paginate(5);
       //dd($categorias);
-      return view('tarjetas.index',compact('tarjetas','empleados','users','equipos','plantas','eventos','categorias','causas'));
+      return view('tarjetas.index',compact('tarjetas','users','users','equipos','plantas','eventos','categorias','causas'));
     }
 
 
@@ -49,7 +49,7 @@ class TarjetasController extends Controller
     public function store(Request $request)
     {
       $tarjetas=new TarjetasModel;
-      $tarjetas->empleado_id=$request->get('empleado_id');
+      $tarjetas->user_id=$request->get('empleado_id');
       $tarjetas->area_id=$request->get('area_id');
       $tarjetas->equipo_id=$request->get('equipo_id');
       $tarjetas->prioridad=$request->get('prioridad');
@@ -61,9 +61,9 @@ class TarjetasController extends Controller
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
       $tarjetas->status='enviada';
-      $tarjetas->empleado_asignado=(1);
-      $tarjetas->empleado_finaliza=(1);
-      
+      $tarjetas->user_asignado=(2);
+      $tarjetas->user_finaliza=(2);
+
       //$tarjetas->fecha_cierre=$request->get('fecha_cierre');
       //$tarjetas->finalizado=$request->get('cerrado');
 
@@ -74,12 +74,12 @@ class TarjetasController extends Controller
     public function show($id)
     {
       //variable empleados para llenar combo de empleados en el modal de reasignar
-        $empleados=Empleado::get(['id','nombre']);//selecciona solo dos campos de la tabla
+        $user=User::get(['id','name']);//selecciona solo dos campos de la tabla
         //dd($empleados);
         $tarjetas=TarjetasModel::findOrFail($id);
         //$asignado=TarjetasModel::with('asignado')->get();
         //dd($asignado);
-        return view('tarjetas.show', compact('empleados','tarjetas'));
+        return view('tarjetas.show', compact('user','tarjetas'));
 
     }
 
@@ -95,7 +95,7 @@ class TarjetasController extends Controller
 public function asignar(Request $request,$id)
 {
   $tarjeta=TarjetasModel::findOrFail($id);
-  $tarjeta->empleado_asignado=$request->get('empleado_id');
+  $tarjeta->user_asignado=$request->get('empleado_id');
   $tarjeta->status='Asignada';
   $tarjeta->update();
   return Redirect::to('tarjetas');
@@ -106,7 +106,7 @@ public function asignar(Request $request,$id)
     {
       $tarjetas=  TarejetasModel::findOrFail($id);
       $tarjetas->fehca=$request->get('fehca');
-      $tarjetas->empleado_id=$request->get('empleado_id');
+      $tarjetas->user_id=$request->get('empleado_id');
       $tarjetas->area_id=$request->get('area_id');
       $tarjetas->equipo_id=$request->get('equipo_id');
       $tarjetas->prioridad=$request->get('prioridad');

@@ -16,17 +16,17 @@ class CreateOrdenesTable extends Migration
         Schema::create('ordenes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion');
-            $table->integer('empleado_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('planta_id')->unsigned();
             $table->integer('equipo_id')->unsigned();
-            $table->integer('asignado')->unsigned();
+            $table->integer('user_asignado')->unsigned();
             $table->date('Fecha_ejecucion');
             $table->timestamps();
 
             //relaciones
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('planta_id')->references('id')->on('plantas');
-            $table->foreign('asignado')->references('id')->on('empleados');
+            $table->foreign('user_asignado')->references('id')->on('users');
             $table->foreign('equipo_id')->references('id')->on('equipos');
         });
     }

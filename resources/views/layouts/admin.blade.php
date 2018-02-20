@@ -75,7 +75,7 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<!--<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">-->
-									<small>Bienvenido {{ Auth::user()->nombre }}</small>
+									<small>Bienvenido {{ Auth::user()->name }}</small>
 
 								<i class="ace-icon fa fa-caret-down"></i>
 							</a>
@@ -512,13 +512,13 @@
 		<script src="{{asset('assets/js/jquery.flot.resize.min.js')}}"></script>
 
 		<!-- page specific plugin scripts -->
-		<script src="assets/js/jquery.dataTables.min.js"></script>
-		<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
-		<script src="assets/js/dataTables.tableTools.min.js"></script>
-		<script src="assets/js/dataTables.colVis.min.js"></script>
+		<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
+		<script src="{{asset('assets/js/jquery.dataTables.bootstrap.min.js')}}"></script>
+		<script src="{{asset('assets/js/dataTables.tableTools.min.js')}}"></script>
+		<script src="{{asset('assets/js/dataTables.colVis.min.js')}}"></script>
 
 		<!-- ace scripts -->
-		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="{{asset('assets/js/ace-elements.min.js')}}"></script>
 		<script src="{{asset('assets/js/ace.min.js')}}"></script>
 @yield('scripts')
 	</body>

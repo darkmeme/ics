@@ -4,18 +4,17 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasRoles;
 
-    /**
-     * The attributes that are mass  assignable.
-     *
-     * @var array
-     */
+    public $timestamps=false;
+    
     protected $fillable = [
-        'name', 'email', 'password','codigoempleado','puesto','rol_id',
+        'name', 'email', 'password','codigoempleado','puesto_id',
     ];
 
     /**
@@ -26,4 +25,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function puesto()
+      {
+        return $this->belongsTo('App\PuestosModel');
+      }
 }

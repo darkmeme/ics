@@ -17,7 +17,13 @@
 // rutas de tipo resource usados para manejar los crud de todas las tablas
 Route::resource('equipos', 'EquiposController');
 Route::resource('categorias', 'CategoriasController');
-Route::resource('empleados', 'EmpleadosController');
+
+Route::group(['middleware' => ['role:super-admin|Administrador']], function () {
+
+});
+
+
+//Route::resource('empleados', 'EmpleadosController');
 Route::resource('roles', 'RolesController');
 Route::resource('areas', 'AreasController');
 Route::resource('eventos', 'EventosController');

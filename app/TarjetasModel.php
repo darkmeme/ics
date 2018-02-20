@@ -28,19 +28,19 @@ class TarjetasModel extends Model
       return $this->belongsTo('App\EventosModel');
     }
 
-  public function empleado()
+  public function user()
     {
-      return $this->belongsTo('App\Empleado');
+      return $this->belongsTo('App\User');
     }
 
     public function asignado()
       {
-        return $this->belongsTo('App\Empleado','empleado_asignado');
+        return $this->belongsTo('App\User','user_asignado');
       }
 
     public function terminado()
         {
-          return $this->belongsTo('App\Empleado','empleado_finaliza');
+          return $this->belongsTo('App\User','user_finaliza');
         }
 
   public function area()
