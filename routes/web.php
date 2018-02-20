@@ -23,7 +23,7 @@ Route::group(['middleware' => ['role:super-admin|Administrador']], function () {
 });
 
 
-//Route::resource('empleados', 'EmpleadosController');
+Route::resource('users', 'UsersController');
 Route::resource('roles', 'RolesController');
 Route::resource('areas', 'AreasController');
 Route::resource('eventos', 'EventosController');
@@ -36,6 +36,8 @@ Route::resource('puestos', 'PuestosController');
 Route::resource('ordenes', 'OrdenesController');
 //ruta para asignar una tarjeta a un empleado
 Route::post('/asignar/{idtarjeta}','TarjetasController@asignar');
+//ruta para finalizar una TarjetasModel
+Route::post('/finalizar/{idtarjeta}','TarjetasController@finalizar');
 //ruta para las autentificaciones
 Auth::routes();
 
@@ -45,3 +47,6 @@ Route::get('/reportes/{id}/','TarjetasController@pdf');
 //ruta para las peticiones ajax
 Route::get('/planta/{id}/areas','AreasController@areas_plantas');
 Route::get('/area/{id}/equipos','EquiposController@equipos_areas');
+// rutas para cargar las tarjetas creadas y asignadas a un usuario
+Route::get('/mis-tarjetas', 'TarjetasController@mis_tarjetas');
+Route::get('/tarjetas-asignadas', 'TarjetasController@tarjetas_asignadas');

@@ -8,9 +8,9 @@ class TarjetasModel extends Model
 {
   protected $table='tarjetas';
 
-  protected $fillable=['empleado_id','area_id','equipo_id','prioridad',
-  'descripcion_reporte','empleado_finaliza','categoria_id','solucion_implementada','evento_id','turno',
-  'causa_id','fecha_cierre','finalizado','status','planta_id','empleado_asignado'];
+  protected $fillable=['user_id','area_id','equipo_id','prioridad',
+  'descripcion_reporte','user_finaliza','categoria_id','solucion_implementada','evento_id','turno',
+  'causa_id','fecha_cierre','finalizado','status','planta_id','user_asignado'];
 
   //public $timestamps=false ;
   public function causa()

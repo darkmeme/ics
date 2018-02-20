@@ -12,9 +12,9 @@ class User extends Authenticatable
     use HasRoles;
 
     public $timestamps=false;
-    
+
     protected $fillable = [
-        'name', 'email', 'password','codigoempleado','puesto_id',
+        'id','name', 'email', 'password','codigoempleado','puesto_id',
     ];
 
     /**

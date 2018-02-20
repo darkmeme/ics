@@ -12,6 +12,7 @@ use App\CategoriasModel;
 use App\CausasModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Auth;
 
 
 class TarjetasController extends Controller
@@ -32,12 +33,24 @@ class TarjetasController extends Controller
       $categorias=CategoriasModel::ALL();
       $causas=CausasModel::ALL();
       $tarjetas=TarjetasModel::All();
-      //$tarjetas=TarjetasModel::Buscar($request->get('buscar'))
-      //->orderBy('id','desc')
-      //->paginate(5);
-      //dd($categorias);
       return view('tarjetas.index',compact('tarjetas','users','users','equipos','plantas','eventos','categorias','causas'));
     }
+
+//funcion que carga todas la tarjetas creadas por un usuario
+public function mis_tarjetas(Request $request){
+  $user_actual=Auth::user()->id;
+   $tarjetas=TarjetasModel::where('user_id',$user_actual)->get();
+   //dd($tarjetas);
+   return view('tarjetas.mis-tarjetas',compact('tarjetas'));
+}
+
+public function tarjetas_asignadas(Request $request){
+  $user_actual=Auth::user()->id;
+   $tarjetas=TarjetasModel::where('user_asignado',$user_actual)->get();
+   //dd($tarjetas);
+   return view('tarjetas.tarjetas-asignadas',compact('tarjetas'));
+}
+
 
 
     public function create()
@@ -97,6 +110,19 @@ public function asignar(Request $request,$id)
   $tarjeta=TarjetasModel::findOrFail($id);
   $tarjeta->user_asignado=$request->get('empleado_id');
   $tarjeta->status='Asignada';
+  $tarjeta->update();
+  return Redirect::to('tarjetas');
+}
+
+
+public function finalizar(Request $request,$id)
+{
+  $tarjeta=TarjetasModel::findOrFail($id);
+  $tarjeta->user_finaliza=$request->get('user_finaliza');
+  $tarjeta->solucion_implementada=$request->get('solucion');
+  $tarjeta->status='Finalizada';
+  $tarjeta->finalizado=1;
+  $tarjeta->fecha_cierre= new \DateTime();
   $tarjeta->update();
   return Redirect::to('tarjetas');
 }

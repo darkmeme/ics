@@ -2,59 +2,89 @@
 @section('contenido')
 
 
-  <div class="row">
-    <div class="col-lg-6 col-xs-12">
-    <a href="empleados/create"><button class="btn btn-success">Nuevo</button></a>
-    </div>
-  </div>
-
 
 <div class="row">
-  <div class="col-sm-12">
-    <h3 class="header smaller lighter blue">Listado de Empleados</h3>
-    <div class="clearfix">
-      <div class="pull-right tableTools-container"></div>
-    </div>
-    <div class="table-header">
-      Lista de Empleados"
-    </div>
-    <div class="table-responsive">
-      <table class="table table-bordered text-center" id="table-empleados" width="100%" cellspacing="0">
+<div class="col-xs-12">
+  <h3 class="header smaller lighter blue">Listado de mis tarjetas</h3>
+  <div class="clearfix">
+    <div class="pull-right tableTools-container"></div>
+  </div>
+
+  <div class="table-header">
+    Listado de mis tarjetas"
+  </div>
+<div class="table-responsive">
+
+      <table class="table table-bordered text-center table-striped table-hover" id="table-tarjetas">
         <thead>
-          <th>Id</th>
+          <th>Numero</th>
+          <th>Area</th>
+          <th>Planta</th>
+          <th>Fecha</th>
           <th>Nombre</th>
-          <th>Codigo</th>
-          <th>Puesto</th>
-          <th>Rol</th>
+          <th>Equipo</th>
+          {{--<th>Turno</th>--}}
+          <th>Prioridad</th>
+          <th>Categoria</th>
+          {{--<th>Evento</th>
+          <th>Causa</th>--}}
+          <th>Descripcion</th>
+          {{--<th>Solucion</th>
+          <th>Fecha cierre</th>--}}
+          <th>Finalizado</th>
+          <th>Estatus</th>
           <th>Opciones</th>
         </thead>
 
-        @foreach ($empleados as $empleado)
+
+        @foreach ($tarjetas as $t)
         <tr>
-          <td>{{$empleado->id}}</td>
-          <td>{{$empleado->nombre}}</td>
-          <td>{{$empleado->codigoempleado}}</td>
-          <td>{{$empleado->puesto->nombre}}</td>
-            <td>{{$empleado->rol->name}}</td>
+          <td>{{$t->id}}</td>
+          <td>{{$t->area->nombre}}</td>
+          <td>{{$t->planta->nombre}}</td>
+          <td>{{$t->created_at}}</td>
+          <td>{{$t->user->name}}</td>
+          <td>{{$t->equipo->nombre}}</td>
+          {{--<td>{{$t->turno}}</td>--}}
+          <td>{{$t->prioridad}}</td>
+          <td>{{$t->categoria->nombre}}</td>
+          {{--<td>{{$t->evento->nombre}}</td>
+          <td>{{$t->causa->nombre}}</td>--}}
+          <td>{{$t->descripcion_reporte}}</td>
+          {{--<td>{{$t->solucion_implementada}}</td>
+          <td>{{$t->fecha_cierre}}</td>--}}
+          <td>{{$t->finalizado}}</td>
+          <td><span class="label label-sm label-success">{{$t->status}}</span>
+          </td>
           <td>
-            <a href="{{URL::action('EmpleadosController@edit',$empleado->id)}}"> <button class="btn btn-info">Editar</button></a>
-              <a href=""data-target="#modal-delete-{{$empleado->id}}" data-toggle="modal"> <button class="btn btn-danger">Eliminar</button></a>
+            <div class="hidden-sm hidden-xs action-buttons">
+              <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
+                <i class="ace-icon fa fa-eye bigger-200"></i>
+              </a>
+              <a class="green" href="#">
+                <i class="ace-icon fa fa-pencil bigger-200"></i>
+              </a>
+
+            </div>
           </td>
         </tr>
-@include('empleados.modal')
         @endforeach
       </table>
-    </div>
-  </div>
+        </div>
 </div>
+</div>
+
 @endsection
 
 @section('scripts')
+<script src="js/combox.js"></script>
 <script type="text/javascript">
+
+
   jQuery(function($) {
     //initiate dataTables plugin
     var oTable1 =
-    $('#table-empleados')
+    $('#table-tarjetas')
     //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
     .dataTable( {
 
@@ -129,6 +159,8 @@
                 print this table.\
                 <br />Press <b>escape</b> when finished.</p>",
         }
+
+
           ]
       } );
     //we put a container before our table and append TableTools element to it
@@ -182,7 +214,7 @@
     $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
 
     //select/deselect all rows according to table header checkbox
-    $('#dynamic-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+    $('#table-tarjetas > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
       var th_checked = this.checked;//checkbox inside "TH" table header
 
       $(this).closest('table').find('tbody > tr').each(function(){
@@ -193,42 +225,18 @@
     });
 
     //select/deselect a row when the checkbox is checked/unchecked
-    $('#dynamic-table').on('click', 'td input[type=checkbox]' , function(){
+    $('#table-tarjetas').on('click', 'td input[type=checkbox]' , function(){
       var row = $(this).closest('tr').get(0);
       if(!this.checked) tableTools_obj.fnSelect(row);
       else tableTools_obj.fnDeselect($(this).closest('tr').get(0));
     });
 
 
-
-
-      $(document).on('click', '#dynamic-table .dropdown-toggle', function(e) {
+      $(document).on('click', '#table-tarjetas .dropdown-toggle', function(e) {
       e.stopImmediatePropagation();
       e.stopPropagation();
       e.preventDefault();
     });
-
-
-    //And for the first simple table, which doesn't have TableTools or dataTables
-    //select/deselect all rows according to table header checkbox
-    var active_class = 'active';
-    $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-      var th_checked = this.checked;//checkbox inside "TH" table header
-
-      $(this).closest('table').find('tbody > tr').each(function(){
-        var row = this;
-        if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-        else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-      });
-    });
-
-    //select/deselect a row when the checkbox is checked/unchecked
-    $('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-      var $row = $(this).closest('tr');
-      if(this.checked) $row.addClass(active_class);
-      else $row.removeClass(active_class);
-    });
-
 
 
     /********************************/

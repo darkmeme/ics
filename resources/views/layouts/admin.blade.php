@@ -180,25 +180,25 @@
 							<li class="">
 								<a href="/tarjetas">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Listado de Tarjetas
+									Listado de todas las Tarjetas
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 
 							<li class="">
-								<a href="">
+								<a href="/mis-tarjetas">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Crear Nueva
+									Mis Tarjetas Realizadas
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 
 							<li class="">
-								<a href="">
+								<a href="/tarjetas-asignadas">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Reportes de Tarjetas
+									Mis Tarjetas Asignadas
 								</a>
 
 								<b class="arrow"></b>
