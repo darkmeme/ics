@@ -40,7 +40,7 @@
               <a class="green" href="{{URL::action('AreasController@edit',$are->id)}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-              @can('borrar')
+              @hasanyrole('Administrador|Coordinador')
               <a class="red" href="" data-target="#modal-delete-{{$are->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>

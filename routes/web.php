@@ -30,7 +30,7 @@ Auth::routes();
 Route::post('/permisos', 'RolesController@create_permission');
 Route::delete('/permisos-borrar/{id}/', 'RolesController@delete_permission');
 Route::post('/permisos-asignar/{id}/{permiso}/', 'RolesController@asignar_permiso');
-
+Route::get('/roles-asignar', 'RolesController@asignar_rol');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/reportes/{id}/','TarjetasController@pdf');
