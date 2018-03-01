@@ -10,13 +10,14 @@
 <br>
 <div class="container">
 
-  {{--{{Form::open(array('action'=>array('RolesController@asignar_permiso'),'method'=>'post'))}}
-  {{Form::token()}}--}}
+
+  {!!Form::open(array({{--'url'=>'/permisos-asignar/{id}/{permiso}'--}} 'method'=>'POST','id'=>'FormRol','autocomplete'=>'off'))!!}
+  {{Form::token()}}
   <div class="row">
     <div class="col-lg-3">
   <div class="form-group">
     <label for="nombre">Roles</label>
-    <select class="form-control" id="select-planta" required name="planta_id" class="form-control">
+    <select class="form-control" id="select-rol" required name="rol" class="form-control">
       <option value="">Seleccione un Rol</option>
       @foreach($roles as $r)
       <option value="{{$r->id}}">{{$r->name}}</option>
@@ -32,7 +33,7 @@
   <div class="col-lg-3">
   <div class="form-group">
   <label for="nombre">Permisos</label>
-  <select class="form-control" id="select-planta" required name="planta_id" class="form-control">
+  <select class="form-control" id="select-permiso" required name="permiso" class="form-control">
     <option value="">Seleccione un Permiso</option>
     @foreach($permisos as $per)
     <option value="{{$per->id}}">{{$per->name}}</option>
@@ -40,13 +41,12 @@
   </select>
   </div>
   </div>
-
-  <button type="submit" class="btn btn-sm btn-info">
+  <button type="submit" id="btn-asignar" class="btn btn-sm btn-info">
     <i class="ace-icon fa fa-check"></i>
     Asignar
     </button>
   </div>
-{{--{{Form::Close()}}--}}
+{{Form::Close()}}
 
 
 <div class="row">
@@ -223,6 +223,8 @@
     </div>
   </div>
     {{Form::Close()}}
+@endsection
 
-
+@section('scripts')
+<script src="{{asset('js/insert.js')}}"></script>
 @endsection

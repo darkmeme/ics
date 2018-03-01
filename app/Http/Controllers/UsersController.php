@@ -28,22 +28,22 @@ use RegistersUsers;
       return view('users.index',compact('users'));
     }
 
-  
+
 
     public function create()
     {
 
-      //$roles=RolesModel::All();
+      $roles=Role::All();
       $puestos=PuestosModel::get();
       //dd($puestos);
-      return view('users.create',compact('puestos'));
+      return view('users.create',compact('puestos','roles'));
     }
 
 //funcion para guardar un nuevo empleado, recibe datos desde la vista html
     public function store(Request $request)
     {
       $user=new User;
-      $user->name=$request->get('empleado');
+      $user->name=$request->get('nombre');
       $user->codigoempleado=$request->get('codigo');
       $user->puesto_id=$request->get('puesto_id');
       //$user->rol_id=$request->get('rol_id');

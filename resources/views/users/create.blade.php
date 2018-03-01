@@ -17,7 +17,7 @@
     </div>
     @endif
 
-    {!!Form::open(array('url'=>'empleados','method'=>'POST','autocomplete'=>'off'))!!}
+    {!!Form::open(array('url'=>'users','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
 
     <div class="card">
@@ -26,7 +26,7 @@
 
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" name="empleado" class="form-control" placeholder="Empleado..." required>
+      <input type="text" name="nombre" class="form-control" placeholder="Empleado..." required>
     </div>
 
     <div class="form-group">
@@ -49,24 +49,24 @@
       <select class="form-control" name="rol_id" class="form-control" >
         <option value="">Seleccione Rol</option>
         @foreach($roles as $r)
-        <option value="{{$r->id}}">{{$r->nombre}}</option>
+        <option value="{{$r->id}}">{{$r->name}}</option>
        @endforeach
       </select>
     </div>
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="text" name="email" class="form-control" placeholder="Email..." required>
+      <input type="email" name="email" class="form-control" placeholder="Email..." required>
     </div>
 
     <div class="form-group">
       <label for="password">Contraseña</label>
-      <input type="text" name="password" class="form-control" placeholder="Contraseña..." required>
+      <input type="password" name="password" class="form-control" placeholder="Contraseña..." required>
     </div>
 
     <div class="form-group">
       <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-      <a href="/empleados"><button class="btn btn-danger" type="button">Cancelar<i class="fa fa-times"></i></button></a>
+      <a href="/users"><button class="btn btn-danger" type="button">Cancelar<i class="fa fa-times"></i></button></a>
     </div>
     </div>
   </div>

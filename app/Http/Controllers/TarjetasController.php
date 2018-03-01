@@ -75,8 +75,8 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
       $tarjetas->status='enviada';
-      $tarjetas->user_asignado=(1);
-      $tarjetas->user_finaliza=(1);
+      $tarjetas->user_asignado=(78);
+      $tarjetas->user_finaliza=(78);
 
       //$tarjetas->fecha_cierre=$request->get('fecha_cierre');
       //$tarjetas->finalizado=$request->get('cerrado');
