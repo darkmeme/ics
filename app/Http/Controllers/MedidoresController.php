@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Medidores;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MedidoresController extends Controller
 {
@@ -29,57 +30,48 @@ class MedidoresController extends Controller
         return view('medidores.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function store(Request $request)
     {
-        //
+      $medidores=new Medidores;
+      $medidores->nsd_220=$request->get('nsd_220');
+      $medidores->nsd_480=$request->get('nsd_480');
+      $medidores->blanqueo=$request->get('blanqueo');
+      $medidores->calderas=$request->get('calderas');
+      $medidores->sulfonacion=$request->get('sulfonacion');
+      $medidores->oficinas=$request->get('oficinas');
+      $medidores->daf=$request->get('daf');
+      $medidores->comby=$request->get('comby');
+      $medidores->saponificacion=$request->get('saponificacion');
+      $medidores->enee_principal=$request->get('enee_principal');
+      $medidores->enee_reactivo=$request->get('enee_reactivo');
+      $medidores->fp=$request->get('fp');
+      $medidores->save();
+      return Redirect::to('medidores');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Medidores  $medidores
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function show(Medidores $medidores)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Medidores  $medidores
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function edit(Medidores $medidores)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Medidores  $medidores
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Medidores $medidores)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Medidores  $medidores
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Medidores $medidores)
     {
         //

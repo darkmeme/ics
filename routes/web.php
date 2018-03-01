@@ -24,7 +24,7 @@ Route::post('/finalizar/{idtarjeta}','TarjetasController@finalizar');
 //ruta para las autentificaciones
 Auth::routes();
 
-Route::get('/', 'TarjetasController@mis_tarjetas');
+//Route::get('/', 'TarjetasController@mis_tarjetas');
 
 //rutas para los permisos
 Route::post('/permisos', 'RolesController@create_permission');
@@ -32,7 +32,7 @@ Route::delete('/permisos-borrar/{id}/', 'RolesController@delete_permission');
 Route::post('/permisos-asignar/{id}/{permiso}/', 'RolesController@asignar_permiso');
 
 
-//Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/reportes/{id}/','TarjetasController@pdf');
 //Route::get('reporte', 'RolesController@pdf');//->name('roles.pdf');
 //ruta para las peticiones ajax

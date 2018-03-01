@@ -23,6 +23,7 @@
 <div class="table-responsive">
       <table class="table table-bordered text-center table-striped table-hover" id="table-equipos">
         <thead>
+          <th>No</th>
           <th>Fecha</th>
           <th>Nsd 220</th>
           <th>Nsd 480</th>
@@ -36,10 +37,12 @@
           <th>Enee Principal</th>
           <th>Enee Reactivo</th>
           <th>FP</th>
+          <th>Opciones</th>
         </thead>
 
         @foreach ($medidores as $m)
         <tr>
+          <td>{{$m->id}}</td>
           <td>{{$m->created_at}}</td>
           <td>{{$m->nsd_220}}</td>
           <td>{{$m->nsd_480}}</td>

@@ -381,6 +381,26 @@
 						</ul>
 					</li>
 
+					<li class="">
+						<a href="" class="dropdown-toggle">
+							<i class="menu-icon fa fa-bolt"></i>
+							<span class="menu-text">Energia</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<li class="">
+								<a href="/medidores">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Lecturas de Energia
+								</a>
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
+
 
 				</ul><!-- /.nav-list -->
 
@@ -480,7 +500,7 @@
 		<!-- page specific plugin scripts -->
 		<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 		<script src="{{asset('assets/js/buttons.bootstrap.min.js')}}"></script>
-		
+
 		<script src="{{asset('assets/js/jquery.dataTables.bootstrap.min.js')}}"></script>
 		<script src="{{asset('assets/js/dataTables.tableTools.min.js')}}"></script>
 		<script src="{{asset('assets/js/dataTables.colVis.min.js')}}"></script>
