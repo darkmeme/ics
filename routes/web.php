@@ -2,7 +2,7 @@
 // rutas de tipo resource usados para manejar los crud de todas las tablas
 Route::resource('equipos', 'EquiposController');
 Route::resource('categorias', 'CategoriasController');
-
+Route::resource('medidores', 'MedidoresController');
 //Route::group(['middleware' => ['role:Administrador']], function () {});
 Route::resource('areas', 'AreasController');
 
