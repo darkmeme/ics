@@ -24,6 +24,11 @@ Route::post('/finalizar/{idtarjeta}','TarjetasController@finalizar');
 //ruta para las autentificaciones
 Auth::routes();
 
+
+//ruta paara petecion de usuario por medio de json
+Route::get('list-users/{filtro}', 'UsersController@users_json');
+
+
 //Route::get('/', 'TarjetasController@mis_tarjetas');
 
 //rutas para los permisos

@@ -102,39 +102,40 @@
 
 <script>
  // script para llamar modal de busqueda de usuarios
+ //$('#filtrar-users').attr('value','prueba');
 $(document).ready(function () {
 
-            //funcion para abrir modal cuando se da click en select de empleado
- $('#txtfiltrar').click(function () {
-$('#modal-usuario').modal('show');
-});// finaliza funcion para abrir modal
 
-//cuando se presiona una tecla sobre input de busqueda se hace una peticion ajax con filtro
-        $("#busqueda").keyup(function(e){
-          //obtenemos el texto introducido en el campo de búsqueda
-          var consulta = $("#busqueda").val();
-  // se hace la peticion ajax al server
+               $('#txtfiltrar').click(function (e) {
+                 e.preventDefault();
+$('#modal-usuario').modal('show');
+});
+
+//comprobamos si se pulsa una tecla
+        $("#filtrar-users").keyup(function(e){
+
      $.ajax({
-    url: '/list-users/'+consulta+'/',
-    //data: consulta,
+    url: '/list-users/',
     type: 'get',
     dataType: 'JSON',
-    beforeSend: function(){
-      //imagen de carga
-      $("#resultado").html("<p align='center'><img src='/images/loader.gif' /></p>");
-                    },
-    error: function(){
-      //  alert("Error en la petición ajax");
-            },
     success: function (data) {
+//$("#contenido").jpaginate();
       /* Inicializamos la tabla */
               $("#contenido").html('');
-  // se recorre la variable data para pasarlo a la tabla
-          $.each(data, function(index, value){
-  $("#contenido").append("<tr><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
+              /* Vemos que la respuesta no este vacía y sea una arreglo */
+              if(data != null && $.isArray(data)){
+                  /* Recorremos tu respuesta con each */
+                  for(var i=0; i<data.length; ++i){
+                  //$.each(data, function(index, value){
+                      /* Vamos agregando a nuestra tabla las filas necesarias */
+                      $("#contenido").append("<tr><td class=id>" + data[i].id + "</td><td class=nombre>" + data[i].name + "</tr>")};
+                      //$("#contenido").append("<tr id=fila><td>" + value.id + "</td><td>" + value.name + "</tr>");
 }
-}); //finaliza la peticion ajax
-});//finaliza evento keyup de input de busqueda
+    }
+});
+});
+
+
 
 //funcion para cargar los datos de la fila seleccionada al objeto select de html
                $('#tabla').on('click','tr td', function(evt){
@@ -148,7 +149,7 @@ $('#modal-usuario').modal('show');
               // se cierra el modal despues de cargar los datos al select
               $('#modal-usuario').modal('hide');
                });
-});//finaliza document ready
+});
 
 /*$('#email').focusout(function(event) {
  event.preventDefault();
@@ -168,7 +169,11 @@ $('#modal-usuario').modal('show');
                 $("#respuesta").html("");
                  if (json.validar_correo == true) {
                    $("#respuesta").html("El correo ya existe");
-                 */
+                 }
+              }
+         });
+  });
+});*/
   </script>
 
 <script type="text/javascript">

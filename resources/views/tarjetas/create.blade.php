@@ -1,6 +1,7 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
 role="dialog" tabindex="1" id="modal-create-tarjeta">
 
+
 {!!Form::open(array('url'=>'tarjetas','method'=>'POST','autocomplete'=>'off'))!!}
 {{Form::token()}}
 <div class="modal-dialog modal-lg">
@@ -19,6 +20,8 @@ role="dialog" tabindex="1" id="modal-create-tarjeta">
           </select>
         </div>
       </div>
+
+
     <div class="col-lg-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Area/Linea</label>
@@ -42,12 +45,14 @@ role="dialog" tabindex="1" id="modal-create-tarjeta">
     <div class="col-lg-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <select class="form-control" name="empleado_id" required class="form-control">
-          <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
-          @foreach($users as $u)
-          <option value="{{$u->id}}">{{$u->name}}</option>
-          @endforeach
-        </select>
+        {{--<input id="txtfiltrar" type="text" name="empleado_id" class="form-control" placeholder="usuario">--}}
+
+
+           <select class="form-control" id="txtfiltrar" name="empleado_id" required class="form-control">
+            <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
+
+          </select>
+
       </div>
     </div>
 
@@ -141,4 +146,50 @@ role="dialog" tabindex="1" id="modal-create-tarjeta">
   </div>
 </div>
   {!!Form::close()!!}
+</div>
+
+<div class="modal fade" id="modal-usuario" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content modal-sm">
+      <div class="modal-header no-padding">
+        <div class="table-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+          </button>
+          Busqueda de Usuarios
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="input-group">
+              <span class="input-group-addon">Buscar</span>
+              <input id="busqueda" type="text" class="form-control" placeholder="">
+            </div>
+
+            <table id="tabla" class="table">
+             <thead>
+              <tr>
+               <th>Codigo</th>
+               <th>Nombre</th>
+              </tr>
+             </thead>
+             <tbody class="buscar" id="contenido">
+               {{--se llena automatico desde jquery con peticiones ajax--}}
+             </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer no-margin-top">
+        <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+          <i class="ace-icon fa fa-times"></i>
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

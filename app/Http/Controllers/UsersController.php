@@ -16,16 +16,30 @@ class UsersController extends Controller
 use RegistersUsers;
 //middleware para dar paso solo a usuarios autentificados
 
-  public function __construct()
-  {
-      $this->middleware('auth');
-  }
+  //public function __construct()
+  //{
+    //$this->middleware('auth');
+//  }
 
 
     public function index(Request $request)
     {
       $users=User::All();
       return view('users.index',compact('users'));
+    }
+
+//funcion para mandar listado de usuarios por medio de json
+    public function users_json(Request $request,$filtro)
+    {
+        return User::where('name','LIKE','%'.$filtro.'%')->get();
+      /*if ($request->ajax()){
+        //return User::get(['id','name']);
+        return response()->json([
+          'mensaje'=>$filtro
+        ])
+      }*/
+
+
     }
 
 

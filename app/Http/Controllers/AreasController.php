@@ -7,13 +7,36 @@ use App\PlantasModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\AreasFormRequest;
+use Illuminate\Support\Facades\Validator;
 
 class AreasController extends Controller
 {
-  public function __construct()
+ public function __construct()
   {
       $this->middleware('auth');
   }
+
+/*
+Validator::make($request->all(), [
+    'title' => 'required|max:255',
+    'item' => 'required'
+])->validate();
+
+return response()->json([
+    'status' => 'success',
+    'msg' => 'New item has been saved'
+]);
+
+return response()->json([
+    'status' => 'success',
+    'id' => $list->id,
+    'title' => $list->title,
+    'item' => $list->item,
+]);
+
+*/
+
+
 
 // metodo para la peticion ajax, llena combo de areas por cada planta
   public function areas_plantas($id)

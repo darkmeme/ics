@@ -55,3 +55,11 @@
 @section('scripts')
 <script src="{{asset('js/combox.js')}}"></script>
 @endsection
+
+
+{{--
+formulario con html
+<form action="lists" method="post" id="store-form">
+
+</form>
+--}}
