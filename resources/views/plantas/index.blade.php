@@ -18,7 +18,7 @@
       Lista de Plantas"
     </div>
 
-      <table class="table table-bordered text-center table-striped table-hover" id="table-plantas">
+      <table class="table text-center table-striped table-hover" id="table-plantas">
         <thead>
           <th>Id</th>
           <th>Nombre</th>

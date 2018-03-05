@@ -27,14 +27,8 @@ class TarjetasController extends Controller
 
     public function index(Request $request)
     {
-      $users=User::All();
-      $equipos=EquiposModel::All();
-      $plantas=PlantasModel::ALL();
-      $eventos=EventosModel::ALL();
-      $categorias=CategoriasModel::ALL();
-      $causas=CausasModel::ALL();
       $tarjetas=TarjetasModel::All();
-      return view('tarjetas.index',compact('tarjetas','users','users','equipos','plantas','eventos','categorias','causas'));
+      return view('tarjetas.index',compact('tarjetas'));
     }
 
 //funcion que carga todas la tarjetas creadas por un usuario
@@ -56,8 +50,14 @@ public function tarjetas_asignadas(Request $request){
 
     public function create()
     {
+      $users=User::All();
+      $equipos=EquiposModel::All();
+      $plantas=PlantasModel::ALL();
+      $eventos=EventosModel::ALL();
+      $categorias=CategoriasModel::ALL();
+      $causas=CausasModel::ALL();
+      return view('tarjetas.create',compact('users','users','equipos','plantas','eventos','categorias','causas'));
 
-      return view('tarjetas.create',compact('tarjetas'));
     }
 
     public function store(Request $request)

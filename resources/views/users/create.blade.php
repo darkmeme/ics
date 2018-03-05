@@ -1,12 +1,7 @@
 @extends('layouts.admin')
 @section('contenido')
 
-<div class="row">
-  <p></p>
-</div>
 
-<div class="row">
-<div class="col-lg-6 col-xs-12 offset-3">
     @if (count($errors)>0)
     <div class="alert alert-danger">
       <ul>
@@ -19,11 +14,17 @@
 
     {!!Form::open(array('url'=>'users','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
+    <div class="row">
+      <div class="col col-lg-3 col-lg-offset-1">
 
-    <div class="card">
-    <div class="card-header">Agregar Nuevo Empleado</div>
-    <div class="card-body">
-
+      </div>
+      <div class="col-lg-3">
+        <h3 class="blue">Agregar Nuevo Usuario</h3>
+      </div>
+    </div>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-lg-6 col-xs-12 offset-3">
     <div class="form-group">
       <label for="nombre">Nombre</label>
       <input type="text" name="nombre" class="form-control" placeholder="Empleado..." required>
@@ -68,10 +69,8 @@
       <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
       <a href="/users"><button class="btn btn-danger" type="button">Cancelar<i class="fa fa-times"></i></button></a>
     </div>
-    </div>
-  </div>
 </div>
     {!!Form::close()!!}
 </div>
 </div>
-@stop
+@endsection

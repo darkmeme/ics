@@ -1,17 +1,12 @@
-@extends('layouts.admin')
-@section('contenido')
+<div class="modal fade modal-slide-in-right" aria-hidden="true"
+role="dialog" tabindex="1" id="modal-create-tarjeta">
+
+
 {!!Form::open(array('url'=>'tarjetas','method'=>'POST','autocomplete'=>'off'))!!}
 {{Form::token()}}
-<style media="screen">
-.amarillo{ background-color:yellow;}
-.color-etiquetas{ background-color:green;}
-</style>
-
-
-<div class="container">
-  <br>
-  <div class="row">
-    <div class="col-lg-10 amarillo">
+<div class="modal-dialog modal-lg">
+  <div class="modal-content amarillo">
+    <div class="modal-body">
 
 <div class="row">
       <div class="col-lg-4 col-xs-12">
@@ -136,18 +131,23 @@
         </div>
       </div>
         </div>
+
+    </div>
+    <div class="modal-footer no-margin-top">
+      <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+        <i class="ace-icon fa fa-times"></i>
+        Cerrar
+      </button>
+      <button type="submit" class="btn btn-sm btn-success pull-left">
+        <i class="ace-icon fa fa-check"></i>
+        Crear Tarjeta
+      </button>
     </div>
   </div>
-<br>
-<div class="form-group">
-  <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-  <a href="/tarjetas"><button class="btn btn-danger" type="button">Regresar<i class="fa fa-times"></i></button></a>
+</div>
+  {!!Form::close()!!}
 </div>
 
-  {!!Form::close()!!}
-
-
-{{--modal para busqueda de usuarios y llenar tarjeta--}}
 <div class="modal fade" id="modal-usuario" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content modal-sm">
@@ -193,59 +193,3 @@
     </div>
   </div>
 </div>
-@endsection
-@section('scripts')
-<script src="{{asset('js/combox.js')}}"></script>
-
-<script type="text/javascript">
- // script para llamar modal de busqueda de usuarios
-$(document).ready(function () {
-
-      //funcion para abrir modal cuando se da click en select de empleado
- $('#txtfiltrar').click(function () {
-$('#modal-usuario').modal('show');
-});// finaliza funcion para abrir modal
-
-//cuando se presiona una tecla sobre input de busqueda se hace una peticion ajax con filtro
-        $("#busqueda").keyup(function(e){
-          //obtenemos el texto introducido en el campo de búsqueda
-          var consulta = $("#busqueda").val();
-  // se hace la peticion ajax al server
-     $.ajax({
-    url: '/list-users/'+consulta+'/',
-    //data: consulta,
-    type: 'get',
-    dataType: 'JSON',
-    beforeSend: function(){
-      //imagen de carga
-      $("#resultado").html("<p align='center'><img src='/images/loader.gif' /></p>");
-                    },
-    error: function(){
-      //  alert("Error en la petición ajax");
-            },
-    success: function (data) {
-      /* Inicializamos la tabla */
-              $("#contenido").html('');
-  // se recorre la variable data para pasarlo a la tabla
-          $.each(data, function(index, value){
-  $("#contenido").append("<tr><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
-}
-}); //finaliza la peticion ajax
-});//finaliza evento keyup de input de busqueda
-
-//funcion para cargar los datos de la fila seleccionada al objeto select de html
-               $('#tabla').on('click','tr td', function(evt){
-              var nombre,id,html_select;
-              //se recorre el tr padre luego se busca el td con el nombre id
-              id = $(this).parents("tr").find(".id").html();
-              nombre= $(this).parents("tr").find(".nombre").html();
-              // se genera un option con los valores de la fila seleccionada y se cargan al select de tarjetas
-              html_select += '<option value="'+id+'">'+nombre+'</option>'
-              $('#txtfiltrar').html(html_select);
-              // se cierra el modal despues de cargar los datos al select
-              $('#modal-usuario').modal('hide');
-               });
-});//finaliza document ready
-  </script>
-
-@endsection

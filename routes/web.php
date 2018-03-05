@@ -8,7 +8,6 @@ Route::resource('areas', 'AreasController');
 
 Route::resource('users', 'UsersController');
 Route::resource('roles', 'RolesController');
-//Route::resource('areas', 'AreasController');
 Route::resource('eventos', 'EventosController');
 Route::resource('causas', 'CausasController');
 Route::resource('plantas', 'PlantasController');

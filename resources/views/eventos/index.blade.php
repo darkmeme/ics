@@ -18,7 +18,7 @@
       Lista de Eventos"
     </div>
 
-      <table class="table table-bordered text-center table-striped table-hover" id="table-eventos">
+      <table class="table text-center table-striped table-hover" id="table-eventos">
         <thead>
           <th>Id</th>
           <th>Nombre</th>

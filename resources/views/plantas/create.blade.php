@@ -2,10 +2,6 @@
 @section('contenido')
 
 <div class="row">
-  <p></p>
-</div>
-
-<div class="row">
 <div class="col-lg-6 col-xs-12 offset-3">
     @if (count($errors)>0)
     <div class="alert alert-danger">

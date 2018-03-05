@@ -16,10 +16,10 @@ class UsersController extends Controller
 use RegistersUsers;
 //middleware para dar paso solo a usuarios autentificados
 
-  //public function __construct()
-  //{
-    //$this->middleware('auth');
-//  }
+  public function __construct()
+  {
+  $this->middleware('auth');
+  }
 
 
     public function index(Request $request)
@@ -41,8 +41,6 @@ use RegistersUsers;
 
 
     }
-
-
 
     public function create()
     {
@@ -71,7 +69,9 @@ use RegistersUsers;
 
     public function show($id)
     {
-        //
+        $user=User::findOrFail($id);
+        $puestos=PuestosModel::get();
+        return view('users.perfil',compact('user','puestos'));
     }
 
 
@@ -81,15 +81,22 @@ use RegistersUsers;
     }
 
 
+    public function change_password(){
+
+
+    }
+
+
     public function update(Request $request,$id)
     {
       $user=User::findOrFail($id);
       $user->name=$request->get('nombre');
       $user->codigoempleado=$request->get('codigo');
       $user->puesto_id=$request->get('puesto_id');
+      $user->email=$request->get('email');
       //$user->rol_id=$request->get('rol_id');
       $user->update();
-      return Redirect::to('users');
+      return Redirect::to('users/'.$id);
     }
 
 //funcion para eliminar un usuario por su id

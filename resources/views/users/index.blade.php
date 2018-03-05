@@ -19,7 +19,7 @@
       Lista de Usuarios"
     </div>
     <div class="table-responsive">
-      <table class="table table-bordered text-center" id="table-empleados" width="100%" cellspacing="0">
+      <table class="table text-center" id="table-empleados" width="100%" cellspacing="0">
         <thead>
           <th>Id</th>
           <th>Nombre</th>
