@@ -43,7 +43,7 @@
 {{Form::open(array('action'=>array('TarjetasController@asignar',$tarjetas->id),'method'=>'post'))}}
 {{Form::token()}}
 <div class="modal fade" id="modal-asignar" tabindex="-1">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header no-padding">
         <div class="table-header">
@@ -57,14 +57,26 @@
         <div class="row">
           <div class="col-lg-10">
 
-            <label for="nombre">Empleados</label>
-            <select class="form-control" id="select-empleado" name="empleado_id" class="form-control">
-              <option value="">Seleccione Empleado</option>
-              @foreach($user as $u)
-              <option value="{{$u->id}}">{{$u->name}}</option>
-              @endforeach
-            </select>
+            <div class="input-group">
+              <span class="input-group-addon">Buscar</span>
+              <input id="busqueda" type="text" class="form-control" >
+            </div>
 
+            <table id="tabla" class="table">
+             <thead>
+              <tr>
+               <th>Codigo</th>
+               <th>Nombre</th>
+              </tr>
+             </thead>
+             <tbody class="buscar" id="contenido">
+               {{--se llena automatico desde jquery con peticiones ajax--}}
+             </tbody>
+            </table>
+
+            <select class="form-control" id="user-selected" name="empleado_id" class="form-control">
+              {{--se llena desde jquery--}}
+            </select>
           </div>
         </div>
       </div>
@@ -87,12 +99,13 @@
 
 
 
+
   {{--modal para finalizar la tarjeta--}}
 
   {{Form::open(array('action'=>array('TarjetasController@finalizar',$tarjetas->id),'method'=>'post'))}}
   {{Form::token()}}
   <div class="modal fade" id="modal-finalizar" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header no-padding">
           <div class="table-header">
@@ -105,12 +118,26 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-10">
-              <label for="nombre">Empleado Finaliza</label>
-              <select class="form-control" id="select-empleado" name="user_finaliza" class="form-control">
-                <option value="{{Auth::user()->id}}">{{Auth::user()->name}}</option>
-                @foreach($user as $u)
-                <option value="{{$u->id}}">{{$u->name}}</option>
-                @endforeach
+
+              <div class="input-group">
+                <span class="input-group-addon">Buscar</span>
+                <input id="busqueda-user" type="text" class="form-control">
+              </div>
+
+              <table id="tabla-finalizar" class="table">
+               <thead>
+                <tr>
+                 <th>Codigo</th>
+                 <th>Nombre</th>
+                </tr>
+               </thead>
+               <tbody class="buscar" id="contenido-user">
+                 {{--se llena automatico desde jquery con peticiones ajax--}}
+               </tbody>
+              </table>
+
+              <select class="form-control" id="empleado" name="user_finaliza" class="form-control">
+                {{--se llena automatico desde jQuery--}}
               </select>
             </div>
           </div>
@@ -139,4 +166,94 @@
     </div>
   </div>
     {{Form::Close()}}
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+ // script para llamar modal de busqueda de usuarios
+$(document).ready(function () {
+//cuando se presiona una tecla sobre input de busqueda se hace una peticion ajax con filtro
+        $("#busqueda").keyup(function(e){
+          //obtenemos el texto introducido en el campo de búsqueda
+          var consulta = $("#busqueda").val();
+  // se hace la peticion ajax al server
+     $.ajax({
+    url: '/list-users/'+consulta+'/',
+    //data: consulta,
+    type: 'get',
+    dataType: 'JSON',
+    beforeSend: function(){
+      //imagen de carga
+      $("#resultado").html("<p align='center'><img src='/images/loader.gif' /></p>");
+                    },
+    error: function(){
+      //  alert("Error en la petición ajax");
+            },
+    success: function (data) {
+      /* Inicializamos la tabla */
+              $("#contenido").html('');
+  // se recorre la variable data para pasarlo a la tabla
+          $.each(data, function(index, value){
+  $("#contenido").append("<tr><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
+}
+}); //finaliza la peticion ajax
+});//finaliza evento keyup de input de busqueda
+
+//funcion para cargar los datos de la fila seleccionada al objeto select de html
+               $('#tabla').on('click','tr td', function(evt){
+              var nombre,id,html_select;
+              //se recorre el tr padre luego se busca el td con el nombre id
+              id = $(this).parents("tr").find(".id").html();
+              nombre= $(this).parents("tr").find(".nombre").html();
+              // se genera un option con los valores de la fila seleccionada y se cargan al select de tarjetas
+              html_select += '<option value="'+id+'">'+nombre+'</option>'
+              $('#user-selected').html(html_select);
+               });
+});//finaliza document ready
+  </script>
+
+
+  <script type="text/javascript">
+   // script para llamar modal de busqueda de usuarios
+  $(document).ready(function () {
+  //cuando se presiona una tecla sobre input de busqueda se hace una peticion ajax con filtro
+          $("#busqueda-user").keyup(function(e){
+            //obtenemos el texto introducido en el campo de búsqueda
+            var consulta = $("#busqueda-user").val();
+    // se hace la peticion ajax al server
+       $.ajax({
+      url: '/list-users/'+consulta+'/',
+      //data: consulta,
+      type: 'get',
+      dataType: 'JSON',
+      beforeSend: function(){
+        //imagen de carga
+      //  $("#resultado").html("<p align='center'><img src='/images/loader.gif' /></p>");
+                      },
+      error: function(){
+        //  alert("Error en la petición ajax");
+              },
+      success: function (data) {
+        /* Inicializamos la tabla */
+                $("#contenido-user").html('');
+    // se recorre la variable data para pasarlo a la tabla
+            $.each(data, function(index, value){
+    $("#contenido-user").append("<tr><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
+  }
+  }); //finaliza la peticion ajax
+  });//finaliza evento keyup de input de busqueda
+
+  //funcion para cargar los datos de la fila seleccionada al objeto select de html
+                 $('#tabla-finalizar').on('click','tr td', function(evt){
+                var nombre,id,html_select;
+                //se recorre el tr padre luego se busca el td con el nombre id
+                id = $(this).parents("tr").find(".id").html();
+                nombre= $(this).parents("tr").find(".nombre").html();
+                // se genera un option con los valores de la fila seleccionada y se cargan al select de tarjetas
+                html_select += '<option value="'+id+'">'+nombre+'</option>'
+                $('#empleado').html(html_select);
+                 });
+  });//finaliza document ready
+    </script>
+
 @endsection

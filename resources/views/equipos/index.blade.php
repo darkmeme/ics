@@ -85,6 +85,9 @@ $(document).ready(function() {
           "filename": 'Reporte de Equipos',
           "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": "copy",

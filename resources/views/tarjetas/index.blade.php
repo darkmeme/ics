@@ -106,6 +106,9 @@ $(document).ready(function() {
           "filename": 'Reporte de tarjetas',
           "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": "copy",
@@ -118,6 +121,9 @@ $(document).ready(function() {
           "titleAttr": 'Exportar a Excel',
           "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": 'print',
