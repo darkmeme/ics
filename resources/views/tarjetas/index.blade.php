@@ -2,9 +2,7 @@
 @section('contenido')
 <br>
 
-<div class="col-lg-3">
-  <a href="/tarjetas/create"> <button class="btn btn-info">Nueva</button></a>
-</div>
+
 <div class="col-lg-4">
 @if(Session::has('message'))
 <div class="alert alert-success alert-dismissible" role="alert">
@@ -18,7 +16,16 @@
 <div class="col-xs-12">
   <h3 class="header smaller lighter blue">Listado de Todas las Tarjetas</h3>
   <div class="clearfix">
-    <div class="pull-right tableTools-container"></div>
+    <div class="tableTools-container">
+      <div class="row">
+      <div class="col-lg-0 col-lg-offset-0">
+
+      </div>
+      <div class="col-lg-2">
+        <a href="/tarjetas/create"><button class="btn btn-info" type="button">Nueva<i class="fa fa-plus"></i></button></a>
+      </div>
+      </div>
+    </div>
   </div>
 
   <div class="table-header">

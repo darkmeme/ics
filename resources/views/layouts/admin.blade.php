@@ -413,27 +413,24 @@
 			<div class="main-content">
 				<div class="main-content-inner">
 					<div class="breadcrumbs" id="breadcrumbs">
-						<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-						</script>
-
 						<ul class="breadcrumb">
 							<li>
 								<i class="ace-icon fa fa-home home-icon"></i>
 								<a href="/">Home</a>
 							</li>
-							<li class="active">Dashboard</li>
-						</ul><!-- /.breadcrumb -->
 
-						<div class="nav-search" id="nav-search">
-							<form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="ace-icon fa fa-search nav-search-icon"></i>
-								</span>
-							</form>
-						</div><!-- /.nav-search -->
+							{{--<li class="active">Dashboard</li>--}}
+
+						</ul><!-- /.breadcrumb -->
 					</div>
+					<script type="text/javascript">
+
+
+
+
+						//try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+
+					</script>
 <div class="container-fluid">
 	 @yield('contenido')
 </div>
@@ -457,9 +454,6 @@
 								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
 							</a>
 
-							<a href="#">
-								<i class="ace-icon fa fa-rss-square orange bigger-150"></i>
-							</a>
 						</span>
 					</div>
 				</div>
@@ -469,23 +463,15 @@
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
-
+</div><!-- /.main-container -->
 		<!-- basic scripts -->
 
 
 
-	<script src="{{asset('assets/js/jquery.2.1.1.min.js')}}"></script>
+	 {{--<script src="{{asset('assets/js/jquery.2.1.1.min.js')}}"></script>
+	 <script src="jquery.breadcrumbs-generator.min.js"></script>--}}
 
-	<!--<script type="text/javascript">
-		window.jQuery || document.write("<script src='assets/js/jquery.min.js'>"+"<"+"/script>");
-	</script>
-
-
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>-->
-
-
+	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>

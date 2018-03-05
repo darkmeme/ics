@@ -74,7 +74,7 @@
              </tbody>
             </table>
 
-            <select class="form-control" id="user-selected" name="empleado_id" class="form-control">
+            <select style="visibility:hidden" class="form-control" id="user-selected" name="empleado_id" class="form-control">
               {{--se llena desde jquery--}}
             </select>
           </div>
@@ -166,10 +166,14 @@
     </div>
   </div>
     {{Form::Close()}}
+    <style media="screen">
+      .resaltar-fila {background-color: #8FBC8F}
+    </style>
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
+
  // script para llamar modal de busqueda de usuarios
 $(document).ready(function () {
 //cuando se presiona una tecla sobre input de busqueda se hace una peticion ajax con filtro
@@ -194,13 +198,14 @@ $(document).ready(function () {
               $("#contenido").html('');
   // se recorre la variable data para pasarlo a la tabla
           $.each(data, function(index, value){
-  $("#contenido").append("<tr><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
+  $("#contenido").append("<tr class=fila><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
 }
 }); //finaliza la peticion ajax
 });//finaliza evento keyup de input de busqueda
 
 //funcion para cargar los datos de la fila seleccionada al objeto select de html
                $('#tabla').on('click','tr td', function(evt){
+                 $(this).addClass("resaltar-fila");
               var nombre,id,html_select;
               //se recorre el tr padre luego se busca el td con el nombre id
               id = $(this).parents("tr").find(".id").html();
