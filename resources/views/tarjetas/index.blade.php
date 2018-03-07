@@ -39,7 +39,7 @@
           <th>Area</th>
           <th>Planta</th>
           <th>Fecha</th>
-          {{--<th>Nombre</th>--}}
+          <th>Nombre</th>
           <th>Equipo</th>
           {{--<th>Turno</th>--}}
           <th>Prioridad</th>
@@ -60,7 +60,7 @@
           <td>{{$t->area->nombre}}</td>
           <td>{{$t->planta->nombre}}</td>
           <td>{{$t->created_at}}</td>
-          {{--<td>{{$t->user->name}}</td>--}}
+          <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
           {{--<td>{{$t->turno}}</td>--}}
           <td>{{$t->prioridad}}</td>
@@ -102,7 +102,9 @@
 //script para cargar estilo y botones de jQuery DataTable
 $(document).ready(function() {
 
-  var table = $('#table-tarjetas').DataTable();
+  var table = $('#table-tarjetas').DataTable({
+    "aaSorting": [[ 0, "desc" ]],
+  });
 
   new $.fn.dataTable.Buttons( table, {
       buttons: [
@@ -113,6 +115,8 @@ $(document).ready(function() {
           "filename": 'Reporte de tarjetas',
           "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "orientation": 'landscape',
+              "  pageSize": 'Letter',
           "exportOptions": {
                     "columns": ':visible'
                 }
@@ -122,6 +126,9 @@ $(document).ready(function() {
           "titleAttr": 'Copiar a Porta Papeles',
           "text": "<i class='fa fa-copy bigger-110 pink'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": "excel",
@@ -137,6 +144,9 @@ $(document).ready(function() {
           "titleAttr": 'Imprimir Documento',
           "text": "<i class='fa fa-print bigger-110 grey'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": 'colvis',

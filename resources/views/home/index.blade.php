@@ -70,7 +70,7 @@ background-color: white;
       <h3 class="panel-title">Energia</h3>
     </div>
     <div class="panel-body">
-      Modulo de lecturas de nergia
+      Modulo de lecturas de Energia
     </div>
     <div class="center-block" style="width:100px;">
     <a href="/medidores">Acceder...</a>

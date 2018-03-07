@@ -75,15 +75,25 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
       $tarjetas->status='enviada';
-      $tarjetas->user_asignado=(1);
       $tarjetas->user_finaliza=(1);
 
-      //$tarjetas->fecha_cierre=$request->get('fecha_cierre');
-      //$tarjetas->finalizado=$request->get('cerrado');
-
+      if ($tarjetas->categoria->nombre=='Electrica'){
+      $tarjetas->user_asignado=(32);
+      $tarjetas->status='Asignada';
+    }
+    else if ($tarjetas->categoria->nombre=='Mecanica'){
+    $tarjetas->user_asignado=(32);
+    $tarjetas->status='Asignada';
+  }
+    else {
+      $tarjetas->user_asignado=(311);
+      $tarjetas->status='Asignada';
+    }
       $tarjetas->save();
       return Redirect::to('tarjetas');
     }
+
+
 
     public function show($id)
     {
@@ -110,7 +120,7 @@ public function asignar(Request $request,$id)
 {
   $tarjeta=TarjetasModel::findOrFail($id);
   $tarjeta->user_asignado=$request->get('empleado_id');
-  $tarjeta->status='Asignada';
+  $tarjeta->status='Reasignada';
   $tarjeta->update();
   return Redirect::to('tarjetas');
 }

@@ -1,7 +1,15 @@
 @extends('layouts.admin')
 @section('contenido')
+<br>
+<div class="col-lg-1 col-md-0 col-xs-0">
 
-<div class="col-lg-10 offset-1">
+</div>
+<div class="row">
+<div class="container">
+<div class="col-xs-10">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Detalle de Tarjetas</div>
+      <div class="container">
       <div class="row">
         <div class="col-lg-3">
           <h3 class="header smaller lighter blue">Tarjeta No: {{$tarjetas->id}}</h3>
@@ -9,25 +17,23 @@
       </div>
     <div class="row">
       <div class="col-lg-6 col-xs-12">
-        {{--<h5><strong>Asignada a: </strong>{{$tarjetas->user_asignado->name}} </h5>--}}
-        <h5><strong>Status: </strong>{{$tarjetas->status}} </h5>
-        <h5><strong>Fecha: </strong>{{$tarjetas->created_at}} </h5>
-        <h5><strong>Area: </strong>{{$tarjetas->area->nombre}} </h5>
-        <h5><strong>Planta: </strong>{{$tarjetas->planta->nombre}} </h5>
-        <h5><strong>Nombre Empleado: </strong>{{$tarjetas->user->name}} </h5>
-        <h5><strong>Equipo: </strong>{{$tarjetas->equipo->nombre}} </h5>
-        <h5><strong>Turno: </strong>{{$tarjetas->turno}} </h5>
-        <h5><strong>Prioridad: </strong>{{$tarjetas->prioridad}} </h5>
-        <h5><strong>Categoria: </strong>{{$tarjetas->categoria->nombre}} </h5>
-        <h5><strong>Evento: </strong>{{$tarjetas->evento->nombre}} </h5>
-        <h5><strong>Causa: </strong>{{$tarjetas->causa->nombre}} </h5>
-        <h5><strong>Descripcion del Reporte: </strong>{{$tarjetas->descripcion_reporte}} </h5>
-        <h5><strong>Fecha de Cierre: </strong>{{$tarjetas->fecha_cierre}} </h5>
-        <h5><strong>Solucion Implementada: </strong>{{$tarjetas->solucion_implementada}} </h5>
-        <h5><strong>Asignada A: </strong>{{$tarjetas->asignado->name}} </h5>
-        <h5><strong>Realizada por: </strong>{{$tarjetas->terminado->name}} </h5>
+        <h5><strong>Status: </strong><span class="blue">{{$tarjetas->status}}</span></h5>
+        <h5><strong>Fecha: </strong><span class="blue">{{$tarjetas->created_at}}</span> </h5>
+        <h5><strong>Area: </strong><span class="blue">{{$tarjetas->area->nombre}} </span></h5>
+        <h5><strong>Planta: </strong><span class="blue">{{$tarjetas->planta->nombre}} </span></h5>
+        <h5><strong>Nombre Empleado:</strong><span class="blue">{{$tarjetas->user->name}} </span></h5>
+        <h5><strong>Equipo: </strong><span class="blue">{{$tarjetas->equipo->nombre}} </span></h5>
+        <h5><strong>Turno: </strong><span class="blue">{{$tarjetas->turno}} </span></h5>
+        <h5><strong>Prioridad: </strong><span class="blue">{{$tarjetas->prioridad}} </span></h5>
+        <h5><strong>Categoria: </strong><span class="blue">{{$tarjetas->categoria->nombre}}</span> </h5>
+        <h5><strong>Evento: </strong><span class="blue">{{$tarjetas->evento->nombre}} </span></h5>
+        <h5><strong>Causa: </strong><span class="blue">{{$tarjetas->causa->nombre}} </span></h5>
+        <h5><strong>Descripcion del Reporte: </strong><span class="blue">{{$tarjetas->descripcion_reporte}}</span> </h5>
+        <h5><strong>Fecha de Cierre: </strong><span class="blue">{{$tarjetas->fecha_cierre}}</span> </h5>
+        <h5><strong>Solucion Implementada: </strong><span class="blue">{{$tarjetas->solucion_implementada}}</span> </h5>
+        <h5><strong>Asignada A: </strong><span class="blue">{{$tarjetas->asignado->name}}</span> </h5>
+        <h5><strong>Realizada por: </strong><span class="blue">{{$tarjetas->terminado->name}} </span></h5>
       </div>
-
       <div class="col-lg-5 col-xs-12">
 <a href=""data-target="#modal-asignar" data-toggle="modal"> <button class="btn btn-info">Reasignar</button></a>
 <a href=""data-target="#modal-finalizar" data-toggle="modal"> <button class="btn btn-info">Finalizar</button></a>
@@ -36,8 +42,10 @@
     </div>
 </div>
 
-
-
+    </div>
+</div>
+</div>
+</div>
 {{--modal para asignar la tarjeta a los tecnicos--}}
 
 {{Form::open(array('action'=>array('TarjetasController@asignar',$tarjetas->id),'method'=>'post'))}}
@@ -170,6 +178,9 @@
       .resaltar-fila {background-color: #8FBC8F}
     </style>
 @endsection
+
+
+
 
 @section('scripts')
 <script type="text/javascript">

@@ -60,7 +60,9 @@
 //script para cargar estilo y botones de jQuery DataTable
 $(document).ready(function() {
 
-  var table = $('#table-causas').DataTable();
+  var table = $('#table-causas').DataTable({
+    "aaSorting": [[ 0, "desc" ]],
+  });
 
   new $.fn.dataTable.Buttons( table, {
       buttons: [

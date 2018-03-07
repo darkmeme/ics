@@ -71,7 +71,9 @@
 //script para cargar estilo y botones de jQuery DataTable
 $(document).ready(function() {
 
-  var table = $('#table-equipos').DataTable();
+  var table = $('#table-equipos').DataTable({
+    "aaSorting": [[ 0, "desc" ]],
+  });
 
   new $.fn.dataTable.Buttons( table, {
       buttons: [
