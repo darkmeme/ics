@@ -1,8 +1,6 @@
 @extends('layouts.admin')
 @section('contenido')
 <br>
-
-
 <div class="col-lg-4">
 @if(Session::has('message'))
 <div class="alert alert-success alert-dismissible" role="alert">
@@ -18,12 +16,15 @@
   <div class="clearfix">
     <div class="tableTools-container">
       <div class="row">
-      <div class="col-lg-0 col-lg-offset-0">
 
-      </div>
-      <div class="col-lg-2">
+      <div class="col-lg-2 col-md-2 col-xs-4">
         <a href="/tarjetas/create"><button class="btn btn-info" type="button">Nueva<i class="fa fa-plus"></i></button></a>
       </div>
+
+      <div class="col-lg-3 col-xs-6 col-md-6">
+      @include('tarjetas.search')
+      </div>
+
       </div>
     </div>
   </div>
@@ -35,27 +36,27 @@
 
       <table class="table text-center table-striped" id="table-tarjetas">
         <thead>
-          <th>Numero</th>
-          <th>Area</th>
-          <th>Planta</th>
-          <th>Fecha</th>
-          <th>Nombre</th>
-          <th>Equipo</th>
+          <th class="text-center">Numero</th>
+          <th class="text-center">Area</th>
+          <th class="text-center">Planta</th>
+          <th class="text-center">Fecha</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Equipo</th>
           {{--<th>Turno</th>--}}
-          <th>Prioridad</th>
-          <th>Categoria</th>
+          <th class="text-center">Prioridad</th>
+          <th class="text-center">Categoria</th>
           {{--<th>Evento</th>
-          <th>Causa</th>--}}
-          <th>Descripcion</th>
+          <th class="text-center">Causa</th>--}}
+          <th class="text-center">Descripcion</th>
           {{--<th>Solucion</th>
-          <th>Fecha cierre</th>--}}
-          <th>Finalizado</th>
-          <th>Opciones</th>
+          <th class="text-center">Fecha cierre</th>--}}
+          <th class="text-center">Finalizado</th>
+          <th class="text-center">Opciones</th>
         </thead>
 
 
         @foreach ($tarjetas as $t)
-        <tr>
+        <tr id="filas">
           <td>{{$t->id}}</td>
           <td>{{$t->area->nombre}}</td>
           <td>{{$t->planta->nombre}}</td>
@@ -70,8 +71,7 @@
           <td>{{$t->descripcion_reporte}}</td>
           {{--<td>{{$t->solucion_implementada}}</td>
           <td>{{$t->fecha_cierre}}</td>--}}
-          <td><span class="label label-sm label-success">{{$t->status}}</span>
-          </td>
+          <td class="td-status"><span class="label label-sm label-warning">{{$t->status}}</span></td>
           <td>
             <div class="action-buttons">
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
@@ -98,6 +98,34 @@
 </div>
 @endsection
 @section('scripts')
+<script type="text/javascript">
+$(document).ready(function(){
+
+$("#prueba").click(function(e){
+ var estado='';
+ var status;
+  //var status= $("#table-tarjetas #filas .td-status").text();
+//  estado=$.trim(status);
+
+    $("#table-tarjetas #filas").each(function(index, value){
+  estado= $(value).find("td").eq(9).text()
+  status=$.trim(estado);
+  console.log(status);
+if (status=="Reasignada"){
+  $("#table-tarjetas #filas .td-status").append("<td id="+index+"><span class=label label-sm label-warning>Reasignada</span></td>")
+  //$("#table-tarjetas #filas .td-status .label").addClass("label label-sm label-warning");
+}
+else {
+  $("#table-tarjetas #filas .td-status .label").addClass("label label-sm label-info");
+}
+});
+  //id = $(this).parents("tr").find(".id").html();
+
+
+});
+});
+</script>
+
 <script type="text/javascript">
 //script para cargar estilo y botones de jQuery DataTable
 $(document).ready(function() {
@@ -157,7 +185,7 @@ $(document).ready(function() {
   } );
 
   table.buttons().container()
-      .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+      .appendTo( $('.col-sm-6 :eq(0)', table.table().container() ) );
 } );
 </script>
 @endsection

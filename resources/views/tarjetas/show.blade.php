@@ -86,6 +86,9 @@
               {{--se llena desde jquery--}}
             </select>
           </div>
+          <div class="col-xs-1" id="imagen">
+
+          </div>
         </div>
       </div>
 
@@ -193,13 +196,13 @@ $(document).ready(function () {
           var consulta = $("#busqueda").val();
   // se hace la peticion ajax al server
      $.ajax({
-    url: '/list-users/'+consulta+'/',
-    //data: consulta,
+    url: "/list-users/"+ consulta,
     type: 'get',
     dataType: 'JSON',
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
     beforeSend: function(){
       //imagen de carga
-      $("#resultado").html("<p align='center'><img src='/images/loader.gif' /></p>");
+      $("#imagen").html("<p align='center'><img src='/images/loader.gif' /></p>");
                     },
     error: function(){
       //  alert("Error en la petición ajax");
@@ -207,6 +210,7 @@ $(document).ready(function () {
     success: function (data) {
       /* Inicializamos la tabla */
               $("#contenido").html('');
+              $("#imagen").html('');
   // se recorre la variable data para pasarlo a la tabla
           $.each(data, function(index, value){
   $("#contenido").append("<tr class=fila><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
@@ -271,5 +275,4 @@ $(document).ready(function () {
                  });
   });//finaliza document ready
     </script>
-
 @endsection

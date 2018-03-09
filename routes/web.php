@@ -5,7 +5,7 @@ Route::resource('categorias', 'CategoriasController');
 Route::resource('medidores', 'MedidoresController');
 //Route::group(['middleware' => ['role:Administrador']], function () {});
 Route::resource('areas', 'AreasController');
-
+//Route::get('/tarjetas/{filtro}','TarjetasController@index');
 Route::resource('users', 'UsersController');
 Route::resource('roles', 'RolesController');
 Route::resource('eventos', 'EventosController');

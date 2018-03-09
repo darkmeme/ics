@@ -8,13 +8,17 @@
 </style>
 
 
-<div class="container">
-  <br>
-  <div class="row">
-    <div class="col-lg-10 amarillo">
 
-<div class="row">
-      <div class="col-lg-4 col-xs-12">
+
+{{--<div class="container">--}}
+  <br>
+  <div class="col-lg-1"></div>
+
+
+    <div class="col-xs-12 col-md-12 col-lg-10 amarillo">
+
+      <div class="row">
+      <div class="col-lg-4 col-md-4 col-xs-12">
         <div class="form-group">
           <label for="nombre">Planta</label>
           <select class="form-control" id="select-planta" required name="planta_id" class="form-control">
@@ -27,7 +31,7 @@
       </div>
 
 
-    <div class="col-lg-4 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Area/Linea</label>
         <select class="form-control" id="select-area" name="area_id" required class="form-control">
@@ -35,7 +39,7 @@
         </select>
       </div>
     </div>
-    <div class="col-lg-4 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Equipo</label>
         <select class="form-control" id="select-equipos" name="equipo_id" required class="form-control">
@@ -47,7 +51,7 @@
     </div>
 
     <div class="row">
-    <div class="col-lg-4 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
         {{--<input id="txtfiltrar" type="text" name="empleado_id" class="form-control" placeholder="usuario">--}}
@@ -61,7 +65,7 @@
       </div>
     </div>
 
-    <div class="col-lg-4 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Turno</label>
         <select class="form-control" name="turno" class="form-control" required placeholder="1">
@@ -72,7 +76,7 @@
         </select>
       </div>
     </div>
-    <div class="col-lg-4 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Prioridad</label>
         <select class="form-control" name="prioridad" class="form-control" required placeholder="1">
@@ -86,7 +90,7 @@
     </div>
 
     <div class="row">
-    <div class="col-lg-4 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Categoria:</label>
         <select class="form-control" name="categoria_id" required class="form-control">
@@ -97,7 +101,7 @@
         </select>
       </div>
     </div>
-    <div class="col-lg-4 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-xs-6">
       <div class="form-group">
           <label for="nombre">Evento:</label>
           <select class="form-control" name="evento_id" required class="form-control">
@@ -108,7 +112,7 @@
           </select>
       </div>
     </div>
-    <div class="col-lg-4 col-xs-6">
+    <div class="col-lg-4 col-md-4 col-xs-6">
       <div class="form-group">
           <label for="nombre">Causa:</label>
           <select class="form-control" name="causa_id" required class="form-control">
@@ -136,14 +140,26 @@
         </div>
       </div>
         </div>
-    </div>
-  </div>
-<br>
-<div class="form-group">
-  <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-  <a href="/tarjetas"><button class="btn btn-danger" type="button">Regresar<i class="fa fa-times"></i></button></a>
-</div>
 
+
+        <div class="row">
+          <div class="col-xs-10 col-lg-8">
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
+          <a href="/tarjetas"><button class="btn btn-danger" type="button">Regresar<i class="fa fa-times"></i></button></a>
+        </div>
+        </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+{{--</div>--}}
   {!!Form::close()!!}
 
 
@@ -192,6 +208,8 @@
       </div>
     </div>
   </div>
+
+
 </div>
 @endsection
 @section('scripts')

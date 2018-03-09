@@ -16,9 +16,10 @@ background-color: white;
 </div>
 
 
+<div class="container">
 <div class="row">
-  <div class="col-lg-8 pull-right">
-    <h3 class="header smaller lighter blue">Bienvenido al Sistema de Reportes CIC</h3>
+  <div class="col-lg-12 col-md-11 col-xs-11 pull-right">
+    <h3 class="header smaller text-center lighter blue">Bienvenido al Sistema de Reportes CIC</h3>
   </div>
 </div>
 
@@ -29,13 +30,11 @@ background-color: white;
 
 
 
-<div class="container">
-  <div class="col-lg-2">
-
-  </div>
-
 <div class="row">
-  <div class="col-xl-2 col-sm-2 mb-3">
+  <div class="col-lg-1 col-xs-1 col-md-1"></div>
+  <div class="col-lg-11 col-md-11 col-xs-11">
+
+  <div class="col-lg-3 col-md-3 ">
 <div class="panel panel-warning">
   <div class="panel-heading">
     <h3 class="panel-title">Tarjetas Amarillas</h3>
@@ -50,7 +49,7 @@ background-color: white;
   </div>
 
 
-    <div class="col-xl-2 col-sm-2 mb-3">
+    <div class="col-lg-3 col-md-3">
   <div class="panel panel-danger">
     <div class="panel-heading">
       <h3 class="panel-title">Tarjetas Rojas</h3>
@@ -64,7 +63,7 @@ background-color: white;
   </div>
     </div>
 
-    <div class="col-xl-2 col-sm-2 mb-3">
+    <div class="col-lg-3 col-md-3">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Energia</h3>
@@ -78,28 +77,20 @@ background-color: white;
   </div>
     </div>
 
-    <div class="col-xl-2 col-sm-2 mb-3">
+    <div class="col-lg-3 col-md-3">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Calidad</h3>
     </div>
     <div class="panel-body">
-      <br>
       Modulo de Calidad
-
     </div>
     <div class="center-block" style="width:100px;">
     <a href="/">Acceder...</a>
     </div>
   </div>
     </div>
-
-<!--<div class="center-block" style="width:150px;height:100px;background-color:red;">
-  <p>prueba</p>
-</div>-->
-
-
-
-
+    </div>
+</div>
 </div>
 @endsection

@@ -19,16 +19,20 @@ use Auth;
 class TarjetasController extends Controller
 {
 
-  public function __construct()
-  {
+ public function __construct()
+ {
     $this->middleware('auth');
   }
 
 
     public function index(Request $request)
     {
-      $tarjetas=TarjetasModel::All();
-      return view('tarjetas.index',compact('tarjetas'));
+      $filtro=trim($request->get('buscar'));
+      //$parametro=trim($request->get('parametro'));
+
+      $tarjetas=TarjetasModel::where('status','LIKE','%'.$filtro.'%')->get();
+     return view('tarjetas.index',compact('tarjetas','filtro'));
+
     }
 
 //funcion que carga todas la tarjetas creadas por un usuario
@@ -95,23 +99,27 @@ public function tarjetas_asignadas(Request $request){
 
 
 
-    public function show($id)
+    public function show(Request $request,$id)
     {
       //variable empleados para llenar combo de empleados en el modal de reasignar
         $user=User::get(['id','name']);//selecciona solo dos campos de la tabla
         //dd($empleados);
         $tarjetas=TarjetasModel::findOrFail($id);
-        //$asignado=TarjetasModel::with('asignado')->get();
-        //dd($asignado);
-        return view('tarjetas.show', compact('user','tarjetas'));
+        if ($request->ajax()){
+        return response()->json([
+            //'status' => 'success',
+            'data'=>$tarjetas]);
+          }
 
+        return view('tarjetas.show', compact('user','tarjetas'));
     }
 
 
 
     public function edit($id)
     {
-    return view('tarjetas.edit',["tarjetas"=>TarjetasModel::findOrFail($id)]);
+
+  //  return view('tarjetas.edit',["tarjetas"=>TarjetasModel::findOrFail($id)]);
     }
 
 
