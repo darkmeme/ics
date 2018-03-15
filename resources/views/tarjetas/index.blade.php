@@ -77,13 +77,16 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <a class="green" href="#">
+
+
+              <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-              @can('borrar')
+
               <a class="red" href="" data-target="#modal-delete-{{$t->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
+              @can('borrar')
               @else
               @endcan
 
@@ -96,8 +99,46 @@
         </div>
 </div>
 </div>
+@include('tarjetas.modal-editar')
+
 @endsection
+
+
 @section('scripts')
+<script type="text/javascript">
+//script para editar una tarjeta
+$(document).ready(function(){
+$("#table-tarjetas").on("click touchstart", ".edit-btn", function () {
+$.ajax({
+  type: "GET",
+  url: "tarjetas/" + $(this).attr("value") + "/edit",
+  dataType: 'json',
+ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+ beforeSend: function() {
+ //$('#item-not-found').remove();
+ },
+  success: function (data) {
+    var html;
+  $("#descripcion_reporte").val(data['descripcion']);
+
+  html += '<option value="'+data['prioridad']+'">'+data['prioridad']+'</option>'+
+          '<option value="'+'A'+'">'+'A'+'</option>'+
+          '<option value="'+'B'+'">'+'B'+'</option>'+
+          '<option value="'+'c'+'">'+'C'+'</option>';
+  $('#prioridad').html(html);
+
+  //$('#update-form').show();
+ },
+
+});//fin de peticion ajax
+//alert('se presiono boton de editar');
+});//fin de click
+});//fin function ready
+</script>
+
+
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 

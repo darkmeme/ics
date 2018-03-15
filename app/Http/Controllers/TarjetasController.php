@@ -118,8 +118,13 @@ public function tarjetas_asignadas(Request $request){
 
     public function edit($id)
     {
+   $tarjeta=TarjetasModel::findOrFail($id);
 
-  //  return view('tarjetas.edit',["tarjetas"=>TarjetasModel::findOrFail($id)]);
+   return response()->json([
+       'status' => 'success',
+       'descripcion' => $tarjeta->descripcion_reporte,
+       'prioridad' => $tarjeta->prioridad,
+   ]);
     }
 
 
@@ -155,22 +160,19 @@ public function finalizar(Request $request,$id)
 
     public function update(Request $request, $id)
     {
-      $tarjetas=  TarejetasModel::findOrFail($id);
-      $tarjetas->fehca=$request->get('fehca');
-      $tarjetas->user_id=$request->get('empleado_id');
-      $tarjetas->area_id=$request->get('area_id');
-      $tarjetas->equipo_id=$request->get('equipo_id');
+      $tarjetas=TarjetasModel::findOrFail($id);
+      //$tarjetas->user_id=$request->get('user_id');
+      //$tarjetas->area_id=$request->get('area_id');
+      //$tarjetas->equipo_id=$request->get('equipo_id');
       $tarjetas->prioridad=$request->get('prioridad');
       $tarjetas->descripcion_reporte=$request->get('descripcion_reporte');
-      $tarjetas->planta_id=$request->get('planta_id');
-      $tarjetas->categoria=$request->get('categoria');
-      $tarjetas->solucion_implementada=$request->get('solucion_implementada');
-      $tarjetas->evento=$request->get('evento_id');
-      $tarjetas->turno=$request->get('turno');
-      $tarjetas->causa=$request->get('causa');
-      $tarjetas->fecha_cierre=$request->get('fecha_cierre');
-      $tarjetas->cierre=$request->get('cierre');
+      //$tarjetas->planta_id=$request->get('planta_id');
+      //$tarjetas->categoria_id=$request->get('categoria');
+      //$tarjetas->evento_id=$request->get('evento');
+      //$tarjetas->turno=$request->get('turno');
+      //$tarjetas->causa_id=$request->get('causa');
       $tarjetas->update();
+      Session::flash('message','Tarjeta actualizada correctamente');
       return Redirect::to('tarjetas');
     }
 

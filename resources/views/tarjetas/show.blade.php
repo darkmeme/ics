@@ -148,6 +148,7 @@
               </table>
 
               <select class="form-control" id="empleado" name="user_finaliza" class="form-control">
+                <option value="{{Auth::user()->id}}">{{Auth::user()->name}}</option>
                 {{--se llena automatico desde jQuery--}}
               </select>
             </div>

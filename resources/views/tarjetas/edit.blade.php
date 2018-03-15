@@ -1,58 +1,67 @@
 @extends('layouts.admin')
 @section('contenido')
-<style media="screen">
-.amarillo{ background-color:yellow;}
-.color-etiquetas{ background-color:green;}
-</style>
-{!!Form::open(array('url'=>'tarjetas','method'=>'PATCH','autocomplete'=>'off'))!!}
+
+{!!Form::model($tarjetas,['method'=>'PATCH','route'=>['tarjetas.update',$tarjetas->id]])!!}
 {{Form::token()}}
-
+<br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Editar Tarjeta No: {{$tarjetas->id}}</div>
+    <div class="container">
 <div class="row">
-  <div class="col-lg-3 col-xs-12 offset-1">
+  <div class="col-lg-3 col-xs-12">
     <div class="form-group">
-      <label for="nombre">Fecha</label>
-      <input type="text" name="fecha" class="form-control" value={{$tarjetas->fecha}}>
+      <label for="planta">Planta</label>
+      <select class="form-control" name="planta_id" class="form-control">
+        <option value="{{$tarjetas->planta_id}}">{{$tarjetas->planta->nombre}}</option>
+      </select>
     </div>
-      </div>
-    <div class="col-lg-3 col-xs-12">
-      <div class="form-group">
-        <label for="nombre">Area/Linea</label>
-        <select class="form-control" name="area_id" class="form-control">
-          <option value="{{$tarjetas->area_id}}">{{$tarjetas->area_id}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-lg-3 col-xs-12">
-      <div class="form-group">
-        <label for="nombre">Nombre:</label>
-        <select class="form-control" name="empleado_id" class="form-control">
+  </div>
 
+    <div class="col-lg-3 col-xs-12">
+      <div class="form-group">
+        <label for="area">Area/Linea</label>
+        <select class="form-control" name="area_id" class="form-control">
+          <option value="{{$tarjetas->area_id}}">{{$tarjetas->area->nombre}}</option>
         </select>
       </div>
     </div>
+
+    <div class="col-lg-3 col-xs-12">
+      <div class="form-group">
+        <label for="equipo">Equipo:</label>
+        <select class="form-control" name="equipo_id" class="form-control">
+          <option value="{{$tarjetas->equipo_id}}">{{$tarjetas->equipo->nombre}}</option>
+        </select>
+      </div>
+    </div>
+
     </div>
     <div class="row">
     <div class="col-lg-3 col-xs-12 offset-1">
       <div class="form-group">
-        <label for="nombre">Equipo</label>
-        <select class="form-control" name="equipo_id" class="form-control">
-
+        <label for="nombre">Nombre</label>
+        <select class="form-control" name="user_id" class="form-control">
+          <option value="{{$tarjetas->user_id}}">{{$tarjetas->user->name}}</option>
         </select>
       </div>
       </div>
       <div class="col-lg-3 col-xs-12">
         <div class="form-group">
-          <label for="nombre">Turno</label>
-          <select class="form-control" name="turno" class="form-control" placeholder="1">
+          <label for="turno">Turno</label>
+          <select class="form-control" name="turno">
             <option value="{{$tarjetas->turno}}">{{$tarjetas->turno}}</option>
           </select>
         </div>
       </div>
       <div class="col-lg-3 col-xs-6">
         <div class="form-group">
-          <label for="nombre">Prioridad</label>
-          <select class="form-control" name="prioridad" class="form-control" placeholder="1">
-            <option value="$tarjetas->turno}}">$tarjetas->turno}}</option>
+          <label for="prioridad">Prioridad</label>
+          <select class="form-control" name="prioridad">
+            <option value="$tarjetas->prioridad}}">{{$tarjetas->prioridad}}</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
           </select>
         </div>
       </div>
@@ -61,33 +70,31 @@
 
     </div>
     <div class="row">
-    <div class="col-lg-6 col-xs-6">
+    <div class="col-lg-3 col-xs-6">
       <div class="form-group">
-        <label for="nombre">Categoria</label>
-        <select class="form-control" name="categoria" class="form-control" placeholder="1">
-          <option value="{{$tarjetas->categoria}}">{{$tarjetas->categoria}}</option>
+        <label for="categoria">Categoria</label>
+        <select class="form-control" name="categoria">
+          <option value="{{$tarjetas->categoria_id}}">{{$tarjetas->categoria->nombre}}</option>
         </select>
       </div>
     </div>
     </div>
-    <div class="row">
-  <div class="col-lg-10 offset-1">
-  <div class="color-etiquetas text-center">
-      <p>REPORTE DE PIRAMIDE DE SEGURIDAD</p>
-  </div>
-    </div>
-    </div>
+
       <div class="row">
-    <div class="col-lg-6 col-xs-6">
+    <div class="col-lg-3 col-xs-6">
       <div class="form-group">
-        <label for="nombre">Evento</label>
-        <input type="text" name="evento" class="form-control" value="{{$tarjetas->evento}}">
+        <label for="evento">Evento</label>
+        <select class="form-control" name="evento">
+          <option value="{{$tarjetas->evento_id}}">{{$tarjetas->evento->nombre}}</option>
+        </select>
       </div>
     </div>
-    <div class="col-lg-6 col-xs-6">
+    <div class="col-lg-3 col-xs-6">
       <div class="form-group">
         <label for="nombre">Causa del evento</label>
-        <input type="text" name="causa" class="form-control" value="{{$tarjetas->causa}}">
+        <select class="form-control" name="causa">
+          <option value="{{$tarjetas->causa_id}}">{{$tarjetas->causa->nombre}}</option>
+        </select>
       </div>
     </div>
     </div>
@@ -101,45 +108,16 @@
       <div class="row">
       <div class="col-lg-6">
         <div class="form-group">
-          <textarea name="descripcion_reporte" rows="5" cols="100" value="{{$tarjetas->descripcion_reporte}}"></textarea>
+          <textarea name="descripcion_reporte" rows="5" cols="100">{{$tarjetas->descripcion_reporte}}</textarea>
         </div>
       </div>
-        </div>
-      <div class="row">
-      <div class="col-lg-10 offset-1">
-        <div class="color-etiquetas text-center">
-          <p>SOLUCION IMPLEMENTADA</p>
-          </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-lg-6">
-          <div class="form-group">
-            <textarea name="solucion_implementada" rows="5" cols="100"></textarea>
-          </div>
-          </div>
-          </div>
-          <div class="row">
-          <div class="col-lg-6 col-xs-6">
-            <div class="form-group">
-              <label for="nombre">Fecha de cierre</label>
-              <input type="text" name="fecha_cierre" class="form-control" placeholder="Cierre...">
-            </div>
-              </div>
-              <div class="col-lg-6 col-xs-6">
-                <div class="form-group">
-                  <label for="nombre">Cerrado por</label>
-                  <select class="form-control" name="cerrado" class="form-control">
-
-                  </select>
-                </div>
-                  </div>
-                  </div>
-
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal"> Cerrar</button>
-      <button type="submit" class="btn btn-primary">Confirmar</button>
     </div>
+
+
+      <button type="button" class="btn btn-default"> Cerrar</button>
+      <button type="submit" class="btn btn-primary">Confirmar</button>
+          </div>
+      </div>
+  </div>
   {!!Form::close()!!}
 @endsection
