@@ -24,7 +24,6 @@ public $tarjeta;
     public function build()
     {
         return $this->markdown('emails.asignar-tarjeta')
-        //->with('name', 'Elmer Hernandez')
         ->from('tarjetas.cic@gmail.com', 'Tarjetas CIC')
         ->subject('Asignacion de tarjeta');;
     }
