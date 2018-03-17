@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 Use Session;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+use \App\Mail\AsignarTarjeta;
 
 
 class TarjetasController extends Controller
@@ -81,19 +83,21 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->status='enviada';
       $tarjetas->user_finaliza=(1);
 
-      if ($tarjetas->categoria->nombre=='Electrica'){
+      if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
       $tarjetas->user_asignado=(32);
       $tarjetas->status='Asignada';
     }
-    else if ($tarjetas->categoria->nombre=='Mecanica'){
-    $tarjetas->user_asignado=(32);
-    $tarjetas->status='Asignada';
-  }
+
     else {
       $tarjetas->user_asignado=(311);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();
+      //se envia correo al usuario que se le asigno la tarjeta
+      $correo=$tarjetas->asignado->email;
+      $nombre=$tarjetas->asignado->name;
+      Mail::to($correo,$nombre)
+      ->send(new AsignarTarjeta($tarjetas));
       return Redirect::to('tarjetas');
     }
 
@@ -131,10 +135,16 @@ public function tarjetas_asignadas(Request $request){
 // fucnion para reasignar una tarjetas, esta info se carga desde modal de show
 public function asignar(Request $request,$id)
 {
+  //$user=User::where('id',$id)->get(['name']);
   $tarjeta=TarjetasModel::findOrFail($id);
   $tarjeta->user_asignado=$request->get('empleado_id');
   $tarjeta->status='Reasignada';
   $tarjeta->update();
+  $correo=$tarjeta->asignado->email;
+  $nombre=$tarjeta->asignado->name;
+
+  Mail::to($correo,$nombre)
+  ->send(new AsignarTarjeta($tarjeta));
   return Redirect::to('tarjetas');
 }
 
