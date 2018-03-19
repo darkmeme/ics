@@ -143,8 +143,8 @@ public function asignar(Request $request,$id)
   $correo=$tarjeta->asignado->email;
   $nombre=$tarjeta->asignado->name;
 
-  //Mail::to($correo,$nombre)
-  //->send(new AsignarTarjeta($tarjeta));
+  Mail::to($correo,$nombre)
+  ->send(new AsignarTarjeta($tarjeta));
   return Redirect::to('tarjetas');
 }
 
