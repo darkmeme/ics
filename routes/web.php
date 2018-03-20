@@ -16,6 +16,7 @@ Route::resource('plantas', 'PlantasController');
 Route::resource('prioridades', 'PrioridadesController');
 Route::resource('status', 'StatusController');
 Route::resource('tarjetas', 'TarjetasController');
+Route::resource('tarjetas-rojas', 'TarjetasRojasController');
 Route::resource('puestos', 'PuestosController');
 Route::resource('ordenes', 'OrdenesController');
 //ruta para asignar una tarjeta a un empleado
