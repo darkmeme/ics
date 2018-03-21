@@ -13,7 +13,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <span class="white">&times;</span>
           </button>
-          Finalizar Tarjeta
+          Editar Tarjeta Amarilla
         </div>
       </div>
       <div class="modal-body">
@@ -34,10 +34,7 @@
                 <div class="form-group">
                   <label for="prioridad">Prioridad</label>
                   <select class="form-control" id="prioridad" name="prioridad">
-
-
-                    <option value="B">B</option>
-                    <option value="C">C</option>
+                    {{--se llena auto con peticion ajax--}}
                   </select>
                 </div>
               </div>

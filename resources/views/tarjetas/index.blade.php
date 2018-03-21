@@ -42,14 +42,9 @@
           <th class="text-center">Fecha</th>
           <th class="text-center">Nombre</th>
           <th class="text-center">Equipo</th>
-          {{--<th>Turno</th>--}}
           <th class="text-center">Prioridad</th>
           <th class="text-center">Categoria</th>
-          {{--<th>Evento</th>
-          <th class="text-center">Causa</th>--}}
           <th class="text-center">Descripcion</th>
-          {{--<th>Solucion</th>
-          <th class="text-center">Fecha cierre</th>--}}
           <th class="text-center">Finalizado</th>
           <th class="text-center">Opciones</th>
         </thead>
@@ -63,14 +58,9 @@
           <td>{{$t->created_at}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
-          {{--<td>{{$t->turno}}</td>--}}
           <td>{{$t->prioridad}}</td>
           <td>{{$t->categoria->nombre}}</td>
-          {{--<td>{{$t->evento->nombre}}</td>
-          <td>{{$t->causa->nombre}}</td>--}}
           <td>{{$t->descripcion_reporte}}</td>
-          {{--<td>{{$t->solucion_implementada}}</td>
-          <td>{{$t->fecha_cierre}}</td>--}}
           <td class="td-status"><span class="label label-sm label-warning">{{$t->status}}</span></td>
           <td>
             <div class="action-buttons">

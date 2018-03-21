@@ -128,11 +128,12 @@ public function tarjetas_asignadas(Request $request){
        'status' => 'success',
        'descripcion' => $tarjeta->descripcion_reporte,
        'prioridad' => $tarjeta->prioridad,
+       'equipo' =>$tarjeta->equipo->nombre,
    ]);
     }
 
 
-// fucnion para reasignar una tarjetas, esta info se carga desde modal de show
+// funcion para reasignar una tarjetas, esta info se carga desde modal de show
 public function asignar(Request $request,$id)
 {
   //$user=User::where('id',$id)->get(['name']);
@@ -145,7 +146,7 @@ public function asignar(Request $request,$id)
 
   Mail::to($correo,$nombre)
   ->send(new AsignarTarjeta($tarjeta));
-  return Redirect::to('tarjetas');
+  return Redirect::to('tarjetas-asignadas');
 }
 
 
@@ -183,7 +184,7 @@ public function finalizar(Request $request,$id)
       //$tarjetas->causa_id=$request->get('causa');
       $tarjetas->update();
       Session::flash('message','Tarjeta actualizada correctamente');
-      return Redirect::to('tarjetas');
+      return Redirect::to('tarjetas-asignadas');
     }
 
     public function destroy($id)

@@ -1,6 +1,15 @@
 @extends('layouts.admin')
 @section('contenido')
+  <br>
 
+  <div class="col-lg-5">
+    @if(Session::has('message'))
+      <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{Session::get('message')}}
+      </div>
+    @endif
+  </div>
 
 
 <div class="row">
@@ -61,7 +70,7 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <a class="green" href="#">
+              <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
 
@@ -73,10 +82,43 @@
         </div>
 </div>
 </div>
-
+@include('tarjetas.modal-editar')
 @endsection
 
 @section('scripts')
+  <script type="text/javascript">
+    //script para editar una tarjeta amarilla
+    $(document).ready(function(){
+        $("#table-tarjetas-asignadas").on("click touchstart", ".edit-btn", function () {
+            $.ajax({
+                type: "GET",
+                url: "tarjetas/" + $(this).attr("value") + "/edit",
+                dataType: 'json',
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                beforeSend: function() {
+                    //$('#item-not-found').remove();
+                },
+                success: function (data) {
+                    var html;
+                    $("#descripcion_reporte").val(data['descripcion']);
+
+                    html += '<option value="'+data['prioridad']+'">'+data['prioridad']+'</option>'+
+                        '<option value="'+'A'+'">'+'A'+'</option>'+
+                        '<option value="'+'B'+'">'+'B'+'</option>'+
+                        '<option value="'+'c'+'">'+'C'+'</option>';
+                    $('#prioridad').html(html);
+                    $('#equipo').html('<option value="'+data['equipo']+'">'+data['equipo']+'</option>');
+                    //$('#update-form').show();
+                },
+            });//fin de peticion ajax
+//alert('se presiono boton de editar');
+        });//fin de click
+    });//fin function ready
+  </script>
+
+
+
+
 <script type="text/javascript">
 //script para cargar estilo y botones de jQuery DataTable
 $(document).ready(function() {
