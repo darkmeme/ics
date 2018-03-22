@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Medidores;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use App\Mail\LecturasEnergia;
+use Auth;
 
 class MedidoresController extends Controller
 {
@@ -20,11 +23,7 @@ class MedidoresController extends Controller
       return view('medidores.index',compact('medidores'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('medidores.create');
@@ -48,6 +47,9 @@ class MedidoresController extends Controller
       $medidores->enee_reactivo=$request->get('enee_reactivo');
       $medidores->fp=$request->get('fp');
       $medidores->save();
+      $user=Auth::user()->name;
+        Mail::to('dagoberto.ortega@unilever.com','Dagoberto Ortega')
+            ->send(new LecturasEnergia($medidores,$user));
       return Redirect::to('medidores');
     }
 

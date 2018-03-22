@@ -18,17 +18,19 @@
     <div class="table-responsive">
       <table class="table text-center" id="table-empleados" width="100%" cellspacing="0">
         <thead>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Codigo</th>
-          <th>Puesto</th>
-          <th>Opciones</th>
+          <th class="text-center">Id</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Codigo</th>
+          <th class="text-center">Puesto</th>
+          <th class="text-center">Opciones</th>
         </thead>
 
         @foreach ($users as $u)
         <tr>
           <td>{{$u->id}}</td>
           <td>{{$u->name}}</td>
+          <td>{{$u->email}}</td>
           <td>{{$u->codigoempleado}}</td>
           <td>{{$u->puesto->nombre}}</td>
 

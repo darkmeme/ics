@@ -49,3 +49,14 @@ Route::get('/area/{id}/equiposPadres','EquiposController@equipos_padres');
 // rutas para cargar las tarjetas creadas y asignadas a un usuario
 Route::get('/mis-tarjetas', 'TarjetasController@mis_tarjetas');
 Route::get('/tarjetas-asignadas', 'TarjetasController@tarjetas_asignadas');
+
+
+
+
+Route::get('pruebaLecturas', function () {
+    $medidor=App\Medidores::findOrfail(1);
+    $user=\Illuminate\Support\Facades\Auth::user()->name;
+
+    Mail::to('geovany.hernandez90@gmail.com','Elmer Hernandez')
+        ->send(new \App\Mail\LecturasEnergia($medidor,$user));
+});
