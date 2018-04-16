@@ -1,22 +1,41 @@
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+new Vue({
+	el: '#table',
+	data: {
+		areas:[],
+	},
 
-require('./bootstrap');
+	created: function() {
+		this.getAreas();
+		//this.$nextTick(function() {
+		//	$('#table-areas').DataTable();
+		  //})
+	},
 
-window.Vue = require('vue');
+	methods: {
+		//metodo para obtener listado de todas las areas
+		getAreas: function() {
+			var urlAreas = 'listaAreas';
+      axios.get(urlAreas).then(response => {
+				this.areas = response.data
+				});//fin de peticion ajax
+		},//fin de getAreas
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+			//metodo para eliminar un area
+		deleteArea: function(area){
+			var url= 'areas/'+area.id;
+			confirm('Seguro de Eliminar el area: '+area.nombre, function(result){
+				if(!result) {
+				   return false;
+				}
+			});
+			axios.delete(url).then(response=>{
+				this.getAreas();
+				toastr.success('Area'+' '+area.id+' '+ 'Eliminada correctamente');
+			},
+			(error) => { alert(error) }
+		);
+		}//termina metodo delete
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
+	},//cierre de todos los metodos
+}); //fin de instancia de vue

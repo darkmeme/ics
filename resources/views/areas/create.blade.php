@@ -3,35 +3,35 @@
 
 <div class="row">
 <div class="col-lg-6 col-xs-12 offset-3">
-    @if (count($errors)>0)
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{$error}}</li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
-
 
     {!!Form::open(array('url'=>'areas','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
 
     <h3 class="header smaller lighter blue">Crear Nueva Area</h3>
 
-    <div class="form-group">
+    <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
       <label for="nombre">Nombre</label>
-      <input type="text" name="areas" class="form-control" placeholder="Nombre..." required>
+      <input type="text" name="nombre" value="{{old('nombre')}}" class="form-control" placeholder="Nombre...">
+        @if ($errors->has('nombre'))
+            <span class="help-block">
+                <strong>{{ $errors->first('nombre') }}</strong>
+            </span>
+        @endif
     </div>
 
-    <div class="form-group">
+    <div class="form-group {{ $errors->has('planta_id') ? ' has-error' : '' }}">
       <label for="nombre">Planta</label>
-      <select class="form-control" name="planta_id" id="select-planta" class="form-control" placeholder="Planta..." required>
+      <select class="form-control" name="planta_id" id="select-planta" class="form-control" placeholder="Planta...">
         <option value="">Seleccione Planta</option>
         @foreach($plantas as $p)
         <option value="{{$p->id}}">{{$p->nombre}}</option>
        @endforeach
       </select>
+        @if ($errors->has('planta_id'))
+            <span class="help-block">
+                <strong>{{ $errors->first('planta_id') }}</strong>
+            </span>
+        @endif
     </div>
 
     <div class="form-group">

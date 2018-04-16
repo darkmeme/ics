@@ -11,10 +11,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<!-- bootstrap & fontawesome -->
-
 		<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
 		<link href="{{asset('assets/font-awesome/4.2.0/css/font-awesome.min.css')}}" rel="stylesheet">
-
+		<!--<link href="{{asset('css/app.css')}}" rel="stylesheet">-->
 		<!-- page specific plugin styles -->
 
 		<!-- text fonts -->
@@ -23,7 +22,7 @@
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="{{asset('assets/css/ace.min.css')}}" class="ace-main-stylesheet" id="main-ace-style">
-
+		
 		<!-- ace settings handler -->
 	</head>
 	<body class="no-skin">
@@ -466,33 +465,23 @@
 </div><!-- /.main-container -->
 		<!-- basic scripts -->
 
-
-
-	 {{--<script src="{{asset('assets/js/jquery.2.1.1.min.js')}}"></script>
-	 <script src="jquery.breadcrumbs-generator.min.js"></script>--}}
-
-	 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+		 <script src="{{asset('assets/js/jquery-3.3.1.js')}}"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>
 		<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-		<script src="{{asset('assets/js/jquery-ui.custom.min.js')}}"></script>
-		<script src="{{asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-		<script src="{{asset('assets/js/jquery.easypiechart.min.js')}}"></script>
-		<script src="{{asset('assets/js/jquery.sparkline.min.js')}}"></script>
-		<script src="{{asset('assets/js/jquery.flot.min.js')}}"></script>
-		<script src="{{asset('assets/js/jquery.flot.pie.min.js')}}"></script>
-		<script src="{{asset('assets/js/jquery.flot.resize.min.js')}}"></script>
+
 
 		<!-- page specific plugin scripts -->
 		{{--<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 		<script src="{{asset('assets/js/jquery.dataTables.bootstrap.min.js')}}"></script>
 		<script src="{{asset('assets/js/dataTables.tableTools.min.js')}}"></script>
 		<script src="{{asset('assets/js/dataTables.colVis.min.js')}}"></script>--}}
-
 		<!-- ace scripts -->
 		<script src="{{asset('assets/js/ace-elements.min.js')}}"></script>
 		<script src="{{asset('assets/js/ace.min.js')}}"></script>
+		<!--<script src="{{asset('js/app.js')}}"></script>-->
 @yield('scripts')
 	</body>
 </html>

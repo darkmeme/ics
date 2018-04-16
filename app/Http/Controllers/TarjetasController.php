@@ -171,17 +171,10 @@ public function finalizar(Request $request,$id)
 
     public function update(Request $request, $id)
     {
+      //dd('el id enviado:'.$id);
       $tarjetas=TarjetasModel::findOrFail($id);
-      //$tarjetas->user_id=$request->get('user_id');
-      //$tarjetas->area_id=$request->get('area_id');
-      //$tarjetas->equipo_id=$request->get('equipo_id');
       $tarjetas->prioridad=$request->get('prioridad');
       $tarjetas->descripcion_reporte=$request->get('descripcion_reporte');
-      //$tarjetas->planta_id=$request->get('planta_id');
-      //$tarjetas->categoria_id=$request->get('categoria');
-      //$tarjetas->evento_id=$request->get('evento');
-      //$tarjetas->turno=$request->get('turno');
-      //$tarjetas->causa_id=$request->get('causa');
       $tarjetas->update();
       Session::flash('message','Tarjeta actualizada correctamente');
       return Redirect::to('tarjetas-asignadas');
@@ -191,7 +184,6 @@ public function finalizar(Request $request,$id)
     {
       $tarjetas=TarjetasModel::findOrFail($id);
       $tarjetas->Delete();
-      //Post::destroy($id);
       Return Redirect::to('tarjetas');
     }//generador de crud
 

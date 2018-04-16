@@ -132,7 +132,7 @@ $("#prueba").click(function(e){
  var status;
 
     $("#table-tarjetas #filas").each(function(index, value){
-  estado= $(value).find("td").eq(9).text()
+  estado= $(value).find("td").eq(9).text();
   status=$.trim(estado);
   console.log(status);
 if (status=="Reasignada"){

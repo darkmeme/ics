@@ -47,21 +47,17 @@
 
 
         @foreach ($tarjetas as $t)
+        @include('tarjetas.modal-editar')
         <tr>
           <td>{{$t->id}}</td>
           <td>{{$t->area->nombre}}</td>
           <td>{{$t->planta->nombre}}</td>
-          <td>{{$t->created_at}}</td>
+          <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
-          {{--<td>{{$t->turno}}</td>--}}
           <td>{{$t->prioridad}}</td>
           <td>{{$t->categoria->nombre}}</td>
-          {{--<td>{{$t->evento->nombre}}</td>
-          <td>{{$t->causa->nombre}}</td>--}}
           <td>{{$t->descripcion_reporte}}</td>
-          {{--<td>{{$t->solucion_implementada}}</td>
-          <td>{{$t->fecha_cierre}}</td>--}}
           <td>{{$t->finalizado}}</td>
           <td><span class="label label-sm label-success">{{$t->status}}</span>
           </td>
@@ -70,7 +66,8 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag">
+
+              <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag-{{$t->id}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
 
@@ -82,7 +79,7 @@
         </div>
 </div>
 </div>
-@include('tarjetas.modal-editar')
+
 @endsection
 
 @section('scripts')
@@ -100,14 +97,14 @@
                 },
                 success: function (data) {
                     var html;
-                    $("#descripcion_reporte").val(data['descripcion']);
+                    $(".descripcion_reporte").val(data['descripcion']);
 
                     html += '<option value="'+data['prioridad']+'">'+data['prioridad']+'</option>'+
                         '<option value="'+'A'+'">'+'A'+'</option>'+
                         '<option value="'+'B'+'">'+'B'+'</option>'+
                         '<option value="'+'c'+'">'+'C'+'</option>';
-                    $('#prioridad').html(html);
-                    $('#equipo').html('<option value="'+data['equipo']+'">'+data['equipo']+'</option>');
+                    $('.prioridad').html(html);
+                    $('.equipo').html('<option value="'+data['equipo']+'">'+data['equipo']+'</option>');
                     //$('#update-form').show();
                 },
             });//fin de peticion ajax

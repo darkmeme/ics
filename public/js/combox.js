@@ -11,7 +11,7 @@ function selectPlantaChange() {
   //peticion ajax
   $.get('/planta/'+planta_id+'/areas',function (data)
   {
-    var html_select='<option value="">Seleccione Area'
+    var html_select='<option value="">Seleccione Area';
     for(var i=0; i<data.length; ++i)
     html_select += '<option value="'+data[i].id+'">'+data[i].nombre+'</option>';
     //pasar los datos al segundo select cuando se cambia el valor del primero
@@ -28,7 +28,7 @@ function selectAreaChange() {
 var area_id = $(this).val();
 $.get('/area/'+area_id+'/equipos',function (data) {
 
-  var html_select_equipos='<option value="">Seleccione Equipo'
+  var html_select_equipos='<option value="">Seleccione Equipo';
   for(var i=0; i<data.length; ++i)
   html_select_equipos += '<option value="'+data[i].id+'">'+data[i].nombre+'</option>';
   //pasar los datos al segundo select cuando se cambia el valor del primero
@@ -47,7 +47,7 @@ var area_id = $(this).val();
 //alert(area_id);
 $.get('/area/'+area_id+'/equiposPadres',function (data) {
 
-  var html_select_equiposPadres='<option value="">Seleccione Equipo'
+  var html_select_equiposPadres='<option value="">Seleccione Equipo';
   for(var i=0; i<data.length; ++i)
   html_select_equiposPadres += '<option value="'+data[i].id+'">'+data[i].nombre+'</option>';
   //pasar los datos al segundo select cuando se cambia el valor del primero

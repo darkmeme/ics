@@ -69,7 +69,7 @@
       "body": "DTTT_Print",
       "info": "tableTools-alert gritter-item-wrapper gritter-info gritter-center white",
       "message": "tableTools-print-navbar"
-    }
+    };
 
     //initiate TableTools extension
     var tableTools_obj = new $.fn.dataTable.TableTools( oTable1, {
@@ -163,7 +163,7 @@
     });
 
     //style it
-    $(colvis.button()).addClass('btn-group').find('button').addClass('btn btn-white btn-info btn-bold')
+    $(colvis.button()).addClass('btn-group').find('button').addClass('btn btn-white btn-info btn-bold');
 
     //and append it to our table tools btn-group, also add tooltip
     $(colvis.button())
@@ -239,7 +239,7 @@
     //tooltip placement on right or left
     function tooltip_placement(context, source) {
       var $source = $(source);
-      var $parent = $source.closest('table')
+      var $parent = $source.closest('table');
       var off1 = $parent.offset();
       var w1 = $parent.width();
 

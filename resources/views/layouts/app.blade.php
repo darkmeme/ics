@@ -11,7 +11,7 @@
     <title>Digital CIC</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
 </head>
 <body>
@@ -72,11 +72,16 @@
                 </div>
             </div>
         </nav>
+        <style media="screen">
+            {{--img.logo { padding: 300px; margin: 30px; border: 0px; solid black; float: right; width: 50px; }--}}
+        </style>
 
+        {{--<img style="width:100%; height:105px;" src="images/ugrande.png">--}}
         @yield('content')
     </div>
 
     <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

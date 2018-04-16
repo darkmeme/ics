@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MedidoresFormRequest;
 use App\Medidores;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use App\Mail\LecturasEnergia;
-use Auth;
 
 class MedidoresController extends Controller
 {
@@ -31,7 +32,7 @@ class MedidoresController extends Controller
 
 
 
-    public function store(Request $request)
+    public function store(MedidoresFormRequest $request)
     {
       $medidores=new Medidores;
       $medidores->nsd_220=$request->get('nsd_220');
@@ -48,8 +49,8 @@ class MedidoresController extends Controller
       $medidores->fp=$request->get('fp');
       $medidores->save();
       $user=Auth::user()->name;
-        Mail::to('dagoberto.ortega@unilever.com','Dagoberto Ortega')
-            ->send(new LecturasEnergia($medidores,$user));
+        //Mail::to('dagoberto.ortega@unilever.com','Dagoberto Ortega')
+           // ->send(new LecturasEnergia($medidores,$user));
       return Redirect::to('medidores');
     }
 
@@ -57,7 +58,7 @@ class MedidoresController extends Controller
 
     public function show(Medidores $medidores)
     {
-        //
+
     }
 
 

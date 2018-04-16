@@ -25,7 +25,7 @@ class AreasFormRequest extends FormRequest
     {
         return [
             'nombre'=>'required|max:50',
-          'planta_id'=>'required|',
+            'planta_id'=>'required|',
         ];
     }
 }

@@ -46,16 +46,16 @@
           <th class="text-center">Categoria</th>
           <th class="text-center">Descripcion</th>
           <th class="text-center">Finalizado</th>
-          <th class="text-center">Opciones</th>
+          <th class="text-center" WIDTH="100">Opciones</th>
         </thead>
 
-
         @foreach ($tarjetas as $t)
+        @include('tarjetas.modal-editar')
         <tr id="filas">
           <td>{{$t->id}}</td>
           <td>{{$t->area->nombre}}</td>
           <td>{{$t->planta->nombre}}</td>
-          <td>{{$t->created_at}}</td>
+          <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
           <td>{{$t->prioridad}}</td>
@@ -69,7 +69,7 @@
               </a>
 
 
-              <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag">
+              <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag-{{$t->id}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
 
@@ -79,26 +79,25 @@
               @can('borrar')
               @else
               @endcan
-
             </div>
           </td>
-        </tr>
+        </tr> 
         @include('tarjetas.modal')
         @endforeach
       </table>
         </div>
 </div>
 </div>
-@include('tarjetas.modal-editar')
-
 @endsection
 
 
 @section('scripts')
 <script type="text/javascript">
-//script para editar una tarjeta
+//script para editar una tarjeta, se hace peticion ajax cuando se hace click en boton edit
+//de la tabla y carga los datos en el modal edit-tag
 $(document).ready(function(){
 $("#table-tarjetas").on("click touchstart", ".edit-btn", function () {
+
 $.ajax({
   type: "GET",
   url: "tarjetas/" + $(this).attr("value") + "/edit",
@@ -109,13 +108,13 @@ $.ajax({
  },
   success: function (data) {
     var html;
-  $("#descripcion_reporte").val(data['descripcion']);
+  $(".descripcion_reporte").val(data['descripcion']);
 
   html += '<option value="'+data['prioridad']+'">'+data['prioridad']+'</option>'+
           '<option value="'+'A'+'">'+'A'+'</option>'+
           '<option value="'+'B'+'">'+'B'+'</option>'+
           '<option value="'+'c'+'">'+'C'+'</option>';
-  $('#prioridad').html(html);
+  $('.prioridad').html(html);
 
   //$('#update-form').show();
  },
@@ -137,7 +136,7 @@ $("#prueba").click(function(e){
 //  estado=$.trim(status);
 
     $("#table-tarjetas #filas").each(function(index, value){
-  estado= $(value).find("td").eq(9).text()
+  estado= $(value).find("td").eq(9).text();
   status=$.trim(estado);
   console.log(status);
 if (status=="Reasignada"){
@@ -154,6 +153,7 @@ else {
 });
 });
 </script>
+
 
 <script type="text/javascript">
 //script para cargar estilo y botones de jQuery DataTable

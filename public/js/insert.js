@@ -16,8 +16,8 @@ $('#btn-asignar').click(function(event) {
 			type: $(formId).attr('method'),
 			data: $(formId).serialize(),
       alert(data);
-			dataType: 'html',
-			success: function(result){
+			'html',
+			success;: function(result){
 				if ($(formId).find("input:first-child").attr('value') == 'PUT') {
 					var $jsonObject = jQuery.parseJSON(result);
 	                                $(location).attr('href',$jsonObject.url);
@@ -30,7 +30,7 @@ $('#btn-asignar').click(function(event) {
 			error: function(){
 				console.log('Error');
 			}
-		});
-	});
+})
+});
 
 });

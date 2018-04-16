@@ -257,7 +257,7 @@ $('#modal-usuario').modal('show');
               id = $(this).parents("tr").find(".id").html();
               nombre= $(this).parents("tr").find(".nombre").html();
               // se genera un option con los valores de la fila seleccionada y se cargan al select de tarjetas
-              html_select += '<option value="'+id+'">'+nombre+'</option>'
+              html_select += '<option value="'+id+'">'+nombre+'</option>';
               $('#txtfiltrar').html(html_select);
               // se cierra el modal despues de cargar los datos al select
               $('#modal-usuario').modal('hide');

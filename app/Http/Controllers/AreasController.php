@@ -16,41 +16,31 @@ class AreasController extends Controller
       $this->middleware('auth');
   }
 
-/*
-Validator::make($request->all(), [
-    'title' => 'required|max:255',
-    'item' => 'required'
-])->validate();
-
-return response()->json([
-    'status' => 'success',
-    'msg' => 'New item has been saved'
-]);
-
-return response()->json([
-    'status' => 'success',
-    'id' => $list->id,
-    'title' => $list->title,
-    'item' => $list->item,
-]);
-
-*/
-
-
-
 // metodo para la peticion ajax, llena combo de areas por cada planta
   public function areas_plantas($id)
   {
     return AreasModel::where('planta_id',$id)->get();
   }
 
+
+//funcion para mostrar la vista index
     public function index(Request $request)
     {
-      //$plantas=PlantasModel::All();
-      $areas=AreasModel::All();
-      return view('areas.index',compact('areas'));
+     //$areas=AreasModel::orderBy('id','DESC')->get();
+        // if ($request->ajax()){
+          //return response()->json([
+         // 'data'=>$areas]);
+        // }
+       return view('areas.index');
+   // return view('areas.index')->with(['areas' => $areas]);
+        
     }
 
+    //funcion para mostrar todo el listado de areas en la vista
+    public function mostrarAreas(){
+      $areas=AreasModel::with('planta')->orderBy('id','DESC')->get();
+      return $areas;
+    }
 
     public function create()
     {
@@ -59,20 +49,14 @@ return response()->json([
     }
 
 
-    public function store(Request $request)
+    public function store(AreasFormRequest $request)
     {
       $areas=new AreasModel;
-      $areas->nombre=$request->get('areas');
+      $areas->nombre=$request->get('nombre');
       $areas->planta_id=$request->get('planta_id');
       $areas->subArea=$request->get('subArea');
       $areas->save();
       return Redirect::to('areas');
-    }
-
-
-    public function show($id)
-    {
-        //
     }
 
 
@@ -97,6 +81,6 @@ return response()->json([
       $areas=AreasModel::findOrFail($id);
       $areas->Delete();
       //Post::destroy($id);
-      Return Redirect::to('areas');
+      //Return Redirect::to('areas');
     }
 }

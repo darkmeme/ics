@@ -2,15 +2,16 @@
 use Illuminate\Support\Facades\Mail;
 
 // rutas de tipo resource usados para manejar los crud de todas las tablas
-Route::resource('equipos', 'EquiposController');
+Route::resource('equipos', 'EquiposController',['except'=>['show']]);
 Route::resource('categorias', 'CategoriasController');
-Route::resource('medidores', 'MedidoresController');
+Route::resource('medidores', 'MedidoresController',['except'=>['show','edit','update']]);
 //Route::group(['middleware' => ['role:Administrador']], function () {});
-Route::resource('areas', 'AreasController');
+Route::resource('areas', 'AreasController',['except'=>['show']]);
+Route::get('listaAreas', 'AreasController@mostrarAreas');
 //Route::get('/tarjetas/{filtro}','TarjetasController@index');
 Route::resource('users', 'UsersController');
 Route::resource('roles', 'RolesController');
-Route::resource('eventos', 'EventosController');
+Route::resource('eventos', 'EventosController',['except'=>['show']]);
 Route::resource('causas', 'CausasController');
 Route::resource('plantas', 'PlantasController');
 Route::resource('prioridades', 'PrioridadesController');
@@ -52,7 +53,7 @@ Route::get('/tarjetas-asignadas', 'TarjetasController@tarjetas_asignadas');
 
 
 
-
+// prueba de envio de correos
 Route::get('pruebaLecturas', function () {
     $medidor=App\Medidores::findOrfail(1);
     $user=\Illuminate\Support\Facades\Auth::user()->name;

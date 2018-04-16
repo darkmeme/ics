@@ -227,7 +227,7 @@ $(document).ready(function () {
               id = $(this).parents("tr").find(".id").html();
               nombre= $(this).parents("tr").find(".nombre").html();
               // se genera un option con los valores de la fila seleccionada y se cargan al select de tarjetas
-              html_select += '<option value="'+id+'">'+nombre+'</option>'
+              html_select += '<option value="'+id+'">'+nombre+'</option>';
               $('#user-selected').html(html_select);
                });
 });//finaliza document ready
@@ -271,7 +271,7 @@ $(document).ready(function () {
                 id = $(this).parents("tr").find(".id").html();
                 nombre= $(this).parents("tr").find(".nombre").html();
                 // se genera un option con los valores de la fila seleccionada y se cargan al select de tarjetas
-                html_select += '<option value="'+id+'">'+nombre+'</option>'
+                html_select += '<option value="'+id+'">'+nombre+'</option>';
                 $('#empleado').html(html_select);
                  });
   });//finaliza document ready

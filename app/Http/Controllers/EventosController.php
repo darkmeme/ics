@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\EventosModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use DB;
+
 
 class EventosController extends Controller
 {
@@ -36,11 +36,6 @@ class EventosController extends Controller
       return Redirect::to('eventos');
     }
 
-
-    public function show($id)
-    {
-        //
-    }
 
 
     public function edit($id)
