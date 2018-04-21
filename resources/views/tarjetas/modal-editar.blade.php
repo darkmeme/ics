@@ -6,7 +6,7 @@
 </style>
 
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="edit-tag-{{$t->id}}">
+role="dialog" id="edit-tag-{{$t->id}}">
 {{Form::open(array('action'=>array('TarjetasController@update',$t->id),'method'=>'PATCH'))}}
   {{Form::token()}}
   <div class="modal-dialog modal-sm">

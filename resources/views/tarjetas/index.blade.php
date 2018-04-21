@@ -50,7 +50,7 @@
         </thead>
 
         @foreach ($tarjetas as $t)
-        @include('tarjetas.modal-editar')
+        
         <tr id="filas">
           <td>{{$t->id}}</td>
           <td>{{$t->area->nombre}}</td>
@@ -72,16 +72,16 @@
               <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag-{{$t->id}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-
+              @can('Borrar')
               <a class="red" href="" data-target="#modal-delete-{{$t->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
-              @can('borrar')
               @else
               @endcan
             </div>
           </td>
         </tr> 
+        @include('tarjetas.modal-editar')
         @include('tarjetas.modal')
         @endforeach
       </table>

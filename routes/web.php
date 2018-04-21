@@ -28,7 +28,7 @@ Route::post('/finalizar/{idtarjeta}','TarjetasController@finalizar');
 Auth::routes();
 
 
-//ruta paara petecion de usuario por medio de json
+//ruta para petecion de usuario por medio de json
 Route::get('list-users/{filtro}', 'UsersController@users_json');
 
 
@@ -37,7 +37,7 @@ Route::get('list-users/{filtro}', 'UsersController@users_json');
 //rutas para los permisos
 Route::post('/permisos', 'RolesController@create_permission');
 Route::delete('/permisos-borrar/{id}/', 'RolesController@delete_permission');
-Route::post('/permisos-asignar/{id}/{permiso}/', 'RolesController@asignar_permiso');
+Route::get('/permisos-asignar', 'RolesController@asignar_permiso');
 Route::get('/roles-asignar', 'RolesController@asignar_rol');
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -50,6 +50,7 @@ Route::get('/area/{id}/equiposPadres','EquiposController@equipos_padres');
 // rutas para cargar las tarjetas creadas y asignadas a un usuario
 Route::get('/mis-tarjetas', 'TarjetasController@mis_tarjetas');
 Route::get('/tarjetas-asignadas', 'TarjetasController@tarjetas_asignadas');
+
 
 
 

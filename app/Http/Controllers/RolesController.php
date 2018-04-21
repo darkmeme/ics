@@ -51,8 +51,8 @@ class RolesController extends Controller
     public function asignar_rol(Request $request)
     {
      $user=User::findOrFail(2);
-     $role=Role::findOrFail(3);
-     $permiso=Permission::findOrFail(1);
+     $role=Role::findOrFail(1);
+     //$permiso=Permission::findOrFail(1);
      $user->assignRole($role);
      //$role->givePermissionTo(['publish articles', 'unpublish articles']);
     }
@@ -60,10 +60,13 @@ class RolesController extends Controller
 
 
 
-public function asignar_permiso(Request $request,$rol,$permiso){
-  dd($rol,$permiso);
-
-      //$rol->givePermissionTo($permiso);
+public function asignar_permiso(Request $request){
+  //dd($rol,$permiso);
+  $rol=Role::findOrFail(1);
+  $permiso=Permission::findOrFail(4);
+  //dd($rol,$permiso);
+  $rol->givePermissionTo($permiso);
+  //$permission->assignRole($rol);
 }
 
 

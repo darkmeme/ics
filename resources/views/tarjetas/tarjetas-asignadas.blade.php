@@ -39,15 +39,14 @@
           <th>Causa</th>--}}
           <th>Descripcion</th>
           {{--<th>Solucion</th>
-          <th>Fecha cierre</th>--}}
-          <th>Finalizado</th>
+          <th>Fecha cierre</th>
+          <th>Finalizado</th>--}}
           <th>Estatus</th>
-          <th>Opciones</th>
+          <th class="text-center" WIDTH="100">Opciones </th>
         </thead>
 
 
         @foreach ($tarjetas as $t)
-        @include('tarjetas.modal-editar')
         <tr>
           <td>{{$t->id}}</td>
           <td>{{$t->area->nombre}}</td>
@@ -58,7 +57,7 @@
           <td>{{$t->prioridad}}</td>
           <td>{{$t->categoria->nombre}}</td>
           <td>{{$t->descripcion_reporte}}</td>
-          <td>{{$t->finalizado}}</td>
+          {{--<td>{{$t->finalizado}}</td>--}}
           <td><span class="label label-sm label-success">{{$t->status}}</span>
           </td>
           <td>
@@ -71,9 +70,16 @@
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
 
+               @can('Borrar')
+              <a class="red" href="" data-target="#modal-delete-{{$t->id}}" data-toggle="modal">
+                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+              </a>
+              @endcan
             </div>
           </td>
         </tr>
+       @include('tarjetas.modal-editar')
+       @include('tarjetas.modal')
         @endforeach
       </table>
         </div>

@@ -38,6 +38,11 @@ class TarjetasModel extends Model
         return $this->belongsTo('App\User','user_asignado');
       }
 
+      public function reasignado()
+      {
+        return $this->belongsTo('App\User','user_reasignado');
+      }  
+
     public function terminado()
         {
           return $this->belongsTo('App\User','user_finaliza');
