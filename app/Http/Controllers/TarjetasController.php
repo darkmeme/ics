@@ -96,8 +96,8 @@ public function tarjetas_asignadas(Request $request){
       //se envia correo al usuario que se le asigno la tarjeta
       $correo=$tarjetas->asignado->email;
       $nombre=$tarjetas->asignado->name;
-     // Mail::to($correo,$nombre)
-     //->send(new AsignarTarjeta($tarjetas));
+      Mail::to($correo,$nombre)
+     ->send(new AsignarTarjeta($tarjetas));
      //se envia notificacion a la vista por medio de Toastr
      Toastr::success('Tarjeta Creada Satisfactoriamente :)' ,'Success');
       return Redirect::to('tarjetas');
