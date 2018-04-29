@@ -16,6 +16,7 @@ Use Session;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use \App\Mail\AsignarTarjeta;
+use Brian2694\Toastr\Facades\Toastr;
 
 
 class TarjetasController extends Controller
@@ -41,19 +42,18 @@ class TarjetasController extends Controller
 public function mis_tarjetas(Request $request){
   $user_actual=Auth::user()->id;
    $tarjetas=TarjetasModel::where('user_id',$user_actual)->get();
-   //dd($tarjetas);
    return view('tarjetas.mis-tarjetas',compact('tarjetas'));
 }
 
+//funcion para cargar todas las tarjetas asignadas a un usuario
 public function tarjetas_asignadas(Request $request){
   $user_actual=Auth::user()->id;
    $tarjetas=TarjetasModel::where('user_asignado',$user_actual)->get();
-   //dd($tarjetas);
    return view('tarjetas.tarjetas-asignadas',compact('tarjetas'));
 }
 
 
-
+//funcion para llamar la vista de crear tarjeta, se mandan variables para llenar los select
     public function create()
     {
       $users=User::All();
@@ -63,9 +63,9 @@ public function tarjetas_asignadas(Request $request){
       $categorias=CategoriasModel::ALL();
       $causas=CausasModel::ALL();
       return view('tarjetas.create',compact('users','users','equipos','plantas','eventos','categorias','causas'));
-
     }
 
+    //funcion para almacenar una nueva tarjeta en la db
     public function store(Request $request)
     {
       $tarjetas=new TarjetasModel;
@@ -82,12 +82,12 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->causa_id=$request->get('causa_id');
       $tarjetas->status='enviada';
       $tarjetas->user_finaliza=(1);
-
+// si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
       $tarjetas->user_asignado=(32);
       $tarjetas->status='Asignada';
     }
-
+// si no la tarjeta se asigna al encargado de she
     else {
       $tarjetas->user_asignado=(311);
       $tarjetas->status='Asignada';
@@ -96,8 +96,10 @@ public function tarjetas_asignadas(Request $request){
       //se envia correo al usuario que se le asigno la tarjeta
       $correo=$tarjetas->asignado->email;
       $nombre=$tarjetas->asignado->name;
-      Mail::to($correo,$nombre)
-     ->send(new AsignarTarjeta($tarjetas));
+     // Mail::to($correo,$nombre)
+     //->send(new AsignarTarjeta($tarjetas));
+     //se envia notificacion a la vista por medio de Toastr
+     Toastr::success('Tarjeta Creada Satisfactoriamente :)' ,'Success');
       return Redirect::to('tarjetas');
     }
 
@@ -107,23 +109,19 @@ public function tarjetas_asignadas(Request $request){
     {
       //variable empleados para llenar combo de empleados en el modal de reasignar
         $user=User::get(['id','name']);//selecciona solo dos campos de la tabla
-        //dd($empleados);
         $tarjetas=TarjetasModel::findOrFail($id);
         if ($request->ajax()){
         return response()->json([
-            //'status' => 'success',
             'data'=>$tarjetas]);
           }
-
         return view('tarjetas.show', compact('user','tarjetas'));
     }
 
 
-
+// funcion para editar algunos datos de la tarjeta, se envian los datos a la vista en formato json
     public function edit($id)
     {
    $tarjeta=TarjetasModel::findOrFail($id);
-
    return response()->json([
        'status' => 'success',
        'descripcion' => $tarjeta->descripcion_reporte,
@@ -136,8 +134,14 @@ public function tarjetas_asignadas(Request $request){
 // funcion para reasignar una tarjetas, esta info se carga desde modal de show
 public function asignar(Request $request,$id)
 {
-  //$user=User::where('id',$id)->get(['name']);
   $tarjeta=TarjetasModel::findOrFail($id);
+  //si una tarjeta ya fue finalizada no se puede volver a reasignar
+  if ($tarjeta->finalizado==1){
+    Toastr::error('La tarjeta no se puede asignar porque ya esta finalizada' ,'Asignacion');
+    return back();
+  }
+  else{
+  //$user=User::where('id',$id)->get(['name']);
   $tarjeta->user_asignado=$request->get('empleado_id');
   $tarjeta->status='Reasignada';
   $tarjeta->update();
@@ -146,7 +150,9 @@ public function asignar(Request $request,$id)
 
   Mail::to($correo,$nombre)
   ->send(new AsignarTarjeta($tarjeta));
-  return Redirect::to('tarjetas-asignadas');
+  Toastr::info('Tarjeta Asignada Correctamente, se envio un correo a: '.$nombre ,'Asignacion');
+  return back();
+  }
 }
 
 
@@ -154,8 +160,8 @@ public function finalizar(Request $request,$id)
 {
   $tarjeta=TarjetasModel::findOrFail($id);
   if ($tarjeta->finalizado==1){
-    Session::flash('message','Esta tarjeta ya fue finalizada');
-    return Redirect::to('tarjetas');
+    Toastr::error('No es posible finalizar, esta tarjeta ya fue finalizada' ,'Finalizar');
+    return back();
     }
     else{
   $tarjeta->user_finaliza=$request->get('user_finaliza');
@@ -164,30 +170,34 @@ public function finalizar(Request $request,$id)
   $tarjeta->finalizado=1;
   $tarjeta->fecha_cierre= new \DateTime();
   $tarjeta->update();
-  return Redirect::to('tarjetas');
+  Toastr::success('Tarjeta Finalizada Satisfactoriamente' ,'Finalizar');
+  return back();
 }
 }
 
 
     public function update(Request $request, $id)
     {
-      //dd('el id enviado:'.$id);
       $tarjetas=TarjetasModel::findOrFail($id);
       $tarjetas->prioridad=$request->get('prioridad');
       $tarjetas->descripcion_reporte=$request->get('descripcion_reporte');
       $tarjetas->update();
-      Session::flash('message','Tarjeta actualizada correctamente');
-      return Redirect::to('tarjetas-asignadas');
+      Toastr::success('Tarjeta Editada Satisfactoriamente' ,'Edicion');
+      //Session::flash('message','Tarjeta actualizada correctamente');
+      //return Redirect::to('tarjetas-asignadas');
+      return back();
     }
 
+    //funcion para eliminar una tarjeta, recibe como parametro el id de la tarjeta
     public function destroy($id)
     {
       $tarjetas=TarjetasModel::findOrFail($id);
       $tarjetas->Delete();
-      Return Redirect::to('tarjetas');
-    }//generador de crud
+      Toastr::success('Tarjeta Eliminada Satisfactoriamente' ,'Borrar');
+      return back();
+    }
 
-
+// prueba de generar un reporte pdf utilizando el plugin dompdf
     public function pdf($id)
       {
           $tarjetas = TarjetasModel::where('planta_id',$id)->get();

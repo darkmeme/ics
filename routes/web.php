@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Mail;
 // rutas de tipo resource usados para manejar los crud de todas las tablas
 Route::resource('equipos', 'EquiposController',['except'=>['show']]);
 Route::resource('categorias', 'CategoriasController');
+// en algunas rutas se usa except para evitar que se cree la ruta para una accion 
 Route::resource('medidores', 'MedidoresController',['except'=>['show','edit','update']]);
 //Route::group(['middleware' => ['role:Administrador']], function () {});
 Route::resource('areas', 'AreasController',['except'=>['show']]);

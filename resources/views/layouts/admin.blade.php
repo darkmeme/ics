@@ -11,9 +11,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<!-- bootstrap & fontawesome -->
-		<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+		<!--<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">-->
 		<link href="{{asset('assets/font-awesome/4.2.0/css/font-awesome.min.css')}}" rel="stylesheet">
-		<!--<link href="{{asset('css/app.css')}}" rel="stylesheet">-->
+		<link href="{{asset('css/app.css')}}" rel="stylesheet">
+		<link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet">
 		<!-- page specific plugin styles -->
 
 		<!-- text fonts -->
@@ -23,13 +24,16 @@
 		<!-- ace styles -->
 		<link rel="stylesheet" href="{{asset('assets/css/ace.min.css')}}" class="ace-main-stylesheet" id="main-ace-style">
 		
-		<!-- ace settings handler -->
+		<!-- ace settings handler navbar-fixed-top-->
+		
 	</head>
 	<body class="no-skin">
-		<div id="navbar" class="navbar navbar-default">
-			<script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-			</script>
+	<style>
+		.fix-sidebar{
+  		position: fixed;
+			}
+		</style>
+		<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
 
 			<div class="navbar-container" id="navbar-container">
 				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
@@ -71,7 +75,7 @@
 										Ajustes
 									</a>
 								</li>
-<!--enlace para perfil de usuario-->
+									<!--enlace para perfil de usuario-->
 								<li>
 									<a href="{{URL::action('UsersController@show', Auth::user()->id)}}">
 										<i class="ace-icon fa fa-user"></i>
@@ -99,14 +103,14 @@
 		</div>
 
 		<div class="main-container" id="main-container">
-			<script type="text/javascript">
+			<!--<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
+			</script>-->
 
-			<div id="sidebar" class="sidebar                  responsive">
-				<script type="text/javascript">
+			<div id="sidebar" class="sidebar responsive fix-sidebar">
+				<!--<script type="text/javascript">
 					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-				</script>
+				</script>-->
 
 				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
@@ -137,7 +141,7 @@
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
 
-            <b class="arrow"></b>
+            				<b class="arrow"></b>
 						<ul class="submenu">
 
 							<li class="">
@@ -471,7 +475,7 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
 		<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script>
 		<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-
+	    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 
 		<!-- page specific plugin scripts -->
 		{{--<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
@@ -481,7 +485,9 @@
 		<!-- ace scripts -->
 		<script src="{{asset('assets/js/ace-elements.min.js')}}"></script>
 		<script src="{{asset('assets/js/ace.min.js')}}"></script>
+		<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 		<!--<script src="{{asset('js/app.js')}}"></script>-->
 @yield('scripts')
+{!! Toastr::message() !!}
 	</body>
 </html>

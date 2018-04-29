@@ -37,7 +37,7 @@
       <div class="col-lg-5 col-xs-12">
 <a href=""data-target="#modal-asignar" data-toggle="modal"> <button class="btn btn-info">Reasignar</button></a>
 <a href=""data-target="#modal-finalizar" data-toggle="modal"> <button class="btn btn-info">Finalizar</button></a>
-<a href="/tarjetas"> <button class="btn btn-info">Regresar</button></a>
+<a href="javascript:history.back()"> <button class="btn btn-info">Regresar</button></a>
       </div>
     </div>
 </div>

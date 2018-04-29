@@ -1,3 +1,4 @@
+
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
 role="dialog" tabindex="-1" id="modal-delete-{{$t->id}}">
   {{Form::open(array('action'=>array('TarjetasController@destroy',$t->id),'method'=>'delete'))}}
