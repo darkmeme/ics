@@ -7,15 +7,10 @@
 .color-etiquetas{ background-color:green;}
 </style>
 
-
-
-{{--<div class="container">--}}
   <br>
   <div class="col-lg-1"></div>
 
-
     <div class="col-xs-12 col-md-12 col-lg-10 amarillo">
-
       <div class="row">
       <div class="col-lg-4 col-md-4 col-xs-12">
         <div class="form-group">

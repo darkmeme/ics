@@ -193,7 +193,7 @@
 								<b class="arrow"></b>
 							</li>
 							<li class="">
-								<a href="areas/create">
+								<a href="/areas/create">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Crear Nueva
 								</a>
@@ -278,7 +278,7 @@
 							</li>
 
 							<li class="">
-								<a href="/evento/create">
+								<a href="/eventos/create">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Crear un Nuevo Evento
 								</a>

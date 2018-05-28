@@ -1,20 +1,8 @@
 @extends('layouts.admin')
 @section('contenido')
   <br>
-
-  <div class="col-lg-5">
-    @if(Session::has('message'))
-      <div class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        {{Session::get('message')}}
-      </div>
-    @endif
-  </div>
-
-
 <div class="row">
 <div class="col-xs-12">
-  <h3 class="header smaller lighter blue">Listado de mis Tarjetas Asignadas</h3>
   <div class="clearfix">
     <div class="pull-right tableTools-container"></div>
   </div>
@@ -44,7 +32,6 @@
           <th>Estatus</th>
           <th class="text-center" WIDTH="100">Opciones </th>
         </thead>
-
 
         @foreach ($tarjetas as $t)
         <tr>
@@ -85,7 +72,6 @@
         </div>
 </div>
 </div>
-
 @endsection
 
 @section('scripts')

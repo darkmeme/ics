@@ -24,7 +24,7 @@ use RegistersUsers;
 
     public function index(Request $request)
     {
-      $users=User::All();
+      $users=User::orderBy('id','DESC')->get();
       return view('users.index',compact('users'));
     }
 

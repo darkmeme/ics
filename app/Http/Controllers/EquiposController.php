@@ -58,8 +58,6 @@ public function equipos_padres($id)
     }
 
 
-
-
     public function edit($id)
     {
       return view('equipos.edit',["equipos"=>EquiposModel::findOrFail($id)]);

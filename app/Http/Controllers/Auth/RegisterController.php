@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Auth;
 
 //use App\User;
 use App\User;
-use App\PuestosModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Mail;
+use \App\Mail\confirmation_user;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Brian2694\Toastr\Facades\Toastr;
 
 class RegisterController extends Controller
 {
@@ -29,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'tarjetas';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -61,28 +65,57 @@ class RegisterController extends Controller
 
       protected function create(array $data)
       {
-          return User::create([
+        //$data['confirmation_code'] = str_random(25);
+          $user= User::create([
               'codigoempleado' => $data['codigoempleado'],
               'name' => $data['name'],
               'puesto_id' => 1,
               'email' => $data['email'],
               'password' => bcrypt($data['password']),
-
+              'confirmation_code' => str_random(25)
           ]);
+            //enviar correo de confirmacion
+            Mail::to($user->email)
+            ->send(new confirmation_user($user));
+            Toastr::success('Usuario Creado Satisfactoriamente :)' ,'Success');
+            return $user;
       }
 
-
-
-
-  /*  protected function create(array $data)
+      /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
     {
-      //dd($data);
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'codigoempleado' => $data['codigo'],
+        $this->validator($request->all())->validate();
 
-        ]);
-    }*/
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  mixed $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        if (config('auth.users.confirm_email') && !$user->confirmed) {
+
+            $this->guard()->logout();
+
+            //$user->notify(new ConfirmEmail());
+
+            return redirect(route('login'));
+        }
+    }
+
 }

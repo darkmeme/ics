@@ -72,11 +72,7 @@
                 </div>
             </div>
         </nav>
-        <style media="screen">
-            {{--img.logo { padding: 300px; margin: 30px; border: 0px; solid black; float: right; width: 50px; }--}}
-        </style>
-
-        {{--<img style="width:100%; height:105px;" src="images/ugrande.png">--}}
+        {!! Toastr::message() !!}
         @yield('content')
     </div>
 

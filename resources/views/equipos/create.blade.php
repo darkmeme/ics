@@ -1,23 +1,15 @@
 @extends('layouts.admin')
 @section('contenido')
-
-<div class="row">
-<div class="col-lg-6 col-xs-12 ">
-    @if (count($errors)>0)
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{$error}}</li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
-
+<br>
+<div class="container">
+<br>
+<div class="col-lg-8 col-xs-12 col-md-8 col-lg-offset-1 col-md-offset-1">
+    <div class="panel panel-primary">
+    <div class="panel-heading">Crear Nuevo Equipo</div>
+    <div class="container">
+    <div class="col-lg-6 col-xs-12 col-md-6 col-sm-8 col-lg-offset-0">
     {!!Form::open(array('url'=>'equipos','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
-
-      <h3 class="header smaller lighter blue">Crear Nuevo Equipo</h3>
-
 
     <div class="form-group">
       <label for="nombre">Nombre</label>
@@ -34,7 +26,7 @@
         </div>
       </div>
     </div>
-
+<br>
     <div class="form-group">
       <label for="nombre">Planta</label>
       <select class="form-control" id="select-planta" name="planta_id" class="form-control">
@@ -63,14 +55,15 @@
     <div class="form-group">
       <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
       <a href="/equipos"><button class="btn btn-danger" type="button">Cancelar<i class="fa fa-times"></i></button></a>
+       </div>
 
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
     {!!Form::close()!!}
-</div>
-</div>
-@stop
+@endsection
 
 @section('scripts')
 <script src="{{asset('js/combox.js')}}"></script>

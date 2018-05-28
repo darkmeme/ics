@@ -3,12 +3,13 @@
 
 <br>
 <div class="container">
-<div class="col-lg-10 col-xs-12 col-md-10">
+<br>
+<div class="col-lg-10 col-xs-12 col-md-10 col-lg-offset-1">
   <div class="panel panel-primary">
     <div class="panel-heading">Ingresar Nueva Lectura de Energia</div>
     <br>
     <div class="container">
-      <div class="col-lg-9 col-xs-12 col-md-9">
+      <div class="col-lg-9 col-xs-12 col-sm-9 col-md-9">
     {!!Form::open(array('url'=>'medidores','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
 

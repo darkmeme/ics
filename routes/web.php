@@ -51,7 +51,8 @@ Route::get('/area/{id}/equiposPadres','EquiposController@equipos_padres');
 // rutas para cargar las tarjetas creadas y asignadas a un usuario
 Route::get('/mis-tarjetas', 'TarjetasController@mis_tarjetas');
 Route::get('/tarjetas-asignadas', 'TarjetasController@tarjetas_asignadas');
-
+//ruta para confirmar usuario
+Route::get('/register/verify/{code}', 'GuestController@verify');
 
 
 

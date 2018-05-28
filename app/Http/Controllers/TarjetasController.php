@@ -98,11 +98,10 @@ public function tarjetas_asignadas(Request $request){
       $nombre=$tarjetas->asignado->name;
       Mail::to($correo,$nombre)
      ->send(new AsignarTarjeta($tarjetas));
-     //se envia notificacion a la vista por medio de Toastr
+     //se envia notificacion a la vista por medio de Toastr.
      Toastr::success('Tarjeta Creada Satisfactoriamente :)' ,'Success');
       return Redirect::to('tarjetas');
     }
-
 
 
     public function show(Request $request,$id)

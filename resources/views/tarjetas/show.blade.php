@@ -195,7 +195,7 @@ $(document).ready(function () {
         $("#busqueda").keyup(function(e){
           //obtenemos el texto introducido en el campo de búsqueda
           var consulta = $("#busqueda").val();
-  // se hace la peticion ajax al server
+  // se hace la peticion ajax al servidor 
      $.ajax({
     url: "/list-users/"+ consulta,
     type: 'get',

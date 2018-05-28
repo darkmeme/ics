@@ -20,11 +20,11 @@
 <div class="table-responsive">
       <table class="table text-center table-striped table-hover" id="table-equipos">
         <thead>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Area</th>
-          <th>Padre</th>
-          <th>Opciones</th>
+          <th class="text-center">Id</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Area</th>
+          <th class="text-center">Padre</th>
+          <th class="text-center" WIDTH="100">Opciones</th>
         </thead>
 
         @foreach ($equipos as $equipo)

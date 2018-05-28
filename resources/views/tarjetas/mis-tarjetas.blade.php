@@ -1,11 +1,8 @@
 @extends('layouts.admin')
 @section('contenido')
 
-
-
 <div class="row">
 <div class="col-xs-12">
-  <h3 class="header smaller lighter blue">Listado de mis Tarjetas Realizadas</h3>
   <div class="clearfix">
     <div class="pull-right tableTools-container"></div>
   </div>
