@@ -10,8 +10,8 @@
     <br>
     <div class="container">
       <div class="col-lg-9 col-xs-12 col-sm-9 col-md-9">
-    {!!Form::open(array('url'=>'medidores','method'=>'POST','autocomplete'=>'off'))!!}
-    {{Form::token()}}
+      <form class="form-group" method="POST" action="{{ url('medidores') }}">
+      {{ csrf_field() }}
 
 <div class="row">
   <div class="col-lg-4 col-xs-12 col-md-4">
@@ -177,5 +177,5 @@
         </div>
     </div>
 </div>
-{!!Form::close()!!}
+</form>
 @endsection

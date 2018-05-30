@@ -49,8 +49,9 @@ class MedidoresController extends Controller
       $medidores->fp=$request->get('fp');
       $medidores->save();
       $user=Auth::user()->name;
-        //Mail::to('dagoberto.ortega@unilever.com','Dagoberto Ortega')
-           // ->send(new LecturasEnergia($medidores,$user));
+      $emails = ['dagoberto.ortega@unilever.com', 'saul.alvarado@unilever.com'];
+        Mail::to($emails)
+         ->send(new LecturasEnergia($medidores,$user));
       return Redirect::to('medidores');
     }
 

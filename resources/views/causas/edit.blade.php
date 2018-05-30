@@ -2,7 +2,6 @@
 @section('contenido')
 <div class="row">
   <div class="col-lg-6 col-xs-12">
-    {{--<h3>Editar Causa: {{$causas->Nombre}}</h3>--}}
 
     @if (count($errors)>0)
     <div class="alert alert-danger">
@@ -25,7 +24,7 @@
 
     <div class="form-group">
       <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i></button>
-      <button class="btn btn-danger" type="reset">Cancelar<i class="fa fa-times"></button>
+      <button class="btn btn-danger" type="reset">Cancelar<i class="fa fa-times"></i></button>
     </div>
 
     {!!Form::close()!!}

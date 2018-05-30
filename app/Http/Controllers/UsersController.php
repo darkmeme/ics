@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Http\Requests\UsersFormRequest;
 
 class UsersController extends Controller
 {
@@ -29,7 +30,7 @@ use RegistersUsers;
     }
 
 //funcion para mandar listado de usuarios por medio de json
-    public function users_json(Request $request,$filtro)
+    public function users_json($filtro)
     {
         return User::where('name','LIKE','%'.$filtro.'%')->get();
       /*if ($request->ajax()){
@@ -47,12 +48,11 @@ use RegistersUsers;
 
       $roles=Role::All();
       $puestos=PuestosModel::get();
-      //dd($puestos);
       return view('users.create',compact('puestos','roles'));
     }
 
 //funcion para guardar un nuevo empleado, recibe datos desde la vista html
-    public function store(Request $request)
+    public function store(UsersFormRequest $request)
     {
       $user=new User;
       $user->name=$request->get('nombre');

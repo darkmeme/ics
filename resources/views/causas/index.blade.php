@@ -2,7 +2,7 @@
 @section('contenido')
 <div class="row">
   <div class="col-xs-12">
-    <h3 class="header smaller lighter blue">Listado de Categorias</h3>
+    <h3 class="header smaller lighter blue">Listado de Causas</h3>
     <div class="clearfix">
       <div class="tableTools-container">
         <div class="row">
@@ -19,9 +19,9 @@
 
       <table class="table text-center table-striped table-hover" id="table-causas">
         <thead>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Opciones</th>
+          <th class="text-center">Id</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center" WIDTH="300px">Opciones</th>
         </thead>
 
         @foreach ($causas as $causa)
@@ -29,7 +29,7 @@
           <td>{{$causa->id}}</td>
           <td>{{$causa->nombre}}</td>
           <td>
-            <div class="action-buttons">
+            <div class="action-buttons col-lg-12">
               <a class="blue" href="#">
                 <i class="ace-icon fa fa-search-plus bigger-200"></i>
               </a>
@@ -37,29 +37,54 @@
               <a class="green" href="{{URL::action('CausasController@edit',$causa->id)}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-              @can('borrar')
-              <a class="red" href="" data-target="#modal-delete-{{$causa->id}}" data-toggle="modal">
+              @can('Borrar')
+              {{Form::open(array('action'=>array('CausasController@destroy',$causa->id),'method'=>'delete'))}}
+              <a class="red btnBorrar" href="">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
-              </a>
+              </a>          
+              {{Form::Close()}}
               @else
               @endcan
             </div>
 
           </td>
         </tr>
-        @include('causas.modal')
         @endforeach
       </table>
     </div>
   </div>
-
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
-//script para cargar estilo y botones de jQuery DataTable
+//se ejecuta el script cuando la pagina termina de cargar
 $(document).ready(function() {
+// script para eliminar una causa mediante ajax
+$('.btnBorrar').click(function(e){
+e.preventDefault();
+if(! confirm("Esta seguro de Eliminar?")){
+  return false;
+}
+var row= $(this).parents('tr');
+var form= $(this).parents('form');
+var url= form.attr('action');
 
+// se hace la peticion ajax
+$.post(url,form.serialize(),function(result){
+row.fadeOut();
+toastr.success('CAUSA ELIMINADA CORRECTAMENTE');
+})//finaliza la peticion ajax
+
+.fail(function(){
+  toastr.error('NO SE PUEDE ELIMINAR LA CAUSA PORQUE ESTA EN USO');
+})
+});//finaliza evento click de boton borrar
+  
+
+
+
+
+//script para poner estilo de data table de jquery
   var table = $('#table-causas').DataTable({
     "aaSorting": [[ 0, "desc" ]],
   });
