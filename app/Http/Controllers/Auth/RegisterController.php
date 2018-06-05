@@ -65,7 +65,6 @@ class RegisterController extends Controller
 
       protected function create(array $data)
       {
-        //$data['confirmation_code'] = str_random(25);
           $user= User::create([
               'codigoempleado' => $data['codigoempleado'],
               'name' => $data['name'],
@@ -74,10 +73,10 @@ class RegisterController extends Controller
               'password' => bcrypt($data['password']),
               'confirmation_code' => str_random(25)
           ]);
+          Toastr::success('Usuario Creado Satisfactoriamente :)' ,'Success');
             //enviar correo de confirmacion
             Mail::to($user->email)
             ->send(new confirmation_user($user));
-            Toastr::success('Usuario Creado Satisfactoriamente :)' ,'Success');
             return $user;
       }
 
@@ -113,8 +112,8 @@ class RegisterController extends Controller
             $this->guard()->logout();
 
             //$user->notify(new ConfirmEmail());
-
-            return redirect(route('login'));
+            //dd('si llego aqui es porque no esta confirmado su usuario');
+            return redirect(route('login'))->with('success','Cuenta creada correctamente, Se ha enviado un correo al administrador para aprobar tu cuenta');
         }
     }
 

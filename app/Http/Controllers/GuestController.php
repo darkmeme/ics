@@ -14,12 +14,13 @@ public function verify($code)
 {
     $user= User::where('confirmation_code',$code)->first();
     if (! $user)
-    return redirect('/');
+    return redirect('/login');
 
     $user->confirmed = true;
     $user->confirmation_code = null;
     $user->save();
-    Toastr::success('Usuario Confirmado Satisfactoriamente :)' ,'Success');
-    return redirect('/tarjetas');
+    //Toastr::success('Usuario Confirmado Satisfactoriamente :)' ,'Success');
+    //return redirect('/login')->with('success', 'Usuario confirmado correctamente, ya puedes iniciar sesion');
+    return redirect(route('login'))->with('success','Usuario confirmado correctamente, ya puedes iniciar sesion');
     }
 }

@@ -5,6 +5,7 @@
 .color-etiquetas{ background-color:green;}
 </style>
 
+
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
 role="dialog" id="edit-tag-{{$t->id}}">
 {{Form::open(array('action'=>array('TarjetasController@update',$t->id),'method'=>'PATCH'))}}

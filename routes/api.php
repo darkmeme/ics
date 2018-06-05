@@ -8,3 +8,8 @@ use Illuminate\Http\Request;
 
 Route::get('/planta/{id}/areas','AreasController@areas_plantas');
 Route::get('/area/{id}/equipos','EquiposController@equipos_areas');
+
+
+//ruta para solicitar listado de usuarios del sistema
+Route::get('/list-users/{filter}','UsersController@users_json');
+
