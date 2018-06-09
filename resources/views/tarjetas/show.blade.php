@@ -32,6 +32,18 @@
         <h5><strong>Fecha de Cierre: </strong><span class="blue">{{$tarjetas->fecha_cierre}}</span> </h5>
         <h5><strong>Solucion Implementada: </strong><span class="blue">{{$tarjetas->solucion_implementada}}</span> </h5>
         <h5><strong>Asignada A: </strong><span class="blue">{{$tarjetas->asignado->name}}</span> </h5>
+        <h5><strong>Reasignada A: </strong><span class="blue">
+        @if(isset($tarjetas->reasignado->name))
+            {{$tarjetas->reasignado->name}} 
+          @else Sin Reasignar                    
+          @endif
+        </span> </h5>
+        <h5><strong>Motivo Reasignacion: </strong><span class="blue">
+        @if(isset($tarjetas->motivo_reasignado))
+            {{$tarjetas->motivo_reasignado}} 
+          @else N/A                   
+          @endif
+        </span> </h5>
         <h5><strong>Realizada por: </strong><span class="blue">{{$tarjetas->terminado->name}} </span></h5>
       </div>
       <div class="col-lg-5 col-xs-12">
@@ -51,19 +63,19 @@
 {{Form::open(array('action'=>array('TarjetasController@asignar',$tarjetas->id),'method'=>'post'))}}
 {{Form::token()}}
 <div class="modal fade" id="modal-asignar" tabindex="-1">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog modal-m">
     <div class="modal-content">
       <div class="modal-header no-padding">
         <div class="table-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <span class="white">&times;</span>
           </button>
-          Asignar Tarjeta a Empleado
+          Reasignar Tarjeta a Empleado
         </div>
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-lg-10">
+          <div class="col-lg-7">
 
             <div class="input-group">
               <span class="input-group-addon">Buscar</span>
@@ -82,12 +94,18 @@
              </tbody>
             </table>
 
-            <select style="visibility:hidden" class="form-control" id="user-selected" name="empleado_id" class="form-control">
+            <select style="visibility" class="form-control" id="user-selected" name="empleado_id" required>
               {{--se llena desde jquery--}}
             </select>
           </div>
           <div class="col-xs-1" id="imagen">
 
+          </div>          
+          <div class="col-lg-4">
+          <div class="input-group">
+          <h5><span class="primary"> Motivo Reasignacion: </span></h5>
+          <textarea name="motivo" class="motivo-reasignacion" rows="5" cols="22"></textarea>
+          </div>
           </div>
         </div>
       </div>

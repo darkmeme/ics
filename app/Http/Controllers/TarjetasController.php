@@ -17,6 +17,7 @@ use Auth;
 use Illuminate\Support\Facades\Mail;
 use \App\Mail\AsignarTarjeta;
 use Brian2694\Toastr\Facades\Toastr;
+use App\Http\Requests\TarjetasRequest;
 
 
 class TarjetasController extends Controller
@@ -30,11 +31,16 @@ class TarjetasController extends Controller
 
     public function index(Request $request)
     {
-      $filtro=trim($request->get('buscar'));
+      $filtro=$request->get('comboBuscar');
       //$parametro=trim($request->get('parametro'));
-
-      $tarjetas=TarjetasModel::where('status','LIKE','%'.$filtro.'%')->get();
+     // $tarjetas=TarjetasModel::where('status','LIKE'.$filtro)->get();
+      $tarjetas=TarjetasModel::where('status', $filtro)->get();
+      if($filtro == 'todas'){
+        $tarjetas=TarjetasModel::get();
+        return view('tarjetas.index',compact('tarjetas','filtro'));
+      }
      return view('tarjetas.index',compact('tarjetas','filtro'));
+
 
     }
 
@@ -81,15 +87,15 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
       $tarjetas->status='enviada';
-      $tarjetas->user_finaliza=(1);
+      $tarjetas->user_finaliza=(4);
 // si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
-      $tarjetas->user_asignado=(32);
+      $tarjetas->user_asignado=(5);
       $tarjetas->status='Asignada';
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(311);
+      $tarjetas->user_asignado=(7);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();
@@ -131,7 +137,7 @@ public function tarjetas_asignadas(Request $request){
 
 
 // funcion para reasignar una tarjetas, esta info se carga desde modal de show
-public function asignar(Request $request,$id)
+public function asignar(TarjetasRequest $request,$id)
 {
   $tarjeta=TarjetasModel::findOrFail($id);
   //si una tarjeta ya fue finalizada no se puede volver a reasignar
@@ -141,15 +147,17 @@ public function asignar(Request $request,$id)
   }
   else{
   //$user=User::where('id',$id)->get(['name']);
-  $tarjeta->user_asignado=$request->get('empleado_id');
+  $tarjeta->user_reasignado=$request->get('empleado_id');
   $tarjeta->status='Reasignada';
+  $tarjeta->motivo_reasignado=$request->get('motivo');
   $tarjeta->update();
-  $correo=$tarjeta->asignado->email;
-  $nombre=$tarjeta->asignado->name;
-
+  //dd('llego el request'.' id tarjeta '. $id . ' id user '.$tarjeta->user_reasignado);
+  $correo=$tarjeta->reasignado->email;
+  $nombre=$tarjeta->reasignado->name;
+  
   Mail::to($correo,$nombre)
   ->send(new AsignarTarjeta($tarjeta));
-  Toastr::info('Tarjeta Asignada Correctamente, se envio un correo a: '.$nombre ,'Asignacion');
+  Toastr::info('Tarjeta Reasignada Correctamente, se envio un correo a: '.$nombre ,'Asignacion');
   return back();
   }
 }

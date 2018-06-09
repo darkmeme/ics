@@ -23,13 +23,15 @@
           {{--<th>Turno</th>--}}
           <th>Prioridad</th>
           <th>Categoria</th>
-          {{--<th>Evento</th>
-          <th>Causa</th>--}}
+          {{--<th>Evento</th>--}}
+          {{--<th>Causa</th>--}}
           <th>Descripcion</th>
-          {{--<th>Solucion</th>
-          <th>Fecha cierre</th>--}}
-          <th>Finalizado</th>
+          {{--<th>Solucion</th>--}}
+          {{--<th>Fecha cierre</th>--}}
+          {{--<th>Finalizado</th>--}}
           <th>Estatus</th>
+          <th>Reasignada a:</th>
+          <th>Motivo Reasignacion:</th>
           <th>Opciones</th>
         </thead>
 
@@ -45,13 +47,23 @@
           {{--<td>{{$t->turno}}</td>--}}
           <td>{{$t->prioridad}}</td>
           <td>{{$t->categoria->nombre}}</td>
-          {{--<td>{{$t->evento->nombre}}</td>
-          <td>{{$t->causa->nombre}}</td>--}}
+          {{--<td>{{$t->evento->nombre}}</td>--}}
+          {{--<td>{{$t->causa->nombre}}</td>--}}
           <td>{{$t->descripcion_reporte}}</td>
-          {{--<td>{{$t->solucion_implementada}}</td>
-          <td>{{$t->fecha_cierre}}</td>--}}
-          <td>{{$t->finalizado}}</td>
+          {{--<td>{{$t->solucion_implementada}}</td>--}}
+          {{--<td>{{$t->fecha_cierre}}</td>--}}
+          {{--<td>{{$t->finalizado}}</td>--}}
           <td><span class="label label-sm label-success">{{$t->status}}</span>
+          </td>
+          <td>@if(isset($t->reasignado->name))
+            {{$t->reasignado->name}} 
+          @else Sin Reasignar                    
+          @endif
+          </td>
+          <td>@if(isset($t->motivo_reasignado))
+            {{$t->motivo_reasignado}} 
+          @else N/A                    
+          @endif
           </td>
           <td>
             <div class="action-buttons">
