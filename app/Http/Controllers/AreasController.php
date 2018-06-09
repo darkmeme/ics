@@ -10,7 +10,8 @@ use App\Http\Requests\AreasFormRequest;
 use Illuminate\Support\Facades\Validator;
 
 class AreasController extends Controller
-{
+{ 
+  // metodo constructor con autentificacion de usuarios
  public function __construct()
   {
       $this->middleware('auth');
@@ -26,12 +27,13 @@ class AreasController extends Controller
 //funcion para mostrar la vista index
     public function index(Request $request)
     {
-     //$areas=AreasModel::orderBy('id','DESC')->get();
+     $areas=AreasModel::orderBy('id',"DESC")->get();
+     $plantas=PlantasModel::orderBy('id','DESC')->get();
         // if ($request->ajax()){
           //return response()->json([
          // 'data'=>$areas]);
         // }
-       return view('areas.index');
+       return view('areas.index')->with(['plantas'=>$plantas,'areas'=>$areas]);
    // return view('areas.index')->with(['areas' => $areas]);
         
     }

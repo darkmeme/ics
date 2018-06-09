@@ -1,16 +1,15 @@
 @extends('layouts.admin')
 @section('contenido')
 <br>
-<div class="container" id="table">
     <div class="row">
         <div class="col-xs-12">
-            <h3 class="header smaller lighter blue">Listado de Areas</h3>
                 <div class="clearfix">
                   <div class="tableTools-container">
                       <div class="row">
                          <div class="col-lg-2">
-                            <a href="/areas/create"><button class="btn btn-info" type="button">Nueva<i class="fa fa-plus"></i></button></a>
-                         </div>
+                            <button class="btn btn-info"  data-target="#modalCreate" data-toggle="modal">Nueva
+                            <i class="fa fa-plus"></i></button>
+                          </div>
                         </div>
                    </div>
                  </div>
@@ -19,38 +18,48 @@
                     Lista de Areas"
                     </div>
                     
-                      <table class="table text-center table-striped" id="table-areas">
+                      <table class="table table-striped" id="tablaAreas">
                          <thead>
-                           <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Planta</th>
-                            <th>Opciones</th>
+                           <th class="text-center">Id</th>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Planta</th>
+                            <th class="text-center">Opciones</th>
                          </thead>
-                         <tr v-for="area in areas">
-                         <td>@{{area.id}}</td>
-                         <td>@{{area.nombre}}</td>
-                         <td>@{{area.planta.nombre}}</td>
+                         @foreach ($areas as $a)
+                         <tr>
+                         <td>{{$a->id}}</td>
+                         <td>{{$a->nombre}}</td>
+                         <td>{{$a->planta->nombre}}</td>
                          <td>
-                           <a href="#" class="btn btn-warning btn-sm">Editar </a>
-                            <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deleteArea(area)">Eliminar</a>
-                           </td>
+                              <div class="action-buttons">
+                              <a class="green" href="{{URL::action('AreasController@edit',$a->id)}}">
+                                <i class="ace-icon fa fa-pencil bigger-200"></i>
+                              </a>
+                            
+                              <a class="red" href="" data-target="#" data-toggle="modal">
+                                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+                              </a>
+                              @can('borrar')
+                              @else
+                              @endcan
+                            </div>
+                          </td>
                          </tr>
-                          </table>
-                         
-  </div>
-</div>
-</div>
+                         @endforeach
+                          </table>          
+                     </div>
+                  </div>
+@include('areas.modalCreate')                 
 @endsection
 
 @section('scripts')
-
-<script src="{{asset('js/app.js')}}">//script para llamar a vue js</script>
+<script type="text/javascript" src="{{asset('js/combox.js')}}"></script>
 <script type="text/javascript">
 //script para cargar estilo y botones de jQuery DataTable
 $(document).ready(function() {
 
-  var table = $('#').DataTable({
-    //"aaSorting": [[ 0, "desc" ]],
+  var table = $('#tablaAreas').DataTable({
+    "aaSorting": [[ 0, "desc" ]],
   });
 
   new $.fn.dataTable.Buttons( table, {

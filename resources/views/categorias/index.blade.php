@@ -2,12 +2,12 @@
 @section('contenido')
 <div class="row">
     <div class="col-xs-12">
-      <h3 class="header smaller lighter blue">Listado de Categorias</h3>
       <div class="clearfix">
         <div class="tableTools-container">
           <div class="row">
           <div class="col-lg-2">
-            <a href="/categorias/create"><button class="btn btn-info" type="button">Nueva<i class="fa fa-plus"></i></button></a>
+            <button class="btn btn-info"  data-target="#modalCreateCategoria" data-toggle="modal">Nueva
+            <i class="fa fa-plus"></i></button>
           </div>
           </div>
         </div>
@@ -37,21 +37,22 @@
               <a class="green" href="{{URL::action('CategoriasController@edit',$cat->id)}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-              @can('borrar')
+              
               <a class="red" href="" data-target="#modal-delete-{{$cat->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
+              @can('borrar')
               @else
               @endcan
             </div>
           </td>
-
         </tr>
-@include('categorias.modal')
+        @include('categorias.modal')
         @endforeach
       </table>
     </div>
 </div>
+@include('categorias.modalCreate')
 @endsection
 
 @section('scripts')

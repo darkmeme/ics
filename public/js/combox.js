@@ -16,8 +16,8 @@ function selectPlantaChange() {
     html_select += '<option value="'+data[i].id+'">'+data[i].nombre+'</option>';
     //pasar los datos al segundo select cuando se cambia el valor del primero
     $('#select-area').html(html_select);
-  });
-}
+  });//finaliza peticion ajax
+}//finaliza funtion selectplanta
 
 
 //peticion ajax para llenar equipos por medio de areas en vista de create tarjetas
