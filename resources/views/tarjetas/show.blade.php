@@ -75,7 +75,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-lg-7">
+          <div class="col col-lg-7 col-md-7 col-sm-7">
 
             <div class="input-group">
               <span class="input-group-addon">Buscar</span>
@@ -101,10 +101,10 @@
           <div class="col-xs-1" id="imagen">
 
           </div>          
-          <div class="col-lg-4">
+          <div class="col col-lg-4 col-md-4 col-sm-4">
           <div class="input-group">
-          <h5><span class="primary"> Motivo Reasignacion: </span></h5>
-          <textarea name="motivo" class="motivo-reasignacion" rows="5" cols="22"></textarea>
+          <label for="nombre">Motivo de Reasignacion</label>
+          <textarea name="motivo" class="motivo-reasignacion" rows="5" cols="18"></textarea>
           </div>
           </div>
         </div>

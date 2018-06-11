@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\CategoriasModel;
+use App\TarjetasModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Brian2694\Toastr\Facades\Toastr;
 
 class CategoriasController extends Controller
 {
@@ -32,6 +34,7 @@ class CategoriasController extends Controller
       $categorias=new CategoriasModel;
       $categorias->Nombre=$request->get('categoria');
       $categorias->save();
+      Toastr::success('Categoria creada correctamente');
       return Redirect::to('categorias');
     }
 
@@ -53,6 +56,7 @@ class CategoriasController extends Controller
       $categorias=CategoriasModel::findOrFail($id);
       $categorias->Nombre=$request->get('nombre');
       $categorias->update();
+      Toastr::success('Categoria creada correctamente');
       return Redirect::to('categorias');
     }
 
@@ -60,9 +64,17 @@ class CategoriasController extends Controller
 
     public function destroy($id)
     {
+      //confirmar si esta en uso en alguna tarjeta
+      $tarjeta=TarjetasModel::where('categoria_id',$id)->get()->first();
+      if (count($tarjeta)>0){
+        Toastr::error('No se puede borrar esta categoria, esta en uso' ,'Error');
+        Return Redirect::to('categorias');
+      }
+      else{
       $categorias=CategoriasModel::findOrFail($id);
       $categorias->Delete();
-      //Post::destroy($id);
+      Toastr::success('Categoria eliminada correctamente');
       return Redirect::to('categorias');
+      }
     }
 }

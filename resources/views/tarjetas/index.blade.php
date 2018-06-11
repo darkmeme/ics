@@ -1,15 +1,6 @@
 @extends('layouts.admin')
 @section('contenido')
 <br>
-<!--<div class="col-lg-4">
-@if(Session::has('message'))
-<div class="alert alert-success alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  {{Session::get('message')}}
-</div>
-@endif
-</div>-->
-<!--<button id="btn-prueba" class="btn-info">prueba</button>-->
 <div class="row">
 <div class="col-xs-12">
   <div class="clearfix">
@@ -87,36 +78,10 @@
 </div>
 </div>
 {!! Toastr::message() !!}
-
-<!--<div id="prueba">
-<p>prueba de dialog con boton</p>
-</div>-->
 @endsection
 
 
 @section('scripts')
-<script>
-/*$("#btn-prueba").on("click",function(){
-  
-    $( "#dialog-delete" ).dialog({
-    resizable: false,
-      height: "auto",
-      width: 600,
-      high:300,
-      modal: true,
-      buttons: {
-        "Confirmar": function() {
-          $( this ).dialog( "close" );
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-});*/
-  
-  </script>
-
 <script type="text/javascript">
 //script para editar una tarjeta, se hace peticion ajax cuando se hace click en boton edit
 //de la tabla y carga los datos en el modal edit-tag

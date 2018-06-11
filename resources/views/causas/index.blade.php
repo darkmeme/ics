@@ -1,42 +1,39 @@
 @extends('layouts.admin')
 @section('contenido')
+<br>
 <div class="row">
   <div class="col-xs-12">
-    <h3 class="header smaller lighter blue">Listado de Causas</h3>
     <div class="clearfix">
       <div class="tableTools-container">
         <div class="row">
         <div class="col-lg-2">
-          <a href="/causas/create"><button class="btn btn-info" type="button">Nueva<i class="fa fa-plus"></i></button></a>
+        <button class="btn btn-info"  data-target="#modalCreateCausa" data-toggle="modal">Nueva
+            <i class="fa fa-plus"></i></button>
         </div>
         </div>
       </div>
     </div>
 
     <div class="table-header">
-      Lista de Areas"
+      Lista de Causas"
     </div>
 
       <table class="table text-center table-striped table-hover" id="table-causas">
         <thead>
           <th class="text-center">Id</th>
           <th class="text-center">Nombre</th>
-          <th class="text-center" WIDTH="300px">Opciones</th>
+          <th class="text-center">Opciones</th>
         </thead>
 
         @foreach ($causas as $causa)
         <tr>
-          <td>{{$causa->id}}</td>
-          <td>{{$causa->nombre}}</td>
-          <td>
+          <td class="text-center">{{$causa->id}}</td>
+          <td class="text-center">{{$causa->nombre}}</td>
+          <td class="text-center">
             <div class="action-buttons col-lg-12">
-              <a class="blue" href="#">
-                <i class="ace-icon fa fa-search-plus bigger-200"></i>
-              </a>
-
-              <a class="green" href="{{URL::action('CausasController@edit',$causa->id)}}">
+            <a class="green" data-target="#modal-edit-{{$causa->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
-              </a>
+            </a>
               @can('Borrar')
               {{Form::open(array('action'=>array('CausasController@destroy',$causa->id),'method'=>'delete'))}}
               <a class="red btnBorrar" href="">
@@ -49,10 +46,12 @@
 
           </td>
         </tr>
+        @include('causas.modalEdit')
         @endforeach
       </table>
     </div>
   </div>
+  @include('causas.modalCreate')
 @endsection
 
 @section('scripts')

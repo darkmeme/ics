@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('contenido')
+<br>
 <div class="row">
     <div class="col-xs-12">
       <div class="clearfix">
@@ -19,9 +20,9 @@
 
         <table class="table text-center table-striped" id="table-categorias">
         <thead>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Opciones</th>
+          <th class="text-center">Id</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Opciones</th>
         </thead>
 
         @foreach ($categorias as $cat)
@@ -29,12 +30,8 @@
           <td>{{$cat->id}}</td>
           <td>{{$cat->nombre}}</td>
           <td>
-            <div class="action-buttons">
-              <a class="blue" href="#">
-                <i class="ace-icon fa fa-search-plus bigger-200"></i>
-              </a>
-
-              <a class="green" href="{{URL::action('CategoriasController@edit',$cat->id)}}">
+            <div class="action-buttons">            
+              <a class="green" data-target="#modal-edit-{{$cat->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
               
@@ -47,7 +44,8 @@
             </div>
           </td>
         </tr>
-        @include('categorias.modal')
+        @include('categorias.modalBorrar')
+        @include('categorias.modalEdit')
         @endforeach
       </table>
     </div>

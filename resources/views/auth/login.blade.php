@@ -15,7 +15,7 @@
   <body>
     <style media="screen">
       .logo { padding: 5px; margin: 30px; border: 0px solid black; float: right; width: 100px; }
-      .logo2 { position:relative; top: 155px; left: 15px; float: left; width: 450px; }
+      .logo2 { position:relative; top: 300px; left: 15px; float: left; width: 450px; }
       body {
 		background-color: white;
 	     }

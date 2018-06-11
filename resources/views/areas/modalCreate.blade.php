@@ -41,8 +41,9 @@
     </div>
 
     <div class="form-group">
-      <label for="nombre">Sub Area</label>
+      <label for="nombre">Sub Area (Si aplica)</label>
       <select class="form-control" name="subArea" class="form-control" id="select-area">
+      {{--se llena con jquery--}}
       </select>
     </div>
 

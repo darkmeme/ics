@@ -23,21 +23,28 @@
                            <th class="text-center">Id</th>
                             <th class="text-center">Nombre</th>
                             <th class="text-center">Planta</th>
+                            <th class="text-center">SubArea</th>
                             <th class="text-center">Opciones</th>
                          </thead>
                          @foreach ($areas as $a)
                          <tr>
-                         <td>{{$a->id}}</td>
-                         <td>{{$a->nombre}}</td>
-                         <td>{{$a->planta->nombre}}</td>
-                         <td>
+                         <td class="text-center">{{$a->id}}</td>
+                         <td class="text-center">{{$a->nombre}}</td>
+                         <td class="text-center">{{$a->planta->nombre}}</td>
+                         <td class="text-center">
+                         @if(isset($a->subarea->nombre))
+                         {{$a->subarea->nombre}}
+                         @else Vacio                    
+                         @endif
+                         </td>
+                         <td class="text-center">
                               <div class="action-buttons">
-                              <a class="green" href="{{URL::action('AreasController@edit',$a->id)}}">
+                              <a class="green" data-target="#modal-edit-{{$a->id}}" data-toggle="modal">
                                 <i class="ace-icon fa fa-pencil bigger-200"></i>
                               </a>
                             
-                              <a class="red" href="" data-target="#" data-toggle="modal">
-                                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+                              <a class="red" href=""data-target="#modal-delete-{{$a->id}}" data-toggle="modal">
+                               <i class="ace-icon fa fa-trash-o bigger-200"></i>
                               </a>
                               @can('borrar')
                               @else
@@ -45,6 +52,8 @@
                             </div>
                           </td>
                          </tr>
+                         @include('areas.modalEdit') 
+                         @include('areas.modalDelete') 
                          @endforeach
                           </table>          
                      </div>

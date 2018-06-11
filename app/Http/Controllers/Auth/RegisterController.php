@@ -75,7 +75,7 @@ class RegisterController extends Controller
           ]);
           Toastr::success('Usuario Creado Satisfactoriamente :)' ,'Success');
             //enviar correo de confirmacion
-            Mail::to($user->email)
+            Mail::to('geovany.hernandez90@gmail.com')
             ->send(new confirmation_user($user));
             return $user;
       }

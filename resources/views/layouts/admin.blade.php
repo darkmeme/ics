@@ -192,13 +192,7 @@
 
 								<b class="arrow"></b>
 							</li>
-							<li class="">
-								<a href="/areas/create">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Crear Nueva
-								</a>
-								<b class="arrow"></b>
-							</li>
+							
 						</ul>
 					</li>
 
@@ -249,13 +243,6 @@
 								<b class="arrow"></b>
 							</li>
 
-							<li class="">
-								<a href="/categorias/create">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Crear una Categoria
-								</a>
-								<b class="arrow"></b>
-							</li>
 						</ul>
 					</li>
 
@@ -277,13 +264,6 @@
 								<b class="arrow"></b>
 							</li>
 
-							<li class="">
-								<a href="/eventos/create">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Crear un Nuevo Evento
-								</a>
-								<b class="arrow"></b>
-							</li>
 						</ul>
 					</li>
 
@@ -359,14 +339,6 @@
 								<a href="/users">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Lista de Usuarios
-								</a>
-								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="#">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Crear Nuevo Empleado
 								</a>
 								<b class="arrow"></b>
 							</li>
@@ -469,7 +441,6 @@
 </div><!-- /.main-container -->
 		<!-- basic scripts -->
 
-		 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
 		 <script src="{{asset('assets/js/jquery-3.3.1.js')}}"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
@@ -485,8 +456,8 @@
 		<!-- ace scripts -->
 		<script src="{{asset('assets/js/ace-elements.min.js')}}"></script>
 		<script src="{{asset('assets/js/ace.min.js')}}"></script>
-		<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
-		<!--<script src="{{asset('js/app.js')}}"></script>-->
+		<!--<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>-->
+		<script src="{{asset('js/app.js')}}"></script>
 @yield('scripts')
 {!! Toastr::message() !!}
 	</body>

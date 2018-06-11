@@ -38,14 +38,10 @@
           @endif
           <td>
             <div class="action-buttons">
-              <a class="blue" href="#">
-                <i class="ace-icon fa fa-search-plus bigger-200"></i>
-              </a>
-
-              <a class="green" href="{{URL::action('EquiposController@edit',$equipo->id)}}">
+              <a class="green" data-target="#modal-edit-{{$equipo->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-              @can('borrar')
+              @can('Borrar')
               <a class="red" href="" data-target="#modal-delete-{{$equipo->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
@@ -55,7 +51,8 @@
 
           </td>
         </tr>
-           @include('equipos.modal')
+           @include('equipos.modalDelete')
+           @include('equipos.modalEdit')
         @endforeach
       </table>
       </div>

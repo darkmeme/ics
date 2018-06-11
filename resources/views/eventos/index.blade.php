@@ -1,13 +1,14 @@
 @extends('layouts.admin')
 @section('contenido')
+<br>
 <div class="row">
   <div class="col-xs-12">
-    <h3 class="header smaller lighter blue">Listado de Eventos</h3>
     <div class="clearfix">
       <div class="tableTools-container">
         <div class="row">
         <div class="col-lg-2">
-          <a href="/eventos/create"><button class="btn btn-info" type="button">Nueva<i class="fa fa-plus"></i></button></a>
+        <button class="btn btn-info"  data-target="#modalCreateEvento" data-toggle="modal">Nueva
+            <i class="fa fa-plus"></i></button>
         </div>
         </div>
       </div>
@@ -19,27 +20,23 @@
 
       <table class="table text-center table-striped table-hover" id="table-eventos">
         <thead>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Opciones</th>
+          <th class="text-center">Id</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Opciones</th>
         </thead>
 
-        @foreach ($eventos as $evento)
+        @foreach ($eventos as $e)
         <tr>
-          <td>{{$evento->id}}</td>
-          <td>{{$evento->nombre}}</td>
+          <td>{{$e->id}}</td>
+          <td>{{$e->nombre}}</td>
           <td>
 
             <div class="action-buttons">
-              <a class="blue" href="#">
-                <i class="ace-icon fa fa-search-plus bigger-200"></i>
-              </a>
-
-              <a class="green" href="{{URL::action('EventosController@edit',$evento->id)}}">
+              <a class="green" data-target="#modal-edit-{{$e->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-              @can('borrar')
-              <a class="red" href=""data-target="#modal-delete-{{$evento->id}}" data-toggle="modal">
+              @can('Borrar')
+              <a class="red" href=""data-target="#modal-delete-{{$e->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
               @else
@@ -47,11 +44,14 @@
             </div>
           </td>
         </tr>
-@include('eventos.modal')
+@include('eventos.modalBorrar')
+@include('eventos.modalEdit')
         @endforeach
       </table>
     </div>
   </div>
+  @include('eventos.modalCreate')
+ 
 @endsection
 
 @section('scripts')

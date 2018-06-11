@@ -40,7 +40,7 @@
         @foreach ($medidores as $m)
         <tr>
           <td>{{$m->id}}</td>
-          <td>{{$m->created_at}}</td>
+          <td>{{$m->created_at->format('d-m-Y')}}</td>
           <td>{{$m->nsd_220}}</td>
           <td>{{$m->nsd_480}}</td>
           <td>{{$m->blanqueo}}</td>

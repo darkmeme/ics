@@ -18,4 +18,9 @@ class AreasModel extends Model
       return $this->belongsTo('App\PlantasModel');
     }
 
+    public function subarea()
+    {
+      return $this->belongsTo('App\PlantasModel','subArea');
+    }
+
 }

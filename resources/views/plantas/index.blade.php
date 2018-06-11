@@ -32,7 +32,7 @@
               <a class="green" href="{{URL::action('PlantasController@edit',$plant->id)}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
-              @can('borrar')
+              @can('Borrar')
               <a class="red" href="" data-target="#modal-delete-{{$plant->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>

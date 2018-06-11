@@ -31,17 +31,9 @@ class TarjetasController extends Controller
 
     public function index(Request $request)
     {
-      $filtro=$request->get('comboBuscar');
-      //$parametro=trim($request->get('parametro'));
-     // $tarjetas=TarjetasModel::where('status','LIKE'.$filtro)->get();
-      $tarjetas=TarjetasModel::where('status', $filtro)->get();
-      if($filtro == 'todas'){
-        $tarjetas=TarjetasModel::get();
-        return view('tarjetas.index',compact('tarjetas','filtro'));
-      }
-     return view('tarjetas.index',compact('tarjetas','filtro'));
-
-
+      $filtro=trim($request->get('buscar'));
+      $tarjetas=TarjetasModel::where('status','LIKE',''.$filtro.'%')->get();
+     return view('tarjetas.index',compact('tarjetas','filtro'));  
     }
 
 //funcion que carga todas la tarjetas creadas por un usuario
@@ -86,16 +78,16 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->evento_id=$request->get('evento_id');
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
-      $tarjetas->status='enviada';
-      $tarjetas->user_finaliza=(4);
+      //$tarjetas->status='enviada';
+      $tarjetas->user_finaliza=(1);
 // si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
-      $tarjetas->user_asignado=(5);
+      $tarjetas->user_asignado=(32);
       $tarjetas->status='Asignada';
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(7);
+      $tarjetas->user_asignado=(311);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();
