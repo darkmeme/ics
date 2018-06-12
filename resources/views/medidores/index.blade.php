@@ -87,6 +87,7 @@ $(document).ready(function() {
     "aaSorting": [[ 0, "desc" ]],
   });
 
+
   new $.fn.dataTable.Buttons( table, {
       buttons: [
         {
@@ -96,24 +97,38 @@ $(document).ready(function() {
           "filename": 'Reporte de medidores',
           "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "orientation": 'landscape',
+              "  pageSize": 'Letter',
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": "copy",
           "titleAttr": 'Copiar a Porta Papeles',
           "text": "<i class='fa fa-copy bigger-110 pink'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": "excel",
           "titleAttr": 'Exportar a Excel',
           "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": 'print',
           "titleAttr": 'Imprimir Documento',
           "text": "<i class='fa fa-print bigger-110 grey'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
+          "exportOptions": {
+                    "columns": ':visible'
+                }
         },
         {
           "extend": 'colvis',

@@ -284,14 +284,6 @@
 								</a>
 								<b class="arrow"></b>
 							</li>
-
-							<li class="">
-								<a href="/causas/create">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Crear Nueva Causa
-								</a>
-								<b class="arrow"></b>
-							</li>
 						</ul>
 					</li>
 
