@@ -7,7 +7,7 @@ Estimad@ administrador el usuario: <strong>{{$user->name}}</strong> con correo: 
 <p>Favor haga click en el siguiente enlace para confirmar</p>
 @endcomponent
 
-@component('mail::button', ['url' => 'http://localhost:8000/register/verify/'.$user->confirmation_code])
+@component('mail::button', ['url' => 'http://digital-cic.com/register/verify/'.$user->confirmation_code])
 Autorizar Cuenta
 @endcomponent
 
