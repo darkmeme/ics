@@ -8,7 +8,7 @@ Route::resource('categorias', 'CategoriasController');
 Route::resource('medidores', 'MedidoresController',['except'=>['show','edit','update']]);
 //Route::group(['middleware' => ['role:Administrador']], function () {});
 Route::resource('areas', 'AreasController',['except'=>['show']]);
-Route::get('listaAreas', 'AreasController@mostrarAreas');
+Route::get('listaEquipos', 'EquiposController@mostrarEquipos');
 //Route::get('/tarjetas/{filtro}','TarjetasController@index');
 Route::resource('users', 'UsersController');
 Route::resource('roles', 'RolesController');
@@ -23,7 +23,10 @@ Route::resource('puestos', 'PuestosController');
 Route::resource('ordenes', 'OrdenesController');
 //ruta para asignar una tarjeta a un empleado
 Route::post('/asignar/{idtarjeta}','TarjetasController@asignar');
+//ruta para cambiar de responsable
+Route::post('/cambiar/{idtarjeta}','TarjetasController@cambiarResponsable');
 //ruta para finalizar una TarjetasModel
+
 Route::post('/finalizar/{idtarjeta}','TarjetasController@finalizar');
 //ruta para las autentificaciones
 Auth::routes();

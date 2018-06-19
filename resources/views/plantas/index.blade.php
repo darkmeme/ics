@@ -7,7 +7,7 @@
       <div class="tableTools-container">
         <div class="row">
         <div class="col-lg-2">
-          <a href="/plantas/create"><button class="btn btn-info" type="button">Nueva<i class="fa fa-plus"></i></button></a>
+          <a><button class="btn btn-info" type="button" data-target="#modalCreatePlanta" data-toggle="modal">Nueva<i class="fa fa-plus"></i></button></a>
         </div>
         </div>
       </div>
@@ -29,9 +29,9 @@
           <td>{{$plant->id}}</td>
           <td>{{$plant->nombre}}</td>
           <td>
-              <a class="green" href="{{URL::action('PlantasController@edit',$plant->id)}}">
+          <a class="green" href="{{URL::action('PlantasController@edit',$plant->id)}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
-              </a>
+              </a>            
               @can('Borrar')
               <a class="red" href="" data-target="#modal-delete-{{$plant->id}}" data-toggle="modal">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
@@ -41,11 +41,12 @@
             </div>
           </td>
         </tr>
-@include('plantas.modal')
+@include('plantas.modalDelete')
         @endforeach
       </table>
     </div>
   </div>
+@include('plantas.modalCreate')
 @endsection
 
 

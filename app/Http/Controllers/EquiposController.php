@@ -39,6 +39,12 @@ public function equipos_padres($id)
   }
 
 
+  public function mostrarEquipos(){
+  $listEquipos=EquiposModel::orderBy('id','desc')->get();
+  return $listEquipos;
+  }
+
+
 
     public function create()
     {

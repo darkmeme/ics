@@ -1,12 +1,12 @@
 
 new Vue({
-	el: '#table',
+	el: '#Equipos',
 	data: {
-		areas:[],
+		equipos:[],
 	},
 
 	created: function() {
-		this.getAreas();
+		this.getEquipos();
 		//this.$nextTick(function() {
 		//	$('#table-areas').DataTable();
 		  //})
@@ -14,27 +14,26 @@ new Vue({
 
 	methods: {
 		//metodo para obtener listado de todas las areas
-		getAreas: function() {
-			var urlAreas = 'listaAreas';
-      axios.get(urlAreas).then(response => {
-				this.areas = response.data
+		getEquipos: function() {
+      axios.get('listaEquipos').then(response => {
+				this.equipos = response.data
 				});//fin de peticion ajax
 		},//fin de getAreas
 
-			//metodo para eliminar un area
-		deleteArea: function(area){
-			var url= 'areas/'+area.id;
-			confirm('Seguro de Eliminar el area: '+area.nombre, function(result){
-				if(!result) {
-				   return false;
-				}
-			});
-			axios.delete(url).then(response=>{
-				this.getAreas();
-				toastr.success('Area'+' '+area.id+' '+ 'Eliminada correctamente');
-			},
-			(error) => { alert(error) }
-		);
+			//metodo para eliminar un equipo
+			
+			deleteEquipo(equipo) {
+                if (confirm("Do you really want to delete:?"+equipo.nombre)) {
+                    var app = this;
+                    axios.delete('equipos/' + equipo.id)
+                        .then(function (resp) {
+							//app.companies.splice(index, 1);
+							this.getEquipos();
+                        })
+                        .catch(function (resp) {
+                            alert("Could not delete equipo");
+						});
+					}
 		}//termina metodo delete
 
 	},//cierre de todos los metodos

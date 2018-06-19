@@ -155,6 +155,31 @@ public function asignar(TarjetasRequest $request,$id)
 }
 
 
+public function cambiarResponsable(TarjetasRequest $request,$id)
+{
+  $tarjeta=TarjetasModel::findOrFail($id);
+  //si una tarjeta ya fue finalizada no puede cambiar de responsable
+  if ($tarjeta->finalizado==1){
+    Toastr::error('No se puede Cambiar de responsable porque ya esta finalizada' ,'Cambio Responsable');
+    return back();
+  }
+  else{
+  //$user=User::where('id',$id)->get(['name']);
+  $tarjeta->user_asignado=$request->get('empleado_id');
+  //$tarjeta->status='Reasignada';
+  //$tarjeta->motivo_reasignado=$request->get('motivo');
+  $tarjeta->update();
+  //dd('llego el request'.' id tarjeta '. $id . ' id user '.$tarjeta->user_reasignado);
+  $correo=$tarjeta->asignado->email;
+  $nombre=$tarjeta->asignado->name;
+  
+  Mail::to($correo,$nombre)
+  ->send(new AsignarTarjeta($tarjeta));
+  Toastr::info('Responsable Cambiado Correctamente, se envio un correo a: '.$nombre ,'Cambio Responsable');
+  return back();
+  }
+}
+
 public function finalizar(Request $request,$id)
 {
   $tarjeta=TarjetasModel::findOrFail($id);
