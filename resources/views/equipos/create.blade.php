@@ -29,7 +29,7 @@
 <br>
     <div class="form-group">
       <label for="nombre">Planta</label>
-      <select class="form-control" id="select-planta" name="planta_id" class="form-control">
+      <select class="form-control" id="select-planta" name="planta_id" class="form-control" required>
         <option value="">Seleccione Planta</option>
         @foreach($plantas as $p)
         <option value="{{$p->id}}">{{$p->nombre}}</option>
@@ -39,7 +39,7 @@
 
     <div class="form-group">
       <label for="nombre">Areas</label>
-      <select class="form-control" id="select-area" name="area_id" class="form-control">
+      <select class="form-control" id="select-area" name="area_id" class="form-control" required>
       {{--se llena automatico desde jquey al seleccionar planta--}}
       </select>
     </div>

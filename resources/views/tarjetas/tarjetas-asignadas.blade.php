@@ -18,7 +18,7 @@
           <th>Area</th>
           <th>Planta</th>
           <th>Fecha</th>
-          <th>Nombre</th>
+          <th>Creada por</th>
           <th>Equipo</th>
           {{--<th>Turno</th>--}}
           <th>Prioridad</th>
@@ -28,7 +28,7 @@
           <th>Descripcion</th>
           {{--<th>Solucion</th>--}}
           {{--<th>Fecha cierre</th>--}}
-          <th>Finalizado</th>
+          {{--<th>Finalizado</th>--}} 
           <th>Estatus</th>
           <th class="text-center" WIDTH="100">Opciones </th>
         </thead>
@@ -44,7 +44,7 @@
           <td>{{$t->prioridad}}</td>
           <td>{{$t->categoria->nombre}}</td>
           <td>{{$t->descripcion_reporte}}</td>
-          <td>{{$t->finalizado}}</td>
+          {{--<td>{{$t->finalizado}}</td>--}}
           <td><span class="label label-sm label-success">{{$t->status}}</span>
           </td>
           <td>

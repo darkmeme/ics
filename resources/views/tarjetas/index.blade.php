@@ -30,12 +30,12 @@
           <th class="text-center">Area</th>
           <th class="text-center">Planta</th>
           <th class="text-center">Fecha</th>
-          <th class="text-center">Nombre</th>
+          <th class="text-center">Creada por</th>
           <th class="text-center">Equipo</th>
           <th class="text-center">Prioridad</th>
           <th class="text-center">Categoria</th>
           <th class="text-center">Descripcion</th>
-          <th class="text-center">Finalizado</th>
+          <th class="text-center">Estado</th>
           <th class="text-center" WIDTH="100">Opciones</th>
         </thead>
 

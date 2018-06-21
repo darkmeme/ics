@@ -79,23 +79,23 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
       //$tarjetas->status='enviada';
-      $tarjetas->user_finaliza=(1);
+      $tarjetas->user_finaliza=(2);
 // si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
-      $tarjetas->user_asignado=(32);
+      $tarjetas->user_asignado=(3);
       $tarjetas->status='Asignada';
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(311);
+      $tarjetas->user_asignado=(5);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();
       //se envia correo al usuario que se le asigno la tarjeta
       $correo=$tarjetas->asignado->email;
       $nombre=$tarjetas->asignado->name;
-      Mail::to($correo,$nombre)
-     ->send(new AsignarTarjeta($tarjetas));
+    //  Mail::to($correo,$nombre)
+    // ->send(new AsignarTarjeta($tarjetas));
      //se envia notificacion a la vista por medio de Toastr.
      Toastr::success('Tarjeta Creada Satisfactoriamente :)' ,'Success');
       return Redirect::to('tarjetas');
@@ -108,7 +108,8 @@ public function tarjetas_asignadas(Request $request){
         $user=User::get(['id','name']);//selecciona solo dos campos de la tabla
         $tarjetas=TarjetasModel::findOrFail($id);
         if ($request->ajax()){
-        return response()->json([
+        
+          return response()->json([
             'data'=>$tarjetas]);
           }
         return view('tarjetas.show', compact('user','tarjetas'));

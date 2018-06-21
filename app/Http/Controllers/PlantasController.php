@@ -36,9 +36,15 @@ class PlantasController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $tarjetasP = PlantasModel::findOrFail($id)->tarjetas;
+  
+          return view('plantas.tarjetas-planta', compact('tarjetasP'));
+
+        // return response()->json([
+        //  'data'=>$tarjetasP]);
+     
     }
 
 
