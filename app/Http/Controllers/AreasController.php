@@ -99,4 +99,5 @@ class AreasController extends Controller
       return Redirect::to('areas');
     }
     }
+
 }
