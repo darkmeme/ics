@@ -108,7 +108,8 @@ public function tarjetas_asignadas(Request $request){
         $user=User::get(['id','name']);//selecciona solo dos campos de la tabla
         $tarjetas=TarjetasModel::findOrFail($id);
         if ($request->ajax()){
-        return response()->json([
+        
+          return response()->json([
             'data'=>$tarjetas]);
           }
         return view('tarjetas.show', compact('user','tarjetas'));
