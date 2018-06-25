@@ -450,7 +450,8 @@
 		<script src="{{asset('assets/js/ace.min.js')}}"></script>
 		<!--<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>-->
 		<script src="{{asset('js/app.js')}}"></script>
-@yield('scripts')
+		
+        @yield('scripts')
 {!! Toastr::message() !!}
 	</body>
 </html>

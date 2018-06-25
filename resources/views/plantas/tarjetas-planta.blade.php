@@ -5,11 +5,80 @@
 <div class="col-xs-12">
   <div class="clearfix">
     <div class="pull-right tableTools-container"></div>
-  </div>
+  </div> 
 
   <div class="table-header">
     Listado de Tarjetas en esta Planta
   </div>
+
+<div class="row">
+                <div class="col-lg-2 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-book fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div>Total Tarjetas: 
+                                         <h2>465</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-book fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div>Tarjetas Emitidas: 
+                                         <h2>465</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-book fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div>Reasignadas: 
+                                         <h2>465</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-book fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div>Finalizadas: 
+                                         <h2>465</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                
+            </div>
+
 <div class="table-responsive">
 
       <table class="table table-bordered text-center table-striped table-hover" id="table-tarjetas-asignadas">
