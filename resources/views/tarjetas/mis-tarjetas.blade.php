@@ -18,7 +18,7 @@
           <th>Area</th>
           <th>Planta</th>
           <th>Fecha</th>
-          <th>Nombre</th>
+          <th>Creada por</th>
           <th>Equipo</th>
           {{--<th>Turno</th>--}}
           <th>Prioridad</th>

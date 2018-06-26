@@ -1,25 +1,17 @@
 @extends('layouts.admin')
 @section('contenido')
-<br>
+  <br>
 <div class="row">
 <div class="col-xs-12">
   <div class="clearfix">
-    <div class="tableTools-container">
-      <div class="row">
+    <div class="pull-right tableTools-container"></div>
+  </div> 
 
-      <div class="col-lg-2 col-md-2 col-xs-4">
-        <a href="/tarjetas/create"><button class="btn btn-success" type="button">Nueva<i class="fa fa-plus"></i></button></a>
-      </div>
-
-      <div class="col-lg-3 col-xs-6 col-md-6">
-      @include('tarjetas.search')
-      </div>
-
-      </div>
-    </div>
+  <div class="table-header">
+    Listado de Tarjetas en esta Planta
   </div>
 
-  <div class="row">
+<div class="row">
                 <div class="col-lg-2 col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -45,7 +37,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Tarjetas Emitidas: 
-                                         <h2>{{$totalEmitidas}}</h2>
+                                         <h2>45</h2>
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +53,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Reasignadas: 
-                                         <h2>{{$totalReasignadas}}</h2>
+                                         <h2>67</h2>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +69,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Finalizadas: 
-                                         <h2>{{$totalFinalizadas}}</h2>
+                                         <h2>87</h2>
                                     </div>
                                 </div>
                             </div>
@@ -87,137 +79,49 @@
                 
             </div>
 
-  <div class="table-header">
-    Listado de todas las tarjetas"
-  </div>
 <div class="table-responsive">
 
-      <table class="table text-center table-striped" id="table-tarjetas">
+      <table class="table table-bordered text-center table-striped table-hover" id="table-tarjetas-asignadas">
         <thead>
-          <th class="text-center">Numero</th>
-          <th class="text-center">Area</th>
-          <th class="text-center">Planta</th>
-          <th class="text-center">Fecha</th>
-          <th class="text-center">Creada por</th>
-          <th class="text-center">Equipo</th>
-          <th class="text-center">Prioridad</th>
-          <th class="text-center">Categoria</th>
-          <th class="text-center">Descripcion</th>
-          <th class="text-center">Estado</th>
-          <th class="text-center" WIDTH="100">Opciones</th>
+          <th>Numero</th>
+          <th>Planta</th>
+          <th>Fecha</th>                    
+          <th>Descripcion</th>
+          <th>Estatus</th>
+          <th class="text-center" WIDTH="100">Opciones </th>
         </thead>
 
-        @foreach ($tarjetas as $t)
-        <tr id="filas">
-          <td>{{$t->id}}</td>
-          <td>{{$t->area->nombre}}</td>
+        @foreach ($tarjetasP as $t)
+        <tr>
+          <td>{{$t->id}}</td>         
           <td>{{$t->planta->nombre}}</td>
-          <td>{{$t->created_at->format('d-m-Y')}}</td>
-          <td>{{$t->user->name}}</td>
-          <td>{{$t->equipo->nombre}}</td>
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->categoria->nombre}}</td>
+          <td>{{$t->created_at->format('d-m-Y')}}</td>          
           <td>{{$t->descripcion_reporte}}</td>
-          <td class="td-status"><span class="label label-sm label-warning">{{$t->status}}</span></td>
+          <td><span class="label label-sm label-success">{{$t->status}}</span>
+          </td>
           <td>
             <div class="action-buttons">
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-
-
-              <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag-{{$t->id}}">
-                <i class="ace-icon fa fa-pencil bigger-200"></i>
-              </a>
-              @can('Borrar')
-              <a class="red" href="" data-target="#modal-delete-{{$t->id}}" data-toggle="modal">
-                <i class="ace-icon fa fa-trash-o bigger-200"></i>
-              </a>
-              @else
-              @endcan
             </div>
           </td>
-        </tr> 
-        @include('tarjetas.modal-editar')
-        @include('tarjetas.modal')
+        </tr>
+
         @endforeach
       </table>
         </div>
 </div>
 </div>
-{!! Toastr::message() !!}
 @endsection
 
-
 @section('scripts')
-<script type="text/javascript">
-//script para editar una tarjeta, se hace peticion ajax cuando se hace click en boton edit
-//de la tabla y carga los datos en el modal edit-tag
-$(document).ready(function(){
-$("#table-tarjetas").on("click touchstart", ".edit-btn", function () {
-
-$.ajax({
-  type: "GET",
-  url: "tarjetas/" + $(this).attr("value") + "/edit",
-  dataType: 'json',
- headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
- beforeSend: function() {
- //$('#item-not-found').remove();
- },
-  success: function (data) {
-    var html;
-  $(".descripcion_reporte").val(data['descripcion']);
-
-  html += '<option value="'+data['prioridad']+'">'+data['prioridad']+'</option>'+
-          '<option value="'+'A'+'">'+'A'+'</option>'+
-          '<option value="'+'B'+'">'+'B'+'</option>'+
-          '<option value="'+'c'+'">'+'C'+'</option>';
-  $('.prioridad').html(html);
-
-  //$('#update-form').show();
- },
-
-});//fin de peticion ajax
-//alert('se presiono boton de editar');
-});//fin de click
-});//fin function ready
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){
-
-$("#prueba").click(function(e){
- var estado='';
- var status;
-  //var status= $("#table-tarjetas #filas .td-status").text();
-//  estado=$.trim(status);
-
-    $("#table-tarjetas #filas").each(function(index, value){
-  estado= $(value).find("td").eq(9).text();
-  status=$.trim(estado);
-  console.log(status);
-if (status=="Reasignada"){
-  $("#table-tarjetas #filas .td-status").append("<td id="+index+"><span class=label label-sm label-warning>Reasignada</span></td>")
-  //$("#table-tarjetas #filas .td-status .label").addClass("label label-sm label-warning");
-}
-else {
-  $("#table-tarjetas #filas .td-status .label").addClass("label label-sm label-info");
-}
-});
-  //id = $(this).parents("tr").find(".id").html();
-
-
-});
-});
-</script>
-
 
 <script type="text/javascript">
 //script para cargar estilo y botones de jQuery DataTable
 $(document).ready(function() {
 
-  var table = $('#table-tarjetas').DataTable({
+  var table = $('#table-tarjetas-asignadas').DataTable({
     "aaSorting": [[ 0, "desc" ]],
   });
 
@@ -226,7 +130,7 @@ $(document).ready(function() {
         {
           "extend": "pdf",
           "titleAttr": 'Exportar a PDF',
-          "messageTop": 'Reporte de listado de tarjetas.',
+          "messageTop": 'Reporte de mis tarjetas asignadas.',
           "filename": 'Reporte de tarjetas',
           "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
           "className": "btn btn-white btn-primary  btn-bold",
@@ -272,7 +176,7 @@ $(document).ready(function() {
   } );
 
   table.buttons().container()
-      .appendTo( $('.col-sm-6 :eq(0)', table.table().container() ) );
+      .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
 } );
 </script>
 @endsection

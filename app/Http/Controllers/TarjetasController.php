@@ -31,9 +31,13 @@ class TarjetasController extends Controller
 
     public function index(Request $request)
     {
+      $totalTarjetas=TarjetasModel::count();
+      $totalEmitidas=TarjetasModel::where(['status' => 'Asignada'])->count();
+      $totalReasignadas=TarjetasModel::where(['status' => 'Reasignada'])->count();
+      $totalFinalizadas=TarjetasModel::where(['status' => 'Finalizada'])->count();
       $filtro=trim($request->get('buscar'));
       $tarjetas=TarjetasModel::where('status','LIKE',''.$filtro.'%')->get();
-     return view('tarjetas.index',compact('tarjetas','filtro'));  
+     return view('tarjetas.index',compact('tarjetas','filtro', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas'));  
     }
 
 //funcion que carga todas la tarjetas creadas por un usuario
@@ -79,15 +83,15 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
       //$tarjetas->status='enviada';
-      $tarjetas->user_finaliza=(1);
+      $tarjetas->user_finaliza=(2);
 // si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
-      $tarjetas->user_asignado=(32);
+      $tarjetas->user_asignado=(3);
       $tarjetas->status='Asignada';
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(311);
+      $tarjetas->user_asignado=(1);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();
@@ -103,15 +107,17 @@ public function tarjetas_asignadas(Request $request){
 
 
     public function show(Request $request,$id)
-    {
+    {  
+      
       //variable empleados para llenar combo de empleados en el modal de reasignar
         $user=User::get(['id','name']);//selecciona solo dos campos de la tabla
         $tarjetas=TarjetasModel::findOrFail($id);
         if ($request->ajax()){
-        return response()->json([
+        
+          return response()->json([
             'data'=>$tarjetas]);
           }
-        return view('tarjetas.show', compact('user','tarjetas'));
+        return view('tarjetas.show', compact('user','tarjetas', 'totalTarjetas'));
     }
 
 

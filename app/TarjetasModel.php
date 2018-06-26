@@ -60,7 +60,7 @@ class TarjetasModel extends Model
 
   public function planta()
         {
-          return $this->belongsTo('App\PlantasModel');
+          return $this->belongsTo('App\PlantasModel', 'planta_id');
         }
 
 

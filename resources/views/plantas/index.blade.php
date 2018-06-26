@@ -29,6 +29,9 @@
           <td>{{$plant->id}}</td>
           <td>{{$plant->nombre}}</td>
           <td>
+          <a class="blue" href="{{URL::action('PlantasController@show',$plant->id)}}">
+                <i class="ace-icon fa fa-eye bigger-200"></i>
+              </a>
           <a class="green" href="{{URL::action('PlantasController@edit',$plant->id)}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>            
