@@ -14,7 +14,7 @@ class PlantasModel extends Model
 
   public function tarjetas()
   {
-    return $this->hasMany(TarjetasModel::class, 'area_id');
+    return $this->hasMany('App\TarjetasModel', 'planta_id');
   }
 
 }

@@ -39,9 +39,12 @@ class PlantasController extends Controller
 
     public function show(Request $request, $id)
     {
-      $tarjetasP = PlantasModel::findOrFail($id)->tarjetas;
+      $tarjetasP = PlantasModel::find($id)->tarjetas;
       $totalTarjetas=$tarjetasP->count();
-      
+      $TarjetasFinalizadas=PlantasModel::find($id)->tarjetas->where('status','Finalizada')->count();
+      $TarjetasAsignadas=PlantasModel::find($id)->tarjetas->where('status','Asignada')->count();
+      $TarjetasReasignadas=PlantasModel::find($id)->tarjetas->where('status','Reasignada')->count();
+      //dd($TarjetasFinalizadas);
      // $totalTarjetas=PlantasModel::findOrFail($id)->tarjetas->count();
      // $totalEmitidas=PlantasModel::findOrFail($id)->tarjetas->where(['status' => 'Asignada'])->count();
       //TarjetasModel::where(['status' => 'Asignada'])->count();
@@ -50,10 +53,8 @@ class PlantasController extends Controller
       
       
   
-         return view('plantas.tarjetas-planta', compact('tarjetasP', 'totalTarjetas'));
-
-         //return response()->json([
-        // 'data'=>$totalEmitidas]);
+         return view('plantas.tarjetas-planta', compact('tarjetasP', 'totalTarjetas','TarjetasFinalizadas',
+         'TarjetasAsignadas','TarjetasReasignadas'));
      
     }
 

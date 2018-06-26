@@ -12,7 +12,7 @@
   </div>
 
 <div class="row">
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-3 col-lg-offset-2">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -28,7 +28,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -36,15 +36,15 @@
                                     <i class="fa fa-book fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div>Tarjetas Emitidas: 
-                                         <h2>45</h2>
+                                    <div>Emitidas: 
+                                         <h2>{{$TarjetasAsignadas}}</h2>
                                     </div>
                                 </div>
                             </div>
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -53,14 +53,14 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Reasignadas: 
-                                         <h2>67</h2>
+                                         <h2>{{$TarjetasReasignadas}}</h2>
                                     </div>
                                 </div>
                             </div>
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Finalizadas: 
-                                         <h2>87</h2>
+                                         <h2>{{$TarjetasFinalizadas}}</h2>
                                     </div>
                                 </div>
                             </div>

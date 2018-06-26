@@ -20,7 +20,7 @@
   </div>
 
   <div class="row">
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-3 col-lg-offset-2">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -36,7 +36,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -44,7 +44,7 @@
                                     <i class="fa fa-book fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div>Tarjetas Emitidas: 
+                                    <div>Emitidas: 
                                          <h2>{{$totalEmitidas}}</h2>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -68,7 +68,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-2 col-md-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
