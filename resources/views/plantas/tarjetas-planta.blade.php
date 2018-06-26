@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Total Tarjetas: 
-                                         <h2>465</h2>
+                                         <h2>{{$totalTarjetas}}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Tarjetas Emitidas: 
-                                         <h2>465</h2>
+                                         <h2>45</h2>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Reasignadas: 
-                                         <h2>465</h2>
+                                         <h2>67</h2>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div>Finalizadas: 
-                                         <h2>465</h2>
+                                         <h2>87</h2>
                                     </div>
                                 </div>
                             </div>

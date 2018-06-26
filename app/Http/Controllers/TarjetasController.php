@@ -31,9 +31,13 @@ class TarjetasController extends Controller
 
     public function index(Request $request)
     {
+      $totalTarjetas=TarjetasModel::count();
+      $totalEmitidas=TarjetasModel::where(['status' => 'Asignada'])->count();
+      $totalReasignadas=TarjetasModel::where(['status' => 'Reasignada'])->count();
+      $totalFinalizadas=TarjetasModel::where(['status' => 'Finalizada'])->count();
       $filtro=trim($request->get('buscar'));
       $tarjetas=TarjetasModel::where('status','LIKE',''.$filtro.'%')->get();
-     return view('tarjetas.index',compact('tarjetas','filtro'));  
+     return view('tarjetas.index',compact('tarjetas','filtro', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas'));  
     }
 
 //funcion que carga todas la tarjetas creadas por un usuario
@@ -87,15 +91,15 @@ public function tarjetas_asignadas(Request $request){
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(5);
+      $tarjetas->user_asignado=(1);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();
       //se envia correo al usuario que se le asigno la tarjeta
       $correo=$tarjetas->asignado->email;
       $nombre=$tarjetas->asignado->name;
-    //  Mail::to($correo,$nombre)
-    // ->send(new AsignarTarjeta($tarjetas));
+      Mail::to($correo,$nombre)
+     ->send(new AsignarTarjeta($tarjetas));
      //se envia notificacion a la vista por medio de Toastr.
      Toastr::success('Tarjeta Creada Satisfactoriamente :)' ,'Success');
       return Redirect::to('tarjetas');
@@ -103,7 +107,8 @@ public function tarjetas_asignadas(Request $request){
 
 
     public function show(Request $request,$id)
-    {
+    {  
+      
       //variable empleados para llenar combo de empleados en el modal de reasignar
         $user=User::get(['id','name']);//selecciona solo dos campos de la tabla
         $tarjetas=TarjetasModel::findOrFail($id);
@@ -112,7 +117,7 @@ public function tarjetas_asignadas(Request $request){
           return response()->json([
             'data'=>$tarjetas]);
           }
-        return view('tarjetas.show', compact('user','tarjetas'));
+        return view('tarjetas.show', compact('user','tarjetas', 'totalTarjetas'));
     }
 
 
