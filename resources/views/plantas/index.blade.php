@@ -19,36 +19,38 @@
 
       <table class="table text-center table-striped table-hover" id="table-plantas">
         <thead>
-          <th>Id</th>
-          <th>Nombre</th>
-          <th>Opciones</th>
+          <th class="text-center">Id</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Opciones</th>
         </thead>
 
         @foreach ($plantas as $plant)
-        <tr>
+        <tr class="item{{$plant->id}}">
           <td>{{$plant->id}}</td>
-          <td>{{$plant->nombre}}</td>
+          <td><div id="nombre{{$plant->id}}">{{$plant->nombre}}</div></td>
           <td>
-          <a class="blue" href="{{URL::action('PlantasController@show',$plant->id)}}">
+          <a class="btn btn-link" href="{{URL::action('PlantasController@show',$plant->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
-              </a>
-          <a class="green" href="{{URL::action('PlantasController@edit',$plant->id)}}">
+              </a>              
+              <button class="btn btn-link btn-editar" data-id="{{$plant->id}}" data-planta="{{$plant->nombre}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
-              </a>            
+                </button>
+              <button class="btn btn-link btn-delete" data-id="{{$plant->id}}" data-nombre="{{$plant->nombre}}">       
+                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"> </i>
+                </button>  
               @can('Borrar')
-              <a class="red" href="" data-target="#modal-delete-{{$plant->id}}" data-toggle="modal">
-                <i class="ace-icon fa fa-trash-o bigger-200"></i>
-              </a>
               @else
               @endcan
             </div>
           </td>
         </tr>
-@include('plantas.modalDelete')
         @endforeach
       </table>
     </div>
   </div>
+
+@include('plantas.modalDelete')
+@include('plantas.modalEdit')
 @include('plantas.modalCreate')
 @endsection
 
@@ -98,8 +100,77 @@ $(document).ready(function() {
         } ]
   } );
 
-  table.buttons().container()
-      .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
-} );
+} );//termina document ready
+
+//script para eliminar con modal
+$(document).on('click', '.btn-delete', function() {
+            var nombre = $(this).data('nombre');
+            //var
+            $('.txt-borrar').text(nombre);
+            $('#modal-delete').modal('show');
+            id = $(this).data('id');   
+            //alert('el id es:'+id);         
+        });
+$('.modal-footer').on('click', '.eliminar', function(){
+
+    $.ajax({
+
+         type: 'DELETE',
+         url: ' plantas/' + id,
+         data: {
+         },
+         headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+        success: function(data){
+          toastr.success('Planta Borrada Correractamente!', 'Eliminando Planta', {timeOut: 5000});
+          $('#modal-delete').modal('hide');
+          $('.item' + id).fadeOut(600);          
+          }
+    });
+
+});
+
+//editar con modal
+$(document).on('click', '.btn-editar', function() { 
+
+         // editar = editado;
+          $('#txtPlanta').val($(this).data('planta'));
+         // alert('se capturo la planta '+id );
+          $('#modalEditPlanta').modal('show');
+          //$('#txtPlanta').focus();
+          id = $(this).data('id');
+                          
+        });
+
+        $('.modal-footer').on('click', '.edit', function() {
+            $.ajax({
+                type: 'PUT',
+                url: 'plantas/' + id,
+                data: {                    
+                    'id': id,
+                    'nombre': $('#txtPlanta').val(),                   
+                },
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                  
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#editModal').modal('show');
+                            toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
+                        }, 500);
+                        
+                    } else {
+                        toastr.success('Se ha Modificado Correctamente!', 'Aviso!', {timeOut: 5000});
+                        $('#modalEditPlanta').modal('hide');
+                        $('#nombre'+data.id).text(data.nombre);                       
+                                              
+                    }
+                }
+            });
+        });
+
 </script>
 @endsection
