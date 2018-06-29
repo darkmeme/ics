@@ -138,7 +138,6 @@ $('.modal-footer').on('click', '.eliminar', function(){
 
 //editar con modal
 $(document).on('click', '.btn-editar', function() { 
-
          // editar = editado;
           $('#txtPlanta').val($(this).data('planta'));
          // alert('se capturo la planta '+id );
@@ -170,7 +169,8 @@ $(document).on('click', '.btn-editar', function() {
                     } else {
                         toastr.success('Se ha Modificado Correctamente!', 'Aviso!', {timeOut: 5000});
                         $('#modalEditPlanta').modal('hide');
-                        $('#nombre'+data.id).text(data.nombre);                       
+                        $('#nombre'+data.id).text(data.nombre);  
+                        location.reload();                     
                                               
                     }
                 }

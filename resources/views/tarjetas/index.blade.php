@@ -28,7 +28,7 @@
                                     <i class="fa fa-book fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div>Total Tarjetas: 
+                                    <div>Total: 
                                          <h2>{{$totalTarjetas}}</h2>
                                     </div>
                                 </div>

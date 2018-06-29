@@ -408,7 +408,7 @@
 					<div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder"></span>
-							Copyright ©   2018
+							Copyright Elmer Hernandez©   2018
 						</span>
 
 						&nbsp; &nbsp;
@@ -417,7 +417,7 @@
 								<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
 							</a>
 
-							<a href="#">
+							<a href="https://www.facebook.com/geovany.hernandez.3781">
 								<i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
 							</a>
 
