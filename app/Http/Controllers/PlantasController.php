@@ -44,15 +44,7 @@ class PlantasController extends Controller
       $TarjetasFinalizadas=PlantasModel::find($id)->tarjetas->where('status','Finalizada')->count();
       $TarjetasAsignadas=PlantasModel::find($id)->tarjetas->where('status','Asignada')->count();
       $TarjetasReasignadas=PlantasModel::find($id)->tarjetas->where('status','Reasignada')->count();
-      //dd($TarjetasFinalizadas);
-     // $totalTarjetas=PlantasModel::findOrFail($id)->tarjetas->count();
-     // $totalEmitidas=PlantasModel::findOrFail($id)->tarjetas->where(['status' => 'Asignada'])->count();
-      //TarjetasModel::where(['status' => 'Asignada'])->count();
-      //$totalReasignadas=TarjetasModel::where(['status' => 'Reasignada'])->count();
-     // $totalFinalizadas=TarjetasModel::where(['status' => 'Finalizada'])->count();
-      
-      
-  
+     
          return view('plantas.tarjetas-planta', compact('tarjetasP', 'totalTarjetas','TarjetasFinalizadas',
          'TarjetasAsignadas','TarjetasReasignadas'));
      
@@ -68,17 +60,19 @@ class PlantasController extends Controller
     public function update(Request $request,$id)
     {
       $plantas=PlantasModel::findOrFail($id);
-      $plantas->Nombre=$request->get('nombre');
+      $plantas->nombre=$request->nombre;
       $plantas->update();
-      return Redirect::to('plantas');
+      return response()->json($plantas);
     }
 
 
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
+      //dd('llego el id'.$id);
       $plantas=PlantasModel::findOrFail($id);
       $plantas->Delete();
+            
+      return response()->json($plantas);
       
-      Return Redirect::to('plantas');
     }
 }

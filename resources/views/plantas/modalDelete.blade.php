@@ -1,6 +1,5 @@
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" tabindex="-1" id="modal-delete-{{$plant->id}}">
-  {{Form::open(array('action'=>array('PlantasController@destroy',$plant->id),'method'=>'delete'))}}
+role="dialog" tabindex="-1" id="modal-delete">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
       <div class="modal-header no-padding">
@@ -12,10 +11,10 @@ role="dialog" tabindex="-1" id="modal-delete-{{$plant->id}}">
         </div>
       </div>
         <div class="modal-body">
-          <p>Desea eliminar la Planta: <b>{{$plant->nombre}}</b>?</p>
+          <p>Desea eliminar la Planta: <b class="txt-borrar"></b>?</p>
         </div>
         <div class="modal-footer no-margin-top">
-        <button type="submit" class="btn btn-sm btn-danger pull-left">
+        <button type="submit" class="btn btn-sm btn-danger pull-left eliminar">
           <i class="ace-icon fa fa-check"></i>
           Eliminar
         </button>
@@ -26,5 +25,4 @@ role="dialog" tabindex="-1" id="modal-delete-{{$plant->id}}">
       </div>
       </div>
     </div>
-  {{Form::Close()}}
 </div>
