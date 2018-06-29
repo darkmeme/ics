@@ -86,7 +86,7 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->user_finaliza=(1);
 // si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
-      $tarjetas->user_asignado=(32);
+      $tarjetas->user_asignado=(200);
       $tarjetas->status='Asignada';
     }
 // si no la tarjeta se asigna al encargado de she

@@ -306,13 +306,13 @@
 								<b class="arrow"></b>
 							</li>
 
-							<li class="">
+							<!--<li class="">
 								<a href="/plantas/create">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Crear Nueva Planta
 								</a>
 								<b class="arrow"></b>
-							</li>
+							</li>-->
 						</ul>
 					</li>
 
