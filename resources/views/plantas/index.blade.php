@@ -35,10 +35,10 @@
               <button class="btn btn-link btn-editar" data-id="{{$plant->id}}" data-planta="{{$plant->nombre}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
                 </button>
+                @can('Borrar')
               <button class="btn btn-link btn-delete" data-id="{{$plant->id}}" data-nombre="{{$plant->nombre}}">       
                 <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"> </i>
                 </button>  
-              @can('Borrar')
               @else
               @endcan
             </div>
@@ -126,7 +126,12 @@ $('.modal-footer').on('click', '.eliminar', function(){
           toastr.success('Planta Borrada Correractamente!', 'Eliminando Planta', {timeOut: 5000});
           $('#modal-delete').modal('hide');
           $('.item' + id).fadeOut(600);          
-          }
+          },
+
+          error: function(){
+            toastr.error('No se puede borrar la planta porque esta en uso!', 'Eliminando Planta', {timeOut: 5000});
+            $('#modal-delete').modal('hide');
+            },
     });
 
 });
