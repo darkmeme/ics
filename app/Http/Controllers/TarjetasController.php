@@ -99,7 +99,7 @@ public function tarjetas_asignadas(Request $request){
       $correo=$tarjetas->asignado->email;
       $nombre=$tarjetas->asignado->name;
       Mail::to($correo,$nombre)
-     ->send(new AsignarTarjeta($tarjetas));
+      ->send(new AsignarTarjeta($tarjetas));
      //se envia notificacion a la vista por medio de Toastr.
      Toastr::success('Tarjeta Creada Satisfactoriamente :)' ,'Success');
       return Redirect::to('tarjetas');
@@ -210,12 +210,12 @@ public function finalizar(Request $request,$id)
     {
       $tarjetas=TarjetasModel::findOrFail($id);
       $tarjetas->prioridad=$request->get('prioridad');
-      $tarjetas->descripcion_reporte=$request->get('descripcion_reporte');
+      $tarjetas->descripcion_reporte=$request->get('descripcion');
       $tarjetas->update();
-      Toastr::success('Tarjeta Editada Satisfactoriamente' ,'Edicion');
+      //Toastr::success('Tarjeta Editada Satisfactoriamente' ,'Edicion');
       //Session::flash('message','Tarjeta actualizada correctamente');
       //return Redirect::to('tarjetas-asignadas');
-      return back();
+      return response()->json($tarjetas);
     }
 
     //funcion para eliminar una tarjeta, recibe como parametro el id de la tarjeta
@@ -223,8 +223,8 @@ public function finalizar(Request $request,$id)
     {
       $tarjetas=TarjetasModel::findOrFail($id);
       $tarjetas->Delete();
-      Toastr::success('Tarjeta Eliminada Satisfactoriamente' ,'Borrar');
-      return back();
+     // Toastr::success('Tarjeta Eliminada Satisfactoriamente' ,'Borrar');
+      return response()->json($tarjetas);
     }
 
 // prueba de generar un reporte pdf utilizando el plugin dompdf

@@ -7,9 +7,8 @@
 
 
 <div class="modal fade modal-slide-in-right" aria-hidden="true"
-role="dialog" id="edit-tag-{{$t->id}}">
-{{Form::open(array('action'=>array('TarjetasController@update',$t->id),'method'=>'PATCH'))}}
-  {{Form::token()}}
+role="dialog" id="edit-tarjeta">
+
   <div class="modal-dialog modal-sm">
     <div class="modal-content amarillo">
       <div class="modal-header no-padding">
@@ -37,8 +36,10 @@ role="dialog" id="edit-tag-{{$t->id}}">
               <div class="col-lg-5 col-xs-6">
                 <div class="form-group">
                   <label for="prioridad">Prioridad</label>
-                  <select class="form-control prioridad" name="prioridad">
-                    {{--se llena auto con peticion ajax--}}
+                  <select id="prioridad" class="form-control" name="prioridad">
+                  <option value ="A">A</option>
+                  <option value ="B">B</option>
+                  <option value ="C">C</option>
                   </select>
                 </div>
               </div>
@@ -54,7 +55,7 @@ role="dialog" id="edit-tag-{{$t->id}}">
               <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
-                  <textarea name="descripcion_reporte" class="descripcion_reporte" rows="5" cols="30"></textarea>
+                  <textarea name="descripcion_reporte" class="descripcion" rows="5" cols="30"></textarea>
                 </div>
               </div>
             </div>
@@ -63,7 +64,7 @@ role="dialog" id="edit-tag-{{$t->id}}">
       </div>
 
       <div class="modal-footer no-margin-top">
-        <button type="submit" class="btn btn-sm btn-success pull-left">
+        <button class="btn btn-sm btn-success pull-left editar">
           <i class="ace-icon fa fa-check"></i>
           Editar
         </button>
@@ -74,5 +75,4 @@ role="dialog" id="edit-tag-{{$t->id}}">
       </div>
     </div>
   </div>
-  {{Form::Close()}}
   </div>

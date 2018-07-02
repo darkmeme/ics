@@ -104,11 +104,11 @@
           <th class="text-center">Categoria</th>
           <th class="text-center">Descripcion</th>
           <th class="text-center">Estado</th>
-          <th class="text-center" WIDTH="100">Opciones</th>
+          <th class="text-center" WIDTH="122">Opciones</th>
         </thead>
 
         @foreach ($tarjetas as $t)
-        <tr id="filas">
+        <tr id="filas" class="item{{$t->id}}">
           <td>{{$t->id}}</td>
           <td>{{$t->area->nombre}}</td>
           <td>{{$t->planta->nombre}}</td>
@@ -124,63 +124,90 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-
-
-              <a class="green edit-btn" value="{{$t->id}}" data-toggle="modal" data-target="#edit-tag-{{$t->id}}">
-                <i class="ace-icon fa fa-pencil bigger-200"></i>
-              </a>
+              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
+              </button>
               @can('Borrar')
-              <a class="red" href="" data-target="#modal-delete-{{$t->id}}" data-toggle="modal">
-                <i class="ace-icon fa fa-trash-o bigger-200"></i>
-              </a>
+              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
+              </button>
               @else
               @endcan
             </div>
           </td>
         </tr> 
+        @endforeach
         @include('tarjetas.modal-editar')
         @include('tarjetas.modal')
-        @endforeach
       </table>
         </div>
 </div>
 </div>
-{!! Toastr::message() !!}
+
 @endsection
 
 
 @section('scripts')
 <script type="text/javascript">
-//script para editar una tarjeta, se hace peticion ajax cuando se hace click en boton edit
-//de la tabla y carga los datos en el modal edit-tag
-$(document).ready(function(){
-$("#table-tarjetas").on("click touchstart", ".edit-btn", function () {
+  
+  //editar tarjeta con modal
+//funcion para abrir modal y mandarle datos para edicion
+$(document).on('click', '.btnEdit', function() { 
 
-$.ajax({
-  type: "GET",
-  url: "tarjetas/" + $(this).attr("value") + "/edit",
-  dataType: 'json',
- headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
- beforeSend: function() {
- //$('#item-not-found').remove();
- },
-  success: function (data) {
-    var html;
-  $(".descripcion_reporte").val(data['descripcion']);
+          $('#prioridad').val($(this).data('prioridad'));
+          $('.descripcion').val($(this).data('desc'));         
+          //alert('se capturo la planta '+ $(this).data('desc') );
+          $('#edit-tarjeta').modal('show');
+          //$('#txtPlanta').focus();
+          id = $(this).data('id');
+          boton = $(this);
+        
+        }); //fin de la funcion on click
 
-  html += '<option value="'+data['prioridad']+'">'+data['prioridad']+'</option>'+
-          '<option value="'+'A'+'">'+'A'+'</option>'+
-          '<option value="'+'B'+'">'+'B'+'</option>'+
-          '<option value="'+'c'+'">'+'C'+'</option>';
-  $('.prioridad').html(html);
+        $('.modal-footer').on('click', '.editar', function() {
+            
+            fila = $('.item'+id);
+            var prioridad= $('#prioridad').val();
+            var desc= $('.descripcion').val();  
 
-  //$('#update-form').show();
- },
+            $.ajax({
+                type: 'PUT',
+                url: 'tarjetas/' + id,
+                data: {                    
+                    'id': id,
+                    'prioridad': prioridad,  
+                    'descripcion': desc                
+                },
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                 
+                    if ((data.errors)) {
+                        setTimeout(function () {
+                            $('#edit-tarjeta').modal('show');
+                            toastr.error('Algo ha salido mal!', 'alerta de Error', {timeOut: 5000});
+                        }, 500);
+                        
+                    } else {
+                        $('#edit-tarjeta').modal('hide');
+                       
+                        fila.find("td:eq(6)").html(prioridad);
+                        fila.find("td:eq(8)").html(desc);
+                        boton.data('prioridad', prioridad);
+                        boton.data('desc', desc);
+                       // location.reload();                                           
+                        toastr.success('Se ha Modificado Correctamente!', 'Aviso!', {timeOut: 5000});
+                                              
+                    }
+                },
+                error: function(){
+                    $('#edit-tarjeta').modal('hide');
+                    toastr.error('Algo ha salido mal!', 'alerta de Error', {timeOut: 5000});
+                }
+            });
+        });
 
-});//fin de peticion ajax
-//alert('se presiono boton de editar');
-});//fin de click
-});//fin function ready
 </script>
 
 
@@ -274,5 +301,42 @@ $(document).ready(function() {
   table.buttons().container()
       .appendTo( $('.col-sm-6 :eq(0)', table.table().container() ) );
 } );
+
+//script para eliminar con modal
+//funcion para abrir modal y mandarle datos
+$(document).on('click', '.btn-borrar', function() {
+            id = $(this).data('id');
+            $('.txtBorrar').text(id);
+            $('#modal-delete').modal('show');
+               
+            //alert('el id es:'+id);         
+        });
+
+//funcion para hacer peticion ajax con el modal
+$('.modal-footer').on('click', '.borrar', function(){
+
+$.ajax({
+
+     type: 'DELETE',
+     url: ' tarjetas/' + id,
+     data: {
+     },
+     headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  },
+    success: function(data){
+      toastr.success('Tarjeta Borrada Correractamente!', 'Eliminando Tarjeta', {timeOut: 5000});
+      $('#modal-delete').modal('hide');
+      $('.item' + id).fadeOut(600);          
+      },
+
+      error: function(){
+        toastr.error('No se ha podido borrar la tarjeta!', 'Eliminando Tarjeta', {timeOut: 5000});
+        $('#modal-delete').modal('hide');
+        },
+});
+
+});
+
 </script>
 @endsection

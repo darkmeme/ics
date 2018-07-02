@@ -144,7 +144,8 @@ $(document).on('click', '.btn-editar', function() {
           $('#modalEditPlanta').modal('show');
           //$('#txtPlanta').focus();
           id = $(this).data('id');
-                          
+          boton = $(this);
+
         });
 
         $('.modal-footer').on('click', '.edit', function() {
@@ -163,14 +164,17 @@ $(document).on('click', '.btn-editar', function() {
                     if ((data.errors)) {
                         setTimeout(function () {
                             $('#editModal').modal('show');
-                            toastr.error('Validation error!', 'Error Alert', {timeOut: 5000});
+                            toastr.error('Algo ha salido mal!', 'alerta de Error', {timeOut: 5000});
                         }, 500);
                         
                     } else {
-                        toastr.success('Se ha Modificado Correctamente!', 'Aviso!', {timeOut: 5000});
                         $('#modalEditPlanta').modal('hide');
+                        //alert('valor del data antes de editar: '+ boton.data('planta'));
                         $('#nombre'+data.id).text(data.nombre);  
-                        location.reload();                     
+                        boton.data('planta', data.nombre);
+                        //location.reload();    
+                       // alert('valor del data despues de editar: '+ boton.data('planta'));                 
+                        toastr.success('Se ha Modificado Correctamente!', 'Aviso!', {timeOut: 5000});
                                               
                     }
                 }
