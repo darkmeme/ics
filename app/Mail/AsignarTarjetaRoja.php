@@ -23,7 +23,7 @@ public $tarjeta;
 
     public function build()
     {
-        return $this->markdown('emails.asignar-tarjeta')
+        return $this->markdown('emails.asignarTarjetaRoja')
         ->from('tarjetas.cic@gmail.com', 'Tarjetas CIC')
         ->subject('Asignacion de tarjeta Roja');;
     }

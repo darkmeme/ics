@@ -1,21 +1,21 @@
 @extends('layouts.admin')
-@section('contenido')
-{!!Form::open(array('url'=>'tarjetas','method'=>'POST', 'enctype'=>'multipart/form-data', 'autocomplete'=>'off'))!!}
+
+{!!Form::open(array('url'=>'tarjetas-rojas','method'=>'POST','autocomplete'=>'off'))!!}
 {{Form::token()}}
 <style media="screen">
-.amarillo{ background-color:yellow;}
+.amarillo{ background-color:red;}
 .color-etiquetas{ background-color:green;}
 </style>
 
-  <br>
-  <div class="col-lg-1"></div>
 
-    <div class="col-xs-12 col-md-12 col-lg-10 amarillo">
+<div class="col-lg-1"></div>
+    <div class="col-xs-8 col-md-12 col-lg-6 amarillo">
+
       <div class="row">
-      <div class="col-lg-4 col-md-4 col-xs-12">
+      <div class="col-lg-6 col-md-4 col-xs-12">
         <div class="form-group">
           <label for="nombre">Planta</label>
-          <select class="form-control" id="select-planta" required name="planta_id" class="form-control">
+          <select class="form-control" id="select-planta" required name="planta_id">
             <option value="">Seleccione Planta</option>
             @foreach($plantas as $p)
             <option value="{{$p->id}}">{{$p->nombre}}</option>
@@ -24,43 +24,41 @@
         </div>
       </div>
 
-
-    <div class="col-lg-4 col-md-4 col-xs-12">
+    <div class="col-lg-6 col-md-10 col-xs-12">
       <div class="form-group">
         <label for="nombre">Area/Linea</label>
-        <select class="form-control" id="select-area" name="area_id" required class="form-control">
+        <select class="form-control" id="select-area" name="area_id" required>
           {{--Este select se llena automatico desde jquery--}}
         </select>
       </div>
     </div>
+</div>
+
     <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Equipo</label>
-        <select class="form-control" id="select-equipos" name="equipo_id" required class="form-control">
+        <select class="form-control" id="select-equipos" name="equipo_id" required>
 
       {{--Este select se llena automatico desde jquery--}}
         </select>
       </div>
     </div>
-    </div>
+
 
     <div class="row">
     <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Nombre:</label>
-        {{--<input id="txtfiltrar" type="text" name="empleado_id" class="form-control" placeholder="usuario">--}}
-           <select class="form-control" id="txtfiltrar" name="empleado_id" required class="form-control">
+           <select class="form-control" id="txtfiltrar" name="empleado_id" required>
             <option value="{{ Auth::user()->id }}">{{ Auth::user()->name }}</option>
-
           </select>
-
       </div>
     </div>
 
     <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Turno</label>
-        <select class="form-control" name="turno" class="form-control" required placeholder="1">
+        <select class="form-control" name="turno" required placeholder="1">
           <option value="">Seleccione Turno</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -71,7 +69,7 @@
     <div class="col-lg-4 col-md-4 col-xs-12">
       <div class="form-group">
         <label for="nombre">Prioridad</label>
-        <select class="form-control" name="prioridad" class="form-control" required placeholder="1">
+        <select class="form-control" name="prioridad" required placeholder="1">
           <option value="">Seleccione Prioridad</option>
           <option value="A">A</option>
           <option value="B">B</option>
@@ -81,50 +79,6 @@
     </div>
     </div>
 
-    <div class="row">
-    <div class="col-lg-4 col-md-4 col-xs-12">
-      <div class="form-group">
-        <label for="nombre">Categoria:</label>
-        <select class="form-control" name="categoria_id" required class="form-control">
-          <option value="">Seleccione Categoria</option>
-          @foreach($categorias as $c)
-          <option value="{{$c->id}}">{{$c->nombre}}</option>
-         @endforeach
-        </select>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 col-xs-6">
-      <div class="form-group">
-          <label for="nombre">Evento:</label>
-          <select class="form-control" name="evento_id" required class="form-control">
-            <option value="">Seleccione Evento</option>
-            @foreach($eventos as $v)
-            <option value="{{$v->id}}">{{$v->nombre}}</option>
-           @endforeach
-          </select>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-4 col-xs-6">
-      <div class="form-group">
-          <label for="nombre">Causa:</label>
-          <select class="form-control" name="causa_id" required class="form-control">
-            <option value="">Seleccione causa</option>
-            @foreach($causas as $v)
-            <option value="{{$v->id}}">{{$v->nombre}}</option>
-           @endforeach
-          </select>
-      </div>
-    </div>
-    </div>
-
-    <div calss="row">
-     <div class="col-lg-10 col-xs-12 offset-1">
-      <div class="form-group">
-      <label for="imagen">Seleccione o tome foto del Problema:</label>
-      <input type="file" class="form-control" accept="image/*" name="foto" capture>  
-      </div>
-     </div>
-    </div>
 
     <div class="row">
     <div class="col-lg-10 col-xs-12 offset-1">
@@ -147,12 +101,11 @@
           <div class="col-xs-10 col-lg-8">
         <div class="form-group">
           <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-          <a href="/tarjetas"><button class="btn btn-danger" type="button">Regresar<i class="fa fa-times"></i></button></a>
+          <a href="/tarjetas-rojas"><button class="btn btn-danger" type="button">Regresar<i class="fa fa-times"></i></button></a>
         </div>
         </div>
         </div>
     </div>
-{{--</div>--}}
   {!!Form::close()!!}
 
 
@@ -201,10 +154,8 @@
       </div>
     </div>
   </div>
-
-
 </div>
-@endsection
+
 @section('scripts')
 <script src="{{asset('js/combox.js')}}"></script>
 
