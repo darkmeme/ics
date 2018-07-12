@@ -59,7 +59,7 @@ background-color: white;
       Modulo de Tarjetas Rojas
     </div>
     <div class="center-block" style="width:100px;">
-    <a href="/">Acceder...</a>
+    <a href="/tarjetas-rojas">Acceder...</a>
     </div>
   </div>
     </div>

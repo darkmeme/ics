@@ -23,14 +23,14 @@ role="dialog" id="edit-tarjeta">
 
         <div class="row">
 
-            <div class="col-lg-5 col-xs-12">
+          {{--  <div class="col-lg-5 col-xs-12">
               <div class="form-group">
                 <label for="equipo">Equipo:</label>
                 <select class="form-control" name="equipo_id" id="equipo" class="form-control">
 
                 </select>
               </div>
-            </div>
+            </div> --}}
 
 
               <div class="col-lg-5 col-xs-6">

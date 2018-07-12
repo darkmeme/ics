@@ -25,6 +25,38 @@
 		<link rel="stylesheet" href="{{asset('assets/css/ace.min.css')}}" class="ace-main-stylesheet" id="main-ace-style">
 		
 		<!-- ace settings handler navbar-fixed-top-->
+
+<!-- stylo para navbar en tarjetas -->
+		<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #045FB4;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #A9E2F3;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
 		
 	</head>
 	<body class="no-skin">
@@ -147,29 +179,20 @@
 							<li class="">
 								<a href="/tarjetas">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Listado de todas las Tarjetas
+									Tarjetas Amarillas
 								</a>
 
 								<b class="arrow"></b>
 							</li>
 
 							<li class="">
-								<a href="/mis-tarjetas">
+								<a href="/tarjetas-rojas">
 									<i class="menu-icon fa fa-caret-right"></i>
-									Mis Tarjetas Realizadas
+									Tarjetas Rojas
 								</a>
 
 								<b class="arrow"></b>
-							</li>
-
-							<li class="">
-								<a href="/tarjetas-asignadas">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Mis Tarjetas Asignadas
-								</a>
-
-								<b class="arrow"></b>
-							</li>
+							</li>							
 						</ul>
 					</li> <!--Fin de primer menu de tarjetas-->
 

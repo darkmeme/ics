@@ -12,7 +12,10 @@
   </div>
 
 <div class="row">
-                <div class="col-lg-2 col-md-3 col-lg-offset-2">
+         <div class="col-lg-1 col-md-2">
+         <a href="javascript:history.back()"><button class="btn btn-info" type="button">Regresar<i class="fa fa-arrow-circle-o-left"></i></button></a>
+         </div>
+                <div class="col-lg-2 col-md-3 col-lg-offset-1">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">

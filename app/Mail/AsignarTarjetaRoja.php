@@ -7,15 +7,15 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
-use App\TarjetasModel;
+use App\TarjetasRojas;
 
-class AsignarTarjeta extends Mailable
+class AsignarTarjetaRoja extends Mailable
 {
     use Queueable, SerializesModels;
 
 public $tarjeta;
 
-    public function __construct(TarjetasModel $tarjeta)
+    public function __construct(TarjetasRojas $tarjeta)
     {
           $this->tarjeta=$tarjeta;
     }
@@ -25,6 +25,6 @@ public $tarjeta;
     {
         return $this->markdown('emails.asignar-tarjeta')
         ->from('tarjetas.cic@gmail.com', 'Tarjetas CIC')
-        ->subject('Asignacion de tarjeta amarilla');;
+        ->subject('Asignacion de tarjeta Roja');;
     }
 }

@@ -109,7 +109,7 @@
           <div class="col-xs-10 col-lg-8">
         <div class="form-group">
           <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-          <a href="/tarjetas"><button class="btn btn-danger" type="button">Regresar<i class="fa fa-times"></i></button></a>
+          <a href="/tarjetas-rojas"><button class="btn btn-danger" type="button">Regresar<i class="fa fa-times"></i></button></a>
         </div>
         </div>
         </div>

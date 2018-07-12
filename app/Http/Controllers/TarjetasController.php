@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use \App\Mail\AsignarTarjeta;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\TarjetasRequest;
+use Image;
 
 
 class TarjetasController extends Controller
@@ -35,9 +36,10 @@ class TarjetasController extends Controller
       $totalEmitidas=TarjetasModel::where(['status' => 'Asignada'])->count();
       $totalReasignadas=TarjetasModel::where(['status' => 'Reasignada'])->count();
       $totalFinalizadas=TarjetasModel::where(['status' => 'Finalizada'])->count();
+      $pendientes=$totalTarjetas-$totalFinalizadas;
       $filtro=trim($request->get('buscar'));
       $tarjetas=TarjetasModel::where('status','LIKE',''.$filtro.'%')->get();
-     return view('tarjetas.index',compact('tarjetas','filtro', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas'));  
+     return view('tarjetas.index',compact('tarjetas','filtro', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));  
     }
 
 //funcion que carga todas la tarjetas creadas por un usuario
@@ -78,15 +80,15 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->descripcion_reporte=$request->get('descripcion_reporte');
       $tarjetas->planta_id=$request->get('planta_id');
       $tarjetas->categoria_id=$request->get('categoria_id');
-      $tarjetas->solucion_implementada=$request->get('solucion_implementada');
+    //  $tarjetas->solucion_implementada=$request->get('solucion_implementada');
       $tarjetas->evento_id=$request->get('evento_id');
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
       //$tarjetas->status='enviada';
-      $tarjetas->user_finaliza=(1);
+      //$tarjetas->user_finaliza=(1);
 // si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
-      $tarjetas->user_asignado=(200);
+      $tarjetas->user_asignado=(32);
       $tarjetas->status='Asignada';
     }
 // si no la tarjeta se asigna al encargado de she
@@ -100,6 +102,17 @@ public function tarjetas_asignadas(Request $request){
       $nombre=$tarjetas->asignado->name;
       Mail::to($correo,$nombre)
       ->send(new AsignarTarjeta($tarjetas));
+
+     /*se guarda la imagen de la tarjeta
+      $foto = $request->file('foto');
+      $ext = $foto->getClientOriginalExtension();
+      $rutaImg = 'img/'.$tarjetas->id. '.' .$ext;
+      
+      Image::make($foto)->orientate()->save($rutaImg, 50);
+      
+      $tarjetas->ruta_foto = $ext;
+      $tarjetas->save();*/
+
      //se envia notificacion a la vista por medio de Toastr.
      Toastr::success('Tarjeta Creada Satisfactoriamente :)' ,'Success');
       return Redirect::to('tarjetas');
@@ -117,7 +130,7 @@ public function tarjetas_asignadas(Request $request){
           return response()->json([
             'data'=>$tarjetas]);
           }
-        return view('tarjetas.show', compact('user','tarjetas', 'totalTarjetas'));
+        return view('tarjetas.show', compact('user','tarjetas'));
     }
 
 

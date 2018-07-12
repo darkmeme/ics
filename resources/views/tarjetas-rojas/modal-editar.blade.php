@@ -1,11 +1,7 @@
 {{--modal para editar una tarjeta roja--}}
-<style media="screen">
-.amarillo{ background-color:yellow;}
-.color-etiquetas{ background-color:green;}
-</style>
-{!!Form::model($tarjetasRojas,['method'=>'PATCH','route'=>['tarjetas-rojas.update',$tarjetasRojas->id]])!!}
-{{Form::token()}}
-<div class="modal fade" id="edit-tag" tabindex="-1">
+<div class="modal fade modal-slide-in-right" aria-hidden="true"
+role="dialog" id="edit-tarjeta">
+
   <div class="modal-dialog modal-sm">
     <div class="modal-content amarillo">
       <div class="modal-header no-padding">
@@ -20,24 +16,23 @@
 
         <div class="row">
 
-            <div class="col-lg-5 col-xs-12">
+          {{--  <div class="col-lg-5 col-xs-12">
               <div class="form-group">
                 <label for="equipo">Equipo:</label>
                 <select class="form-control" name="equipo_id" id="equipo" class="form-control">
 
                 </select>
               </div>
-            </div>
+            </div> --}}
 
 
               <div class="col-lg-5 col-xs-6">
                 <div class="form-group">
                   <label for="prioridad">Prioridad</label>
-                  <select class="form-control" id="prioridad" name="prioridad">
-
-
-                    <option value="B">B</option>
-                    <option value="C">C</option>
+                  <select id="prioridad" class="form-control" name="prioridad">
+                  <option value ="A">A</option>
+                  <option value ="B">B</option>
+                  <option value ="C">C</option>
                   </select>
                 </div>
               </div>
@@ -53,7 +48,7 @@
               <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
-                  <textarea name="descripcion_reporte" id="descripcion_reporte" rows="5" cols="30"></textarea>
+                  <textarea name="descripcion_reporte" class="descripcion" rows="5" cols="30"></textarea>
                 </div>
               </div>
             </div>
@@ -62,7 +57,7 @@
       </div>
 
       <div class="modal-footer no-margin-top">
-        <button type="submit" class="btn btn-sm btn-success pull-left">
+        <button class="btn btn-sm btn-success pull-left editar">
           <i class="ace-icon fa fa-check"></i>
           Editar
         </button>
@@ -73,5 +68,4 @@
       </div>
     </div>
   </div>
-</div>
-  {{Form::Close()}}
+  </div>
