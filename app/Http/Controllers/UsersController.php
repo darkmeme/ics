@@ -10,6 +10,10 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Http\Requests\UsersFormRequest;
+use Brian2694\Toastr\Facades\Toastr;
+use \App\Mail\confirmation_user;
+use Illuminate\Support\Facades\Mail;
+
 
 class UsersController extends Controller
 {
@@ -63,6 +67,12 @@ use RegistersUsers;
       // funcion crypt encripta la contrasena que viene del formulario
       $user->password = bcrypt($request['password']);
       $user->save();
+
+      Toastr::success('Usuario Creado Satisfactoriamente :)' ,'Success');
+            //enviar correo de confirmacion
+            Mail::to('geovany.hernandez90@gmail.com')
+            ->send(new confirmation_user($user));
+
       return Redirect::to('users');
     }
 

@@ -4,52 +4,55 @@
 <div class="row">
 <div class="col-xs-12">
   <div class="clearfix">
-    <div class="pull-right tableTools-container"></div>
+    <div class="tableTools-container">
+    <div class="row">
+      <div class="topnav">
+  <a href="/tarjetas/create">Crear Nueva Tarjeta Amarilla <i class="fa fa-plus"></i></a>
+  <a href="/tarjetas">Todas las tarjetas</a>
+  <a id="actual" href="/mis-tarjetas">Mis tarjetas creadas</a>
+  <a href="/tarjetas-asignadas">Mis tarjetas Asignadas</a>
+</div>   
+      </div>
+    </div>
   </div>
 
   <div class="table-header">
-    Listado de mis Tarjetas Realizadas"
+    Listado de mis Tarjetas Amarillas Creadas
   </div>
 <div class="table-responsive">
-
-      <table class="table table-bordered text-center table-striped table-hover" id="table-tarjetas-realizadas">
+                  
+      <table class="table text-center table-striped" id="table-tarjetas">
         <thead>
-          <th>Numero</th>
-          <th>Area</th>
-          <th>Planta</th>
-          <th>Fecha</th>
-          <th>Creada por</th>
-          <th>Equipo</th>
-          {{--<th>Turno</th>--}}
-          <th>Prioridad</th>
-          <th>Categoria</th>
-          {{--<th>Evento</th>--}}
-          {{--<th>Causa</th>--}}
-          <th>Descripcion</th>
-          {{--<th>Solucion</th>--}}
-          {{--<th>Fecha cierre</th>--}}
-          {{--<th>Finalizado</th>--}}
-          <th>Estatus</th>
-          <th>Reasignada a:</th>
-          <th>Motivo Reasignacion:</th>
-          <th>Opciones</th>
+          <th class="text-center">Numero</th>
+          <th class="text-center">Area</th>
+          <th class="text-center">Planta</th>
+          <th class="text-center">Fecha</th>
+          <th class="text-center">Creada por</th>
+          <th class="text-center">Equipo</th>
+          <th class="text-center">Prioridad</th>
+          <th class="text-center">Descripcion</th>
+          <th class="text-center">Categoria</th>          
+          <th class="text-center">Estatus</th>
+          <th class="text-center">Reasignada a:</th>
+          <th class="text-center">Motivo Reasignacion:</th>
+          <th class="text-center" WIDTH="122">Opciones</th>
         </thead>
 
 
         @foreach ($tarjetas as $t)
-        <tr>
+        <tr class="item{{$t->id}}">
           <td>{{$t->id}}</td>
           <td>{{$t->area->nombre}}</td>
           <td>{{$t->planta->nombre}}</td>
-          <td>{{$t->created_at}}</td>
+          <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
           {{--<td>{{$t->turno}}</td>--}}
           <td>{{$t->prioridad}}</td>
+          <td>{{$t->descripcion_reporte}}</td>
           <td>{{$t->categoria->nombre}}</td>
           {{--<td>{{$t->evento->nombre}}</td>--}}
           {{--<td>{{$t->causa->nombre}}</td>--}}
-          <td>{{$t->descripcion_reporte}}</td>
           {{--<td>{{$t->solucion_implementada}}</td>--}}
           {{--<td>{{$t->fecha_cierre}}</td>--}}
           {{--<td>{{$t->finalizado}}</td>--}}
@@ -70,14 +73,22 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <a class="green" href="#">
-                <i class="ace-icon fa fa-pencil bigger-200"></i>
-              </a>
+              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
+              </button>
+              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
+              </button>
+              @can('Borrar')
+              @else
+              @endcan
 
             </div>
           </td>
         </tr>
         @endforeach
+        @include('tarjetas.modal-editar')
+        @include('tarjetas.modal')
       </table>
         </div>
 </div>
@@ -86,66 +97,13 @@
 @endsection
 
 @section('scripts')
+
+@include('delEditScripts')
+
 <script type="text/javascript">
-//script para cargar estilo y botones de jQuery DataTable
-$(document).ready(function() {
 
-  var table = $('#table-tarjetas-realizadas').DataTable({
-    "aaSorting": [[ 0, "desc" ]],
-  });
+operacionesDE('tarjetas/');
 
-  new $.fn.dataTable.Buttons( table, {
-      buttons: [
-        {
-          "extend": "pdf",
-          "titleAttr": 'Exportar a PDF',
-          "messageTop": 'Reporte de mis tarjetas realizadas.',
-          "filename": 'Reporte de tarjetas',
-          "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "orientation": 'landscape',
-              "  pageSize": 'Letter',
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": "copy",
-          "titleAttr": 'Copiar a Porta Papeles',
-          "text": "<i class='fa fa-copy bigger-110 pink'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": "excel",
-          "titleAttr": 'Exportar a Excel',
-          "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": 'print',
-          "titleAttr": 'Imprimir Documento',
-          "text": "<i class='fa fa-print bigger-110 grey'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": 'colvis',
-          "titleAttr": 'Ocultar Columnas',
-          "text": "ocultar",
-          "className": "btn btn-white btn-primary  btn-bold",
-        } ]
-  } );
-
-  table.buttons().container()
-      .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
-} );
 </script>
+
 @endsection

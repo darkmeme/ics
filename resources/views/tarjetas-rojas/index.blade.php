@@ -1,23 +1,34 @@
 @extends('layouts.admin')
 @section('contenido')
+<div class="col-lg-4">
+@if(Session::has('message'))
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{Session::get('message')}}
+</div>
+@endif
+</div>
+
 <div class="row">
 <div class="col-xs-12">
-  <div class="clearfix">
+  
+   <div class="clearfix">
     <div class="tableTools-container">
       <div class="row">
       <div class="topnav">
-  <a href="/tarjetas/create">Crear Nueva Tarjeta Amarilla <i class="fa fa-plus"></i></a>
-  <a id="actual" href="/tarjetas">Todas las tarjetas</a>
-  <a href="/mis-tarjetas">Mis tarjetas creadas</a>
-  <a href="/tarjetas-asignadas">Mis tarjetas Asignadas</a>
-</div>   
+  <a href="/tarjetas-rojas/create">Crear Nueva Tarjeta Roja <i class="fa fa-plus"></i></a>
+  <a id="actual" href="/tarjetas-rojas">Todas las tarjetas</a>
+  <a href="/tarjetas-creadas">Mis tarjetas creadas</a>
+  <a href="/tarjetasR-asignadas">Mis tarjetas Asignadas</a>
+</div>    
+
       </div>
     </div>
   </div>
 
-  <div class="row">
+   <div class="row">
                 <div class="col-lg-2 col-md-3 col-lg-offset-1">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -33,7 +44,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -49,7 +60,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -65,7 +76,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -81,7 +92,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -100,72 +111,64 @@
             </div>
 
   <div class="table-header">
-    Listado de todas las tarjetas Amarillas
+    Listado de todas las tarjetas rojas
   </div>
 <div class="table-responsive">
-
-{!! Form::open(array('url'=>'tarjetas','method'=>'GET','autocomplete'=>'off','id'=>'formbusqueda','role'=>'search'))!!}
-<div class="row">
-<div class="col-lg-2 col-lg-offset-10">
-  <div class="input-group">
-    <input type="text" class="form-control" id="txtbuscar" name="buscar" value="{{$filtro}}" placeholder="Filtrar por Status...">
-    <span class="input-group-btn">
-      <button type="submit" id="btnbuscar" class="btn btn-primary">Filtrar </button>
-    </span>
-  </div>
-  </div>
-</div>
-{{Form::close()}}
+@include('tarjetas-rojas.search')
 
       <table class="table text-center table-striped" id="table-tarjetas">
         <thead>
           <th class="text-center">Numero</th>
           <th class="text-center">Area</th>
           <th class="text-center">Planta</th>
-          <th class="text-center">Equipo</th>
-          <th class="text-center">Categoria</th>
           <th class="text-center">Fecha</th>
+          <th class="text-center">Usuario</th>
+          <th class="text-center">Equipo</th>
           <th class="text-center">Prioridad</th>
           <th class="text-center">Descripcion</th>
-          <th class="text-center">Creada por</th>
-          <th class="text-center">Estado</th>
-          <th class="text-center" WIDTH="122">Opciones</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Opciones</th>
         </thead>
 
-        @foreach ($tarjetas as $t)
-        <tr id="filas" class="item{{$t->id}}">
-          <td>{{$t->id}}</td>
-          <td>{{$t->area->nombre}}</td>
-          <td>{{$t->planta->nombre}}</td>
-          <td>{{$t->equipo->nombre}}</td>
-          <td>{{$t->categoria->nombre}}</td>
-          <td>{{$t->created_at->format('d-m-Y')}}</td>
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->descripcion_reporte}}</td>
-          <td>{{$t->user->name}}</td>
-          <td class="td-status"><span class="label label-sm label-warning">{{$t->status}}</span></td>
+
+        @foreach ($tarjetasRojas as $tr)
+        <tr id="filas" class="item{{$tr->id}}">
+          <td>{{$tr->id}}</td>
+          <td>{{$tr->area->nombre}}</td>
+          <td>{{$tr->planta->nombre}}</td>
+          <td>{{$tr->created_at}}</td>
+          <td>{{$tr->user->name}}</td>
+          <td>{{$tr->equipo->nombre}}</td>
+          <td>{{$tr->prioridad}}</td>
+          <td>{{$tr->descripcion_reporte}}</td>
+          <td class="td-status"><span class="label label-sm label-warning">{{$tr->status}}</span></td>
           <td>
             <div class="action-buttons">
-              <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
+              <a class="blue" href="{{URL::action('TarjetasRojasController@show',$tr->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+
+
+              <button class="btn btn-link btnEdit" data-id="{{$tr->id}}" data-prioridad="{{$tr->prioridad}}" data-desc="{{$tr->descripcion_reporte}}">
                 <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
               </button>
-              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
+
+              <button class="btn btn-link btn-borrar" data-id="{{$tr->id}}">
                 <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
               </button>
-              @can('Borrar')
+              @can('borrar')
               @else
               @endcan
+
             </div>
           </td>
-        </tr> 
+        </tr>
+
         @endforeach
-        @include('tarjetas.modal-editar')
-        @include('tarjetas.modal')
       </table>
         </div>
+        @include('tarjetas-rojas.modal-editar')
+        @include('tarjetas-rojas.modal-borrar')
 </div>
 </div>
 
@@ -178,8 +181,7 @@
 
 <script type="text/javascript">
 
-operacionesDE('tarjetas/');
+operacionesDE('tarjetas-rojas/');
 
 </script>
-
 @endsection

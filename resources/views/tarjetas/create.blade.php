@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('contenido')
-{!!Form::open(array('url'=>'tarjetas','method'=>'POST','autocomplete'=>'off'))!!}
+{!!Form::open(array('url'=>'tarjetas','method'=>'POST', 'enctype'=>'multipart/form-data', 'autocomplete'=>'off'))!!}
 {{Form::token()}}
 <style media="screen">
 .amarillo{ background-color:yellow;}
@@ -117,6 +117,15 @@
           </select>
       </div>
     </div>
+    </div>
+
+    <div calss="row">
+     <div class="col-lg-10 col-xs-12 offset-1">
+      <div class="form-group">
+      <label for="imagen">Seleccione o tome foto del Problema:</label>
+      <input type="file" class="form-control" accept="image/*" name="foto" capture>  
+      </div>
+     </div>
     </div>
 
     <div class="row">

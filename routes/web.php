@@ -23,11 +23,18 @@ Route::resource('puestos', 'PuestosController');
 Route::resource('ordenes', 'OrdenesController');
 //ruta para asignar una tarjeta a un empleado
 Route::post('/asignar/{idtarjeta}','TarjetasController@asignar');
+//ruta para reasignar tarjeta roja
+Route::post('/reasignar/{idtarjeta}','TarjetasRojasController@asignar');
 //ruta para cambiar de responsable
 Route::post('/cambiar/{idtarjeta}','TarjetasController@cambiarResponsable');
-//ruta para finalizar una TarjetasModel
+//ruta para cambiar tarjeta roja de responsable
+Route::post('/cambiarR/{idtarjeta}','TarjetasRojasController@cambiarResponsable');
 
+//ruta para finalizar una TarjetasModel
 Route::post('/finalizar/{idtarjeta}','TarjetasController@finalizar');
+//ruta para finalizar una tarjeta Roja
+Route::post('/finalizarTr/{idtarjeta}','TarjetasRojasController@finalizar');
+
 //ruta para las autentificaciones
 Auth::routes();
 
@@ -54,8 +61,12 @@ Route::get('/area/{id}/equiposPadres','EquiposController@equipos_padres');
 // rutas para cargar las tarjetas creadas y asignadas a un usuario
 Route::get('/mis-tarjetas', 'TarjetasController@mis_tarjetas');
 Route::get('/tarjetas-asignadas', 'TarjetasController@tarjetas_asignadas');
+// rutas para cargar las tarjetas creadas y asignadas a un usuario
+Route::get('/tarjetas-creadas', 'TarjetasRojasController@misTarjetasRojas');
+Route::get('/tarjetasR-asignadas', 'TarjetasRojasController@tarjetasRojasAsignadas');
 //ruta para confirmar usuario
 Route::get('/register/verify/{code}', 'GuestController@verify');
+         
 
 
 
