@@ -145,7 +145,7 @@ public function finalizar(Request $request,$id)
       $tarjetaR->turno=$request->get('turno');   
           
       //se asigna automaticamente la tarjeta Roja     
-      $tarjetaR->user_asignado=(336);
+      $tarjetaR->user_asignado=(4);
       $tarjetaR->status='Asignada';
     
       $tarjetaR->save();
