@@ -26,7 +26,7 @@
 		
 		<!-- ace settings handler navbar-fixed-top-->
 
-<!-- stylo para navbar en tarjetas -->
+<!-- stylo para navbar superior en tarjetas -->
 		<style>
 body {
   margin: 0;

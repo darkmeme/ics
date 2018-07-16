@@ -1,4 +1,19 @@
 
+<style media="screen">
+.amarillo{ background-color:red;}
+.color-etiquetas{ background-color:green;}
+
+.modal-right {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 1200px;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
+}
+</style>
 
 <script type="text/javascript">
 //script para setear opcion actual del navbar
@@ -7,6 +22,66 @@ $(document).ready(function() {
 });
 </script>
 
+<script src="{{asset('js/combox.js')}}"></script>
+
+<script type="text/javascript">
+//seccion de scripts para modal crear tarjetas rojas
+ // script para llamar modal de busqueda de usuarios
+$(document).ready(function () {
+
+    //funcion para abrir modal crear
+$('.link-crear').click(function (){
+  $('#crear-tarjetar').modal('show');
+});
+
+      //funcion para abrir modal cuando se da click en select de empleado
+$('.btnUser').click(function () {
+$('#modal-usuario').modal('show');
+});// finaliza funcion para abrir modal
+
+//cuando se presiona una tecla sobre input de busqueda se hace una peticion ajax con filtro
+        $("#busqueda").keyup(function(e){
+          //obtenemos el texto introducido en el campo de búsqueda
+          var consulta = $("#busqueda").val();
+  // se hace la peticion ajax al server
+     $.ajax({
+    url: '/list-users/'+consulta+'/',
+    //data: consulta,
+    type: 'get',
+    dataType: 'JSON',
+    beforeSend: function(){
+      //imagen de carga
+      $("#resultado").html("<p align='center'><img src='/images/loader.gif' /></p>");
+                    },
+    error: function(){
+      //  alert("Error en la petición ajax");
+            },
+    success: function (data) {
+      /* Inicializamos la tabla */
+              $("#contenido").html('');
+  // se recorre la variable data para pasarlo a la tabla
+          $.each(data, function(index, value){
+  $("#contenido").append("<tr><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
+}
+}); //finaliza la peticion ajax
+});//finaliza evento keyup de input de busqueda
+
+//funcion para cargar los datos de la fila seleccionada al objeto select de html
+               $('#tabla').on('click','tr td', function(evt){
+              var nombre,id;
+              //se recorre el tr padre luego se busca el td con el nombre id
+              id = $(this).parents("tr").find(".id").html();
+              nombre= $(this).parents("tr").find(".nombre").html();
+              //se setean datos en los textbox 
+              $('#txtfiltrar').val(nombre);
+              //id seteado en un textbox oculto
+              $('.txtHidden').val(id);              
+              // se cierra el modal despues de cargar los datos los input text
+              $('#modal-usuario').modal('hide');
+              
+               });
+});//finaliza document ready
+  </script>
 
 <script type="text/javascript">
   

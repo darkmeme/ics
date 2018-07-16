@@ -7,7 +7,7 @@
     <div class="tableTools-container">
     <div class="row">
       <div class="topnav">
-  <a href="/tarjetas-rojas/create">Crear Nueva Tarjeta Roja  <i class="fa fa-plus"></i></a>
+  <a class="link-crear" href="#">Crear Nueva Tarjeta Roja <i class="fa fa-plus"></i></a>
   <a href="/tarjetas-rojas">Todas las tarjetas</a>
   <a id="actual" href="/tarjetas-creadas">Mis tarjetas creadas</a>
   <a href="/tarjetasR-asignadas">Mis tarjetas Asignadas</a>
@@ -87,7 +87,7 @@
         @include('tarjetas-rojas.modal-borrar')
 </div>
 </div>
-
+@include('tarjetas-rojas.modal-create')
 @endsection
 
 @section('scripts')

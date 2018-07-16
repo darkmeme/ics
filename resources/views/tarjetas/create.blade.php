@@ -121,7 +121,7 @@
      <div class="col-lg-10 col-xs-12 offset-1">
       <div class="form-group">
       <label for="imagen">Seleccione o tome foto del Problema:</label>
-      <input type="file" class="form-control" accept="image/*" name="foto" capture>  
+      <input type="file" class="form-control" accept="image/*" name="foto" capture disabled>  
       </div>
      </div>
     </div>

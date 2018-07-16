@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('contenido')
+
 <div class="col-lg-4">
 @if(Session::has('message'))
 <div class="alert alert-success alert-dismissible" role="alert">
@@ -16,7 +17,7 @@
     <div class="tableTools-container">
       <div class="row">
       <div class="topnav">
-  <a href="/tarjetas-rojas/create">Crear Nueva Tarjeta Roja <i class="fa fa-plus"></i></a>
+  <a class="link-crear" href="#">Crear Nueva Tarjeta Roja <i class="fa fa-plus"></i></a>
   <a id="actual" href="/tarjetas-rojas">Todas las tarjetas</a>
   <a href="/tarjetas-creadas">Mis tarjetas creadas</a>
   <a href="/tarjetasR-asignadas">Mis tarjetas Asignadas</a>
@@ -26,8 +27,9 @@
     </div>
   </div>
 
+
    <div class="row">
-                <div class="col-lg-2 col-md-3 col-lg-offset-1">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-lg-offset-1">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -43,7 +45,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -59,7 +61,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -75,7 +77,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -91,7 +93,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -122,7 +124,7 @@
           <th class="text-center">Area</th>
           <th class="text-center">Planta</th>
           <th class="text-center">Fecha</th>
-          <th class="text-center">Usuario</th>
+          <th class="text-center">Creada por</th>
           <th class="text-center">Equipo</th>
           <th class="text-center">Prioridad</th>
           <th class="text-center">Descripcion</th>
@@ -169,8 +171,12 @@
         </div>
         @include('tarjetas-rojas.modal-editar')
         @include('tarjetas-rojas.modal-borrar')
+       
+        
 </div>
 </div>
+
+@include('tarjetas-rojas.modal-create')
 
 @endsection
 
@@ -182,6 +188,6 @@
 <script type="text/javascript">
 
 operacionesDE('tarjetas-rojas/');
-
 </script>
+
 @endsection

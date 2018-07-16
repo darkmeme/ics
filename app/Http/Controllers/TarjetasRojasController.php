@@ -29,34 +29,42 @@ class TarjetasRojasController extends Controller
         $totalEmitidas=TarjetasRojas::where(['status' => 'Asignada'])->count();
         $totalReasignadas=TarjetasRojas::where(['status' => 'Reasignada'])->count();
         $totalFinalizadas=TarjetasRojas::where(['status' => 'Finalizada'])->count();
+        $plantas=PlantasModel::ALL();
         $pendientes=$totalTarjetas-$totalFinalizadas;
 
         $filtro=trim($request->get('buscar'));
         $tarjetasRojas=TarjetasRojas::where('status','LIKE','%'.$filtro.'%')->get();
-        return view('tarjetas-rojas.index',compact('tarjetasRojas','filtro', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));
+        return view('tarjetas-rojas.index',compact('tarjetasRojas','filtro','plantas', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));
     }
 
     //funcion que carga todas la tarjetas rojas creadas por un usuario
     public function misTarjetasRojas(){
         $user_actual=Auth::user()->id;
         $tarjetas=TarjetasRojas::where('user_id',$user_actual)->get();
-        return view('tarjetas-rojas.tarjetas-creadas',compact('tarjetas'));
+        $plantas=PlantasModel::ALL();
+        return view('tarjetas-rojas.tarjetas-creadas',compact('tarjetas', 'plantas'));
     }
 
     public function tarjetasRojasAsignadas(Request $request){
         $user_actual=Auth::user()->id;
-        $tarjetas=TarjetasRojas::where('user_asignado',$user_actual)->get();
+        $tarjetas=TarjetasRojas::where('user_asignado', $user_actual)
+        ->orWhereIn('user_reasignado', [$user_actual])
+        ->get();
+        
+        //->orWhereIn('user_reasignado', $user_actual)
+        
+        $plantas=PlantasModel::ALL();
         //dd($tarjetas);
-        return view('tarjetas-rojas.tarjetas-rojas-asignadas',compact('tarjetas'));
+        return view('tarjetas-rojas.tarjetas-rojas-asignadas',compact('tarjetas', 'plantas'));
     }
 
 
     public function create()
     {
         $users=User::All();
-        $equipos=EquiposModel::All();
-        $plantas=PlantasModel::ALL();
-        return view('tarjetas-rojas.create',compact('users','equipos','plantas'));
+        $plantas=PlantasModel::All();
+        
+        return view('tarjetas-rojas.create',compact('users','plantas'));
 
     }
 

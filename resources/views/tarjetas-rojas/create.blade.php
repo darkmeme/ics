@@ -5,12 +5,19 @@
 <style media="screen">
 .amarillo{ background-color:red;}
 .color-etiquetas{ background-color:green;}
+
+.modal-right {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 1200px;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
+}
 </style>
 
-
-
-{{--<div class="container">--}}
-  <br>
 <div class="col-lg-1"></div>
     <div class="col-xs-8 col-md-12 col-lg-6 amarillo">
 
@@ -20,7 +27,7 @@
           <label for="nombre">Planta</label>
           <select class="form-control" id="select-planta" required name="planta_id">
             <option value="">Seleccione Planta</option>
-            @foreach($plantas as $p)
+            @foreach ($plantas as $p)
             <option value="{{$p->id}}">{{$p->nombre}}</option>
             @endforeach
           </select>
@@ -125,7 +132,7 @@
 
 {{--modal para busqueda de usuarios y llenar tarjeta--}}
 <div class="modal fade" id="modal-usuario" tabindex="-1">
-  <div class="modal-dialog">
+  <div class="modal-right">
     <div class="modal-content modal-sm">
       <div class="modal-header no-padding">
         <div class="table-header">
@@ -168,7 +175,6 @@
       </div>
     </div>
   </div>
-
 
 </div>
 @endsection
@@ -213,15 +219,19 @@ $('#modal-usuario').modal('show');
 
 //funcion para cargar los datos de la fila seleccionada al objeto select de html
                $('#tabla').on('click','tr td', function(evt){
-              var nombre,id,html_select;
+              var nombre,id;
               //se recorre el tr padre luego se busca el td con el nombre id
               id = $(this).parents("tr").find(".id").html();
               nombre= $(this).parents("tr").find(".nombre").html();
               // se genera un option con los valores de la fila seleccionada y se cargan al select de tarjetas
-              html_select += '<option value="'+id+'">'+nombre+'</option>';
-              $('#txtfiltrar').html(html_select);
+              //html_select += '<option value="'+id+'">'+nombre+'</option>';
+              //$('#txtfiltrar').html(html_select);
+              textbox = $('#txtfiltrar');
+              textbox.val(nombre);
+              textbox.attr('placeholder', id);
               // se cierra el modal despues de cargar los datos al select
               $('#modal-usuario').modal('hide');
+             alert('probando captura de dat ' +textbox.val()+' '+textbox.attr(placeholder));
                });
 });//finaliza document ready
   </script>
