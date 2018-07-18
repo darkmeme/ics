@@ -105,20 +105,20 @@ public function tarjetas_asignadas(Request $request){
       //$tarjetas->user_finaliza=(1);
 // si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
-      $tarjetas->user_asignado=(3);
+      $tarjetas->user_asignado=(32);
       $tarjetas->status='Asignada';
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(4);
+      $tarjetas->user_asignado=(311);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();
       //se envia correo al usuario que se le asigno la tarjeta
       $correo=$tarjetas->asignado->email;
       $nombre=$tarjetas->asignado->name;
-      //Mail::to($correo,$nombre)
-     // ->send(new AsignarTarjeta($tarjetas));
+      Mail::to($correo,$nombre)
+      ->send(new AsignarTarjeta($tarjetas));
 
      /*se guarda la imagen de la tarjeta
       $foto = $request->file('foto');

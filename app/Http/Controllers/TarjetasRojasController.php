@@ -175,8 +175,8 @@ public function finalizar(Request $request,$id)
       //se envia correo al usuario que se le asigno la tarjeta
       $correo=$tarjetaR->asignado->email;
       $nombre=$tarjetaR->asignado->name;
-     // Mail::to($correo,$nombre)
-      //->send(new AsignarTarjetaRoja($tarjetaR));
+      Mail::to($correo,$nombre)
+      ->send(new AsignarTarjetaRoja($tarjetaR));
 
      //se guarda la imagen de la tarjeta
       /*$foto = $request->file('foto');
