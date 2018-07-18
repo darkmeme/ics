@@ -39,12 +39,28 @@ class TarjetasController extends Controller
       $pendientes=$totalTarjetas-$totalFinalizadas;
       $filtro=trim($request->get('buscar'));
       $tarjetas=TarjetasModel::where('status','LIKE',''.$filtro.'%')->get();
-     return view('tarjetas.index',compact('tarjetas','filtro', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));  
+      //datos para crear tarjeta con modal
+      $plantas=PlantasModel::ALL();
+      $eventos=EventosModel::ALL();
+      $categorias=CategoriasModel::ALL();
+      $causas=CausasModel::ALL();
+
+      //funcion que carga todas la tarjetas creadas por un usuario
+      $user_actual=Auth::user()->id;
+      $tarjetasC=TarjetasModel::where('user_id',$user_actual)->get();
+      //funcion para cargar todas las tarjetas asignadas a un usuario
+      $tarjetasAsig=TarjetasModel::where('user_asignado', $user_actual)
+        ->orWhereIn('user_reasignado', [$user_actual])
+        ->get();
+
+     return view('tarjetas.index',compact('tarjetas','tarjetasC','tarjetasAsig','filtro', 'totalTarjetas', 'totalEmitidas','plantas','eventos','categorias','causas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));  
     }
+
+/*    **Funciones no necesarias ya, ahora todo se manda al index**!
 
 //funcion que carga todas la tarjetas creadas por un usuario
 public function mis_tarjetas(Request $request){
-  $user_actual=Auth::user()->id;
+  /*$user_actual=Auth::user()->id;
    $tarjetas=TarjetasModel::where('user_id',$user_actual)->get();
    return view('tarjetas.mis-tarjetas',compact('tarjetas'));
 }
@@ -69,7 +85,7 @@ public function tarjetas_asignadas(Request $request){
       $causas=CausasModel::ALL();
       return view('tarjetas.create',compact('users','plantas','eventos','categorias','causas'));
     }
-
+*/
     //funcion para almacenar una nueva tarjeta en la db
     public function store(Request $request)
     {

@@ -34,19 +34,32 @@ class TarjetasRojasController extends Controller
 
         $filtro=trim($request->get('buscar'));
         $tarjetasRojas=TarjetasRojas::where('status','LIKE','%'.$filtro.'%')->get();
-        return view('tarjetas-rojas.index',compact('tarjetasRojas','filtro','plantas', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));
+
+        //seccion para cargar todas la tarjetas rojas creadas por un usuario
+        $user_actual=Auth::user()->id;
+        $tarjetas=TarjetasRojas::where('user_id',$user_actual)->get();
+
+        //seccion para cargar tarjetas asignadas y reasignadas
+        $tarjetasAsig=TarjetasRojas::where('user_asignado', $user_actual)
+        ->orWhereIn('user_reasignado', [$user_actual])
+        ->get();
+
+        return view('tarjetas-rojas.index',compact('tarjetasRojas','tarjetasAsig','filtro','plantas','tarjetas', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));
     }
+
+    /*     **Funciones no necesarias ya, ahora todo se manda al index**!
 
     //funcion que carga todas la tarjetas rojas creadas por un usuario
     public function misTarjetasRojas(){
-        $user_actual=Auth::user()->id;
+       /* $user_actual=Auth::user()->id;
         $tarjetas=TarjetasRojas::where('user_id',$user_actual)->get();
         $plantas=PlantasModel::ALL();
         return view('tarjetas-rojas.tarjetas-creadas',compact('tarjetas', 'plantas'));
+        
     }
 
     public function tarjetasRojasAsignadas(Request $request){
-        $user_actual=Auth::user()->id;
+       /* $user_actual=Auth::user()->id;
         $tarjetas=TarjetasRojas::where('user_asignado', $user_actual)
         ->orWhereIn('user_reasignado', [$user_actual])
         ->get();
@@ -56,17 +69,19 @@ class TarjetasRojasController extends Controller
         $plantas=PlantasModel::ALL();
         //dd($tarjetas);
         return view('tarjetas-rojas.tarjetas-rojas-asignadas',compact('tarjetas', 'plantas'));
+        
     }
 
 
     public function create()
     {
-        $users=User::All();
+      /*  $users=User::All();
         $plantas=PlantasModel::All();
         
         return view('tarjetas-rojas.create',compact('users','plantas'));
 
     }
+    */
 
     public function asignar(Request $request,$id)
     {
@@ -160,8 +175,8 @@ public function finalizar(Request $request,$id)
       //se envia correo al usuario que se le asigno la tarjeta
       $correo=$tarjetaR->asignado->email;
       $nombre=$tarjetaR->asignado->name;
-      Mail::to($correo,$nombre)
-      ->send(new AsignarTarjetaRoja($tarjetaR));
+     // Mail::to($correo,$nombre)
+      //->send(new AsignarTarjetaRoja($tarjetaR));
 
      //se guarda la imagen de la tarjeta
       /*$foto = $request->file('foto');

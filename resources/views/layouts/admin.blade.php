@@ -27,7 +27,7 @@
 		<!-- ace settings handler navbar-fixed-top-->
 
 <!-- stylo para navbar superior en tarjetas -->
-		<style>
+<style>
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;

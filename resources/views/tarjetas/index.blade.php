@@ -6,10 +6,8 @@
     <div class="tableTools-container">
       <div class="row">
       <div class="topnav">
-  <a href="/tarjetas/create">Crear Nueva Tarjeta Amarilla <i class="fa fa-plus"></i></a>
-  <a id="actual" href="/tarjetas">Todas las tarjetas</a>
-  <a href="/mis-tarjetas">Mis tarjetas creadas</a>
-  <a href="/tarjetas-asignadas">Mis tarjetas Asignadas</a>
+  <a class="active link-crear" href="#" id="">Crear Nueva Tarjeta Amarilla <i class="fa fa-plus"></i></a>
+  
 </div>   
       </div>
     </div>
@@ -99,23 +97,20 @@
                 
             </div>
 
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#todas">Todas las Tarjetas</a></li>
+  <li><a data-toggle="tab" href="#creadas">Mis tarjetas Creadas</a></li>
+  <li><a data-toggle="tab" href="#asignadas">Mis Tarjetas Asignadas</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="todas" class="tab-pane fade in active">
   <div class="table-header">
     Listado de todas las tarjetas Amarillas
   </div>
 <div class="table-responsive">
 
-{!! Form::open(array('url'=>'tarjetas','method'=>'GET','autocomplete'=>'off','id'=>'formbusqueda','role'=>'search'))!!}
-<div class="row">
-<div class="col-lg-2 col-lg-offset-10">
-  <div class="input-group">
-    <input type="text" class="form-control" id="txtbuscar" name="buscar" value="{{$filtro}}" placeholder="Filtrar por Status...">
-    <span class="input-group-btn">
-      <button type="submit" id="btnbuscar" class="btn btn-primary">Filtrar </button>
-    </span>
-  </div>
-  </div>
-</div>
-{{Form::close()}}
+@include('tarjetas.buscar')
 
       <table class="table text-center table-striped" id="table-tarjetas">
         <thead>
@@ -162,13 +157,156 @@
           </td>
         </tr> 
         @endforeach
-        @include('tarjetas.modal-editar')
-        @include('tarjetas.modal')
+       
       </table>
         </div>
-</div>
-</div>
 
+  </div>
+  <div id="creadas" class="tab-pane fade">
+    
+  <div class="table-header">
+    Listado de mis Tarjetas Amarillas Creadas
+  </div>
+<div class="table-responsive">
+                  
+      <table class="table text-center table-striped" id="table-creadas">
+        <thead>
+          <th class="text-center">Numero</th>
+          <th class="text-center">Area</th>
+          <th class="text-center">Planta</th>
+          <th class="text-center">Fecha</th>
+          <th class="text-center">Creada por</th>
+          <th class="text-center">Equipo</th>
+          <th class="text-center">Prioridad</th>
+          <th class="text-center">Descripcion</th>
+          <th class="text-center">Categoria</th>          
+          <th class="text-center">Estatus</th>
+          <th class="text-center">Reasignada a:</th>
+          <th class="text-center">Motivo Reasignacion:</th>
+          <th class="text-center" WIDTH="122">Opciones</th>
+        </thead>
+
+
+        @foreach ($tarjetasC as $t)
+        <tr class="item{{$t->id}}">
+          <td>{{$t->id}}</td>
+          <td>{{$t->area->nombre}}</td>
+          <td>{{$t->planta->nombre}}</td>
+          <td>{{$t->created_at->format('d-m-Y')}}</td>
+          <td>{{$t->user->name}}</td>
+          <td>{{$t->equipo->nombre}}</td>
+          {{--<td>{{$t->turno}}</td>--}}
+          <td>{{$t->prioridad}}</td>
+          <td>{{$t->descripcion_reporte}}</td>
+          <td>{{$t->categoria->nombre}}</td>
+          {{--<td>{{$t->evento->nombre}}</td>--}}
+          {{--<td>{{$t->causa->nombre}}</td>--}}
+          {{--<td>{{$t->solucion_implementada}}</td>--}}
+          {{--<td>{{$t->fecha_cierre}}</td>--}}
+          {{--<td>{{$t->finalizado}}</td>--}}
+          <td><span class="label label-sm label-success">{{$t->status}}</span>
+          </td>
+          <td>@if(isset($t->reasignado->name))
+            {{$t->reasignado->name}} 
+          @else Sin Reasignar                    
+          @endif
+          </td>
+          <td>@if(isset($t->motivo_reasignado))
+            {{$t->motivo_reasignado}} 
+          @else N/A                    
+          @endif
+          </td>
+          <td>
+            <div class="action-buttons">
+              <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
+                <i class="ace-icon fa fa-eye bigger-200"></i>
+              </a>
+              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
+              </button>
+              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
+              </button>
+              @can('Borrar')
+              @else
+              @endcan
+
+            </div>
+          </td>
+        </tr>
+        @endforeach
+        
+      </table>
+        </div>
+    
+  </div>
+  <div id="asignadas" class="tab-pane fade">
+    
+  <div class="table-header">
+    Listado de mis Tarjetas Amarillas Asignadas
+  </div>
+<div class="table-responsive">
+
+      <table class="table text-center table-striped" id="table-asignadas">
+        <thead>
+          <th class="text-center">Numero</th>
+          <th class="text-center">Area</th>
+          <th class="text-center">Planta</th>
+          <th class="text-center">Fecha</th>
+          <th class="text-center">Creada por</th>
+          <th class="text-center">Equipo</th>
+          <th class="text-center">Prioridad</th>
+          <th class="text-center">Descripcion</th>
+          <th class="text-center">Categoria</th>          
+          <th class="text-center">Estatus</th>
+          <th class="text-center">Opciones </th>
+        </thead>
+
+        @foreach ($tarjetasAsig as $t)
+        <tr class="item{{$t->id}}">
+          <td>{{$t->id}}</td>
+          <td>{{$t->area->nombre}}</td>
+          <td>{{$t->planta->nombre}}</td>
+          <td>{{$t->created_at->format('d-m-Y')}}</td>
+          <td>{{$t->user->name}}</td>
+          <td>{{$t->equipo->nombre}}</td>
+          <td>{{$t->prioridad}}</td>
+          <td>{{$t->descripcion_reporte}}</td>
+          <td>{{$t->categoria->nombre}}</td>
+          {{--<td>{{$t->finalizado}}</td>--}}
+          <td><span class="label label-sm label-success">{{$t->status}}</span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
+                <i class="ace-icon fa fa-eye bigger-200"></i>
+              </a>
+
+              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
+              </button>
+              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
+              </button>
+              @can('Borrar')
+              @else
+              @endcan
+            </div>
+          </td>
+        </tr>
+               
+        @endforeach
+        
+      </table>
+        </div>
+    
+  </div>
+</div>
+@include('tarjetas.modal-editar')
+@include('tarjetas.modal')
+</div>
+</div>
+@include('tarjetas.modal-create')
 @endsection
 
 
@@ -179,6 +317,10 @@
 <script type="text/javascript">
 
 operacionesDE('tarjetas/');
+
+estiloTabla('#table-tarjetas');
+estiloTabla('#table-creadas');
+estiloTabla('#table-asignadas');
 
 </script>
 

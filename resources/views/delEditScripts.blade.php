@@ -1,26 +1,23 @@
 
 <style media="screen">
-.amarillo{ background-color:red;}
-.color-etiquetas{ background-color:green;}
+.amarillo{ background-color:yellow;}
+.rojo{ background-color:red;}
 
 .modal-right {
   position: absolute;
   top: 100px;
   right: 0;
   bottom: 0;
-  left: 1200px;
+  left: 1250px;
   z-index: 10040;
   overflow: auto;
   overflow-y: auto;
 }
-</style>
 
-<script type="text/javascript">
-//script para setear opcion actual del navbar
-$(document).ready(function() {
- $('#actual').addClass('active');
-});
-</script>
+#mediano{
+      width: 45% !important;
+    }
+</style>
 
 <script src="{{asset('js/combox.js')}}"></script>
 
@@ -31,10 +28,10 @@ $(document).ready(function () {
 
     //funcion para abrir modal crear
 $('.link-crear').click(function (){
-  $('#crear-tarjetar').modal('show');
+  $('#crear-tarjeta').modal('show');
 });
 
-      //funcion para abrir modal cuando se da click en select de empleado
+      //funcion para abrir modal cuando se da click en boton de empleado
 $('.btnUser').click(function () {
 $('#modal-usuario').modal('show');
 });// finaliza funcion para abrir modal
@@ -83,8 +80,7 @@ $('#modal-usuario').modal('show');
 });//finaliza document ready
   </script>
 
-<script type="text/javascript">
-  
+<script type="text/javascript">  
   //funcion para editar y eliminar con modal y peticion ajax
   //ruta='tarjetas/' 
   //o
@@ -194,65 +190,71 @@ $('#modal-delete').modal('hide');
 </script>
 
 <script type="text/javascript">
-//script para cargar estilo y botones de jQuery DataTable
+
+//funcnion para cargar estilo y botones de jQuery DataTable
+
+function estiloTabla(id){
+
 $(document).ready(function() {
 
-  var table = $('#table-tarjetas').DataTable({
-    "aaSorting": [[ 0, "desc" ]],
-  });
+var table = $(id).DataTable({
+  "aaSorting": [[ 0, "desc" ]],
+});
 
-  new $.fn.dataTable.Buttons( table, {
-      buttons: [
-        {
-          "extend": "pdf",
-          "titleAttr": 'Exportar a PDF',
-          "messageTop": 'Reporte de listado de tarjetas.',
-          "filename": 'Reporte de tarjetas',
-          "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "orientation": 'landscape',
-              "  pageSize": 'Letter',
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": "copy",
-          "titleAttr": 'Copiar a Porta Papeles',
-          "text": "<i class='fa fa-copy bigger-110 pink'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": "excel",
-          "titleAttr": 'Exportar a Excel',
-          "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": 'print',
-          "titleAttr": 'Imprimir Documento',
-          "text": "<i class='fa fa-print bigger-110 grey'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": 'colvis',
-          "titleAttr": 'Ocultar Columnas',
-          "text": "ocultar",
-          "className": "btn btn-white btn-primary  btn-bold",
-        } ]
-  } );
-
-  table.buttons().container()
-      .appendTo( $('.col-sm-6 :eq(0)', table.table().container() ) );
+new $.fn.dataTable.Buttons( table, {
+    buttons: [
+      {
+        "extend": "pdf",
+        "titleAttr": 'Exportar a PDF',
+        "messageTop": 'Reporte de listado de tarjetas.',
+        "filename": 'Reporte de tarjetas',
+        "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
+        "className": "btn btn-white btn-primary  btn-bold",
+        "orientation": 'landscape',
+            "  pageSize": 'Letter',
+        "exportOptions": {
+                  "columns": ':visible'
+              }
+      },
+      {
+        "extend": "copy",
+        "titleAttr": 'Copiar a Porta Papeles',
+        "text": "<i class='fa fa-copy bigger-110 pink'></i>",
+        "className": "btn btn-white btn-primary  btn-bold",
+        "exportOptions": {
+                  "columns": ':visible'
+              }
+      },
+      {
+        "extend": "excel",
+        "titleAttr": 'Exportar a Excel',
+        "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
+        "className": "btn btn-white btn-primary  btn-bold",
+        "exportOptions": {
+                  "columns": ':visible'
+              }
+      },
+      {
+        "extend": 'print',
+        "titleAttr": 'Imprimir Documento',
+        "text": "<i class='fa fa-print bigger-110 grey'></i>",
+        "className": "btn btn-white btn-primary  btn-bold",
+        "exportOptions": {
+                  "columns": ':visible'
+              }
+      },
+      {
+        "extend": 'colvis',
+        "titleAttr": 'Ocultar Columnas',
+        "text": "ocultar",
+        "className": "btn btn-white btn-primary  btn-bold",
+      } ]
 } );
+
+table.buttons().container()
+    .appendTo( $('.col-sm-6 :eq(0)', table.table().container() ) );
+} );
+
+} //fin de la funcion principal
 
 </script>
