@@ -36,7 +36,7 @@ use RegistersUsers;
 //funcion para mandar listado de usuarios por medio de json
     public function users_json($filtro)
     {
-        return User::where('name','LIKE','%'.$filtro.'%')->get();
+        return User::where('name','LIKE','%'.$filtro.'%')->take(15)->get();
       /*if ($request->ajax()){
         //return User::get(['id','name']);
         return response()->json([

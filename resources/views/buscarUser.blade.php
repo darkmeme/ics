@@ -1,7 +1,7 @@
 
 <script type="text/javascript">
 // script para hacer la busqueda de usuarios
-function buscarUsuario(txtBusqueda, setImg, tbodyId, tabla, selectId){
+function buscarUsuario(txtBusqueda, setImg, tbodyId, tabla, txtNombre, txtId){
     $(document).ready(function () {
   //cuando se presiona una tecla sobre input de busqueda se hace una peticion ajax con filtro
   txtBusqueda.keyup(function(e){
@@ -33,14 +33,19 @@ function buscarUsuario(txtBusqueda, setImg, tbodyId, tabla, selectId){
   
   //funcion para cargar los datos de la fila seleccionada al objeto select de html
                 tabla.on('click','tr td', function(evt){
-                   $(this).addClass("resaltar-fila");
-                var nombre,id,html_select;
+                  if($(this).hasClass("resaltar-fila")){
+                    $(this).removeClass("resaltar-fila")
+                  }else{
+                    $(this).addClass("resaltar-fila");
+                  }
+                   
+                var nombre,id;
                 //se recorre el tr padre luego se busca el td con el nombre id
                 id = $(this).parents("tr").find(".id").html();
                 nombre= $(this).parents("tr").find(".nombre").html();
                 // se genera un option con los valores de la fila seleccionada y se cargan al select de tarjetas
-                html_select += '<option value="'+id+'">'+nombre+'</option>';
-                selectId.html(html_select);
+                txtNombre.val(nombre);
+                txtId.val(id);
                  });
   });//finaliza document ready
   
