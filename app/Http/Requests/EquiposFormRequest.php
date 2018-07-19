@@ -24,8 +24,9 @@ class EquiposFormRequest extends FormRequest
     public function rules()
     {
         return [
-          'nombre'=>'required|max:50',
-          'area_id'=>'required|'
+          'equipo'=>'required|max:50',
+          'area_id'=>'required|',
+          'planta_id'=>'required|' 
         ];
     }
 }
