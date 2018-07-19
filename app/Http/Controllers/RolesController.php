@@ -50,7 +50,7 @@ class RolesController extends Controller
 
     public function asignar_rol(Request $request)
     {
-     $user=User::findOrFail(2);
+     $user=User::findOrFail(311);
      $role=Role::findOrFail(1);
      //$permiso=Permission::findOrFail(1);
      $user->assignRole($role);
