@@ -66,6 +66,7 @@ use RegistersUsers;
       $user->email=$request->get('email');
       // funcion crypt encripta la contrasena que viene del formulario
       $user->password = bcrypt($request['password']);
+      $user->confirmation_code = str_random(25);
       $user->save();
 
       Toastr::success('Usuario Creado Satisfactoriamente :)' ,'Success');

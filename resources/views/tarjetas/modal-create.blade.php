@@ -70,19 +70,19 @@
         </select>
       </div>
     </div>
+
     <div class="col-lg-4 col-md-4 col-xs-12">
-<div class="form-group">
+      <div class="form-group">
        <label for="nombre">Nombre:</label>  
        <div class="input-group">
        
        <input id="txtfiltrar" type="text" value="{{ Auth::user()->name }}" class="form-control" readonly>
        <span class="input-group-btn">
-       <button class="btn btn-link btnUser"><i class="ace-icon fa fa-search bigger-150"></i> </button>             
+       <button type="button" class="btn btn-link btnUser"><i class="ace-icon fa fa-search bigger-150"></i> </button>             
        </span>
 
        </div>                
            <input class="txtHidden" type="text" name="empleado_id" value="{{ Auth::user()->id }}" hidden>
-      
        </div>
     </div>
 
@@ -160,7 +160,7 @@
 
 {{--modal para busqueda de usuarios y llenar tarjeta--}}
 <div class="modal fade" id="modal-usuario" tabindex="-1">
-  <div class="modal-right">
+  <div class="modal-dialog">
     <div class="modal-content modal-sm">
       <div class="modal-header no-padding">
         <div class="table-header">
