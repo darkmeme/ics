@@ -1,15 +1,86 @@
 
+<style media="screen">
+.amarillo{ background-color:yellow;}
+.rojo{ background-color:red;}
+
+.modal-right {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  bottom: 0;
+  left: 1250px;
+  z-index: 10040;
+  overflow: auto;
+  overflow-y: auto;
+}
+
+#mediano{
+      width: 45% !important;
+    }
+</style>
+
+<script src="{{asset('js/combox.js')}}"></script>
 
 <script type="text/javascript">
-//script para setear opcion actual del navbar
-$(document).ready(function() {
- $('#actual').addClass('active');
+//seccion de scripts para modal crear tarjetas rojas
+ // script para llamar modal de busqueda de usuarios
+$(document).ready(function () {
+
+    //funcion para abrir modal crear
+$('.link-crear').click(function (){
+  $('#crear-tarjeta').modal('show');
 });
-</script>
 
+      //funcion para abrir modal cuando se da click en boton de empleado
+$('.btnUser').click(function () {
+$('#modal-usuario').modal('show');
+});// finaliza funcion para abrir modal
 
-<script type="text/javascript">
-  
+//cuando se presiona una tecla sobre input de busqueda se hace una peticion ajax con filtro
+        $("#busqueda").keyup(function(e){
+          //obtenemos el texto introducido en el campo de búsqueda
+          var consulta = $("#busqueda").val();
+  // se hace la peticion ajax al server
+     $.ajax({
+    url: '/list-users/'+consulta+'/',
+    //data: consulta,
+    type: 'get',
+    dataType: 'JSON',
+    beforeSend: function(){
+      //imagen de carga
+      $("#resultado").html("<p align='center'><img src='/images/loader.gif' /></p>");
+                    },
+    error: function(){
+      //  alert("Error en la petición ajax");
+            },
+    success: function (data) {
+      /* Inicializamos la tabla */
+              $("#contenido").html('');
+  // se recorre la variable data para pasarlo a la tabla
+          $.each(data, function(index, value){
+  $("#contenido").append("<tr><td class=id>" + value.id + "</td><td class=nombre>" + value.name + "</tr>")});
+}
+}); //finaliza la peticion ajax
+});//finaliza evento keyup de input de busqueda
+
+//funcion para cargar los datos de la fila seleccionada al objeto select de html
+               $('#tabla').on('click','tr td', function(evt){
+              var nombre,id;
+              //se recorre el tr padre luego se busca el td con el nombre id
+              id = $(this).parents("tr").find(".id").html();
+              nombre= $(this).parents("tr").find(".nombre").html();
+              //se setean datos en los textbox 
+              $('#txtfiltrar').val(nombre);
+              //id seteado en un textbox oculto
+              $('.txtHidden').val(id);              
+              // se cierra el modal despues de cargar los datos los input text
+              $('#modal-usuario').modal('hide');
+              
+               });
+});//finaliza document ready
+  </script>
+
+<script type="text/javascript">  
   //funcion para editar y eliminar con modal y peticion ajax
   //ruta='tarjetas/' 
   //o
@@ -119,65 +190,71 @@ $('#modal-delete').modal('hide');
 </script>
 
 <script type="text/javascript">
-//script para cargar estilo y botones de jQuery DataTable
+
+//funcnion para cargar estilo y botones de jQuery DataTable
+
+function estiloTabla(id){
+
 $(document).ready(function() {
 
-  var table = $('#table-tarjetas').DataTable({
-    "aaSorting": [[ 0, "desc" ]],
-  });
+var table = $(id).DataTable({
+  "aaSorting": [[ 0, "desc" ]],
+});
 
-  new $.fn.dataTable.Buttons( table, {
-      buttons: [
-        {
-          "extend": "pdf",
-          "titleAttr": 'Exportar a PDF',
-          "messageTop": 'Reporte de listado de tarjetas.',
-          "filename": 'Reporte de tarjetas',
-          "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "orientation": 'landscape',
-              "  pageSize": 'Letter',
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": "copy",
-          "titleAttr": 'Copiar a Porta Papeles',
-          "text": "<i class='fa fa-copy bigger-110 pink'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": "excel",
-          "titleAttr": 'Exportar a Excel',
-          "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": 'print',
-          "titleAttr": 'Imprimir Documento',
-          "text": "<i class='fa fa-print bigger-110 grey'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": 'colvis',
-          "titleAttr": 'Ocultar Columnas',
-          "text": "ocultar",
-          "className": "btn btn-white btn-primary  btn-bold",
-        } ]
-  } );
-
-  table.buttons().container()
-      .appendTo( $('.col-sm-6 :eq(0)', table.table().container() ) );
+new $.fn.dataTable.Buttons( table, {
+    buttons: [
+      {
+        "extend": "pdf",
+        "titleAttr": 'Exportar a PDF',
+        "messageTop": 'Reporte de listado de tarjetas.',
+        "filename": 'Reporte de tarjetas',
+        "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
+        "className": "btn btn-white btn-primary  btn-bold",
+        "orientation": 'landscape',
+            "  pageSize": 'Letter',
+        "exportOptions": {
+                  "columns": ':visible'
+              }
+      },
+      {
+        "extend": "copy",
+        "titleAttr": 'Copiar a Porta Papeles',
+        "text": "<i class='fa fa-copy bigger-110 pink'></i>",
+        "className": "btn btn-white btn-primary  btn-bold",
+        "exportOptions": {
+                  "columns": ':visible'
+              }
+      },
+      {
+        "extend": "excel",
+        "titleAttr": 'Exportar a Excel',
+        "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
+        "className": "btn btn-white btn-primary  btn-bold",
+        "exportOptions": {
+                  "columns": ':visible'
+              }
+      },
+      {
+        "extend": 'print',
+        "titleAttr": 'Imprimir Documento',
+        "text": "<i class='fa fa-print bigger-110 grey'></i>",
+        "className": "btn btn-white btn-primary  btn-bold",
+        "exportOptions": {
+                  "columns": ':visible'
+              }
+      },
+      {
+        "extend": 'colvis',
+        "titleAttr": 'Ocultar Columnas',
+        "text": "ocultar",
+        "className": "btn btn-white btn-primary  btn-bold",
+      } ]
 } );
+
+table.buttons().container()
+    .appendTo( $('.col-sm-6 :eq(0)', table.table().container() ) );
+} );
+
+} //fin de la funcion principal
 
 </script>

@@ -3,7 +3,7 @@
 role="dialog" id="edit-tarjeta">
 
   <div class="modal-dialog modal-sm">
-    <div class="modal-content amarillo">
+    <div class="modal-content rojo">
       <div class="modal-header no-padding">
         <div class="table-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
