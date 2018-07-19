@@ -34,24 +34,12 @@ class MedidoresController extends Controller
 
     public function store(MedidoresFormRequest $request)
     {
-      $medidores=new Medidores;
-      $medidores->nsd_220=$request->get('nsd_220');
-      $medidores->nsd_480=$request->get('nsd_480');
-      $medidores->blanqueo=$request->get('blanqueo');
-      $medidores->calderas=$request->get('calderas');
-      $medidores->sulfonacion=$request->get('sulfonacion');
-      $medidores->oficinas=$request->get('oficinas');
-      $medidores->daf=$request->get('daf');
-      $medidores->comby=$request->get('comby');
-      $medidores->saponificacion=$request->get('saponificacion');
-      $medidores->enee_principal=$request->get('enee_principal');
-      $medidores->enee_reactivo=$request->get('enee_reactivo');
-      $medidores->fp=$request->get('fp');
-      $medidores->save();
+      $medidores=Medidores::create($request->all());
+    
       $user=Auth::user()->name;
       $emails = ['dagoberto.ortega@unilever.com', 'saul.alvarado@unilever.com'];
-        Mail::to($emails)
-         ->send(new LecturasEnergia($medidores,$user));
+       Mail::to($emails)
+       ->send(new LecturasEnergia($medidores,$user));
       return Redirect::to('medidores');
     }
 

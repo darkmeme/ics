@@ -8,7 +8,7 @@
 <div class="container">
 <div class="col-xs-10">
   <div class="panel panel-primary">
-    <div class="panel-heading">Detalle de Tarjetas</div>
+    <div class="panel-heading">Detalle de Tarjetas Amarillas</div>
       <div class="container">
       <div class="row">
         <div class="col-lg-3">
