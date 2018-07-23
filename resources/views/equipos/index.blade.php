@@ -14,7 +14,7 @@
     </div>
 
     <div class="table-header">
-      Lista de Equipos"
+      Lista de Equipos
     </div>
 
 <div class="table-responsive">

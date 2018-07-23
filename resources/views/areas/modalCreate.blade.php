@@ -15,17 +15,13 @@
       </div>
 
     <div class="modal-body">
-    <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
+    <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" name="nombre" value="{{old('nombre')}}" required class="form-control" placeholder="Nombre...">
-        @if ($errors->has('nombre'))
-            <span class="help-block">
-                <strong>{{ $errors->first('nombre') }}</strong>
-            </span>
-        @endif
+      <input type="text" name="nombre" class="form-control" placeholder="Nombre..." required maxlength="50">
+        
     </div>
 
-    <div class="form-group {{ $errors->has('planta_id') ? ' has-error' : '' }}">
+    <div class="form-group">
       <label for="nombre">Planta</label>
       <select class="form-control" name="planta_id" id="select-planta" class="form-control" required>
         <option value="">Seleccione Planta</option>
@@ -33,11 +29,7 @@
         <option value="{{$p->id}}">{{$p->nombre}}</option>
        @endforeach
       </select>
-        @if ($errors->has('planta_id'))
-            <span class="help-block">
-                <strong>{{ $errors->first('planta_id') }}</strong>
-            </span>
-        @endif
+        
     </div>
 
     <div class="form-group">

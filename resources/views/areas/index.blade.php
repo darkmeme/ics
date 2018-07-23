@@ -15,7 +15,7 @@
                  </div>
 
                  <div class="table-header">
-                    Lista de Areas"
+                    Lista de Areas
                     </div>
                     
                       <table class="table table-striped" id="tablaAreas">

@@ -15,7 +15,7 @@
     <div class="modal-body">
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" name="nombre" class="form-control" value="{{$causa->nombre}}">
+      <input type="text" name="nombre" class="form-control" value="{{$causa->nombre}}" required maxlength="50">
     </div>
     </div>
 

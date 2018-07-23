@@ -17,7 +17,7 @@
       <div class="modal-body">
     <div class="form-group">
       <label for="nombre">Categoria</label>
-      <input type="text" name="categoria" class="form-control" placeholder="Categoria..." required>
+      <input type="text" name="categoria" class="form-control" placeholder="Categoria..." required maxlength="30">
     </div>
 
 

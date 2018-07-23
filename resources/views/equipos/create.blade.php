@@ -13,7 +13,7 @@
 
     <div class="form-group{{ $errors->has('equipo') ? ' has-error' : '' }}">
       <label for="nombre">Nombre</label>
-      <input type="text" name="equipo" value="{{old('nsd_220')}}" class="form-control" placeholder="Nombre..." required>
+      <input type="text" name="equipo" value="{{old('nsd_220')}}" class="form-control" placeholder="Nombre..." pattern="{2-50}" required>
       @if ($errors->has('equipo'))
             <span class="help-block">
                 <strong>{{ $errors->first('equipo') }}</strong>

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 use App\CategoriasModel;
 use App\TarjetasModel;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoriasRequest;
 use Illuminate\Support\Facades\Redirect;
 use Brian2694\Toastr\Facades\Toastr;
+
+
 
 class CategoriasController extends Controller
 {

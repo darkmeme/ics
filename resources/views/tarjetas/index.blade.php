@@ -6,7 +6,7 @@
     <div class="tableTools-container">
       <div class="row">
       <div class="topnav">
-  <a class="active link-crear" href="#" id="">Crear Nueva Tarjeta Amarilla <i class="fa fa-plus"></i></a>
+  <a class="active link-crear" href="#">Crear Nueva Tarjeta Amarilla <i class="fa fa-plus"></i></a>
   
 </div>   
       </div>

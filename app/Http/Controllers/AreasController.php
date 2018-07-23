@@ -54,7 +54,7 @@ class AreasController extends Controller
     }
 
 
-    public function store(AreasFormRequest $request)
+    public function store(Request $request)
     {
       $areas=new AreasModel;
       $areas->nombre=$request->get('nombre');
@@ -78,7 +78,7 @@ class AreasController extends Controller
       $areas->nombre=$request->get('nombre');
       $areas->planta_id=$request->get('planta_id');
       $areas->update();
-      Toastr::success('Se edito correctamente el area');
+      Toastr::success('Se editó correctamente el area');
       return Redirect::to('areas');
     }
 

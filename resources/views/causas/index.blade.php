@@ -15,7 +15,7 @@
     </div>
 
     <div class="table-header">
-      Lista de Causas"
+      Lista de Causas
     </div>
 
       <table class="table text-center table-striped table-hover" id="table-causas">

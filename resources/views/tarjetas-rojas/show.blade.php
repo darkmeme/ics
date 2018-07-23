@@ -115,7 +115,7 @@
                {{--se llena automatico desde jquery con peticiones ajax--}}
              </tbody>
             </table>
-            <input id="user-selected" type="text" placeholder="{{Auth::user()->name}}" class="form-control" required readonly>
+            <input id="user-selected" type="text" placeholder="Busque y seleccione un empleado" class="form-control" required readonly>
             <input id="txt-id" type="text" name="empleado_id" hidden>
             
           </div>

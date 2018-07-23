@@ -14,12 +14,12 @@
       <div class="modal-body">
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" name="nombre" class="form-control" value="{{$equipo->nombre}}">
+      <input type="text" name="nombre" class="form-control" value="{{$equipo->nombre}}" required maxlength="50">
     </div>
 
     <div class="form-group">
       <label for="nombre">Areas</label>
-      <select class="form-control" name="area_id" class="form-control">
+      <select class="form-control" name="area_id" class="form-control" required>
         <option value="{{$equipo->area_id}}">{{$equipo->area->nombre}}</option>
       </select>
     </div>

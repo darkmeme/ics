@@ -15,7 +15,7 @@
       </div>
 
       <div class="table-header">
-        Lista de Categorias"
+        Lista de Categorias
       </div>
 
         <table class="table text-center table-striped" id="table-categorias">
