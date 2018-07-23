@@ -11,9 +11,14 @@
     {!!Form::open(array('url'=>'equipos','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
 
-    <div class="form-group">
+    <div class="form-group{{ $errors->has('equipo') ? ' has-error' : '' }}">
       <label for="nombre">Nombre</label>
-      <input type="text" name="equipo" class="form-control" placeholder="Nombre..." required>
+      <input type="text" name="equipo" value="{{old('nsd_220')}}" class="form-control" placeholder="Nombre..." required>
+      @if ($errors->has('equipo'))
+            <span class="help-block">
+                <strong>{{ $errors->first('equipo') }}</strong>
+            </span>
+        @endif
     </div>
 
     <div class="form-group">

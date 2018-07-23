@@ -21,7 +21,7 @@
         <h5><strong>Fecha: </strong><span class="blue">{{$tarjetaR->created_at}}</span> </h5>
         <h5><strong>Area: </strong><span class="blue">{{$tarjetaR->area->nombre}} </span></h5>
         <h5><strong>Planta: </strong><span class="blue">{{$tarjetaR->planta->nombre}} </span></h5>
-        <h5><strong>Creada por:</strong><span class="blue">{{$tarjetaR->user->name}} </span></h5>
+        <h5><strong>Creada por: </strong><span class="blue">{{$tarjetaR->user->name}} </span></h5>
         <h5><strong>Equipo: </strong><span class="blue">{{$tarjetaR->equipo->nombre}} </span></h5>
         <h5><strong>Turno: </strong><span class="blue">{{$tarjetaR->turno}} </span></h5>
         <h5><strong>Prioridad: </strong><span class="blue">{{$tarjetaR->prioridad}} </span></h5>       
@@ -80,7 +80,7 @@
 </div>
 </div>
 </div>
-{{--modal para asignar la tarjeta a los tecnicos--}}
+{{--modal para reasignar la tarjeta a los tecnicos--}}
 
 {{Form::open(array('action'=>array('TarjetasRojasController@asignar',$tarjetaR->id),'method'=>'post'))}}
 {{Form::token()}}
@@ -97,7 +97,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col col-lg-7 col-md-7 col-sm-7">
+          <div class="col col-lg-6 col-md-6 col-sm-6">
 
             <div class="input-group">
               <span class="input-group-addon">Buscar</span>
@@ -115,10 +115,9 @@
                {{--se llena automatico desde jquery con peticiones ajax--}}
              </tbody>
             </table>
-
-            <select style="visibility" class="form-control" id="user-selected" name="empleado_id" required>
-              {{--se llena desde jquery--}}
-            </select>
+            <input id="user-selected" type="text" placeholder="{{Auth::user()->name}}" class="form-control" required readonly>
+            <input id="txt-id" type="text" name="empleado_id" hidden>
+            
           </div>
           <div class="col-xs-1" id="imagen">
 
@@ -184,10 +183,9 @@
                {{--se llena automatico desde jquery con peticiones ajax--}}
              </tbody>
             </table>
-
-            <select style="visibility" class="form-control" id="empleCambiar" name="empleado_id" required>
-              {{--se llena desde jquery--}}
-            </select>
+            <input id="empleCambiar" type="text" placeholder="Busque y seleccione un empleado" class="form-control" required readonly>
+            <input id="txtCambiar" type="text" name="empleado_id" hidden>
+           
           </div>
           <div class="col-xs-1" id="imagenR">
 
@@ -248,11 +246,9 @@
                  {{--se llena automatico desde jquery con peticiones ajax--}}
                </tbody>
               </table>
-
-              <select class="form-control" id="empleado" name="user_finaliza" class="form-control">
-                <option value="{{Auth::user()->id}}">{{Auth::user()->name}}</option>
-                {{--se llena automatico desde jQuery--}}
-              </select>
+              <input id="empleado" type="text" placeholder="{{Auth::user()->name}}" class="form-control" required readonly>
+              <input id="txtFin" type="text" value="{{Auth::user()->id}}" name="user_finaliza" hidden>
+              
             </div>
             <div class="col-xs-1" id="imagenC">
 
@@ -314,9 +310,10 @@ $(document).ready(function(){
  var img= $("#imagen");
  var tbody=$("#contenido");
  var tab=$('#tabla');
- var combo=$('#user-selected');
+ var txtNombre=$('#user-selected');
+ var txtId=$('#txt-id');
 
-    buscarUsuario(txtbuscar, img, tbody, tab, combo);
+    buscarUsuario(txtbuscar, img, tbody, tab, txtNombre, txtId);
 
 
   </script>
@@ -329,9 +326,11 @@ $(document).ready(function(){
   var imagen=$("#imagenR");
   var tabBody=$("#contenido-user");
   var table=$('#tabla-finalizar');
-  var combo=$('#empleado');
+  var txtNombre=$('#empleado');
+  var txtId=$('#txtFin');
+  
 
-  buscarUsuario(txtBusca, imagen, tabBody, table, combo);
+  buscarUsuario(txtBusca, imagen, tabBody, table, txtNombre, txtId);
 
     </script>
 
@@ -343,9 +342,10 @@ $(document).ready(function(){
    var imagen=$("#imagenC");
    var tabBody=$("#conteCambiar");
    var table=$('#tablaCambiar');
-   var combo=$('#empleCambiar');
-
-   buscarUsuario(txtBusca, imagen, tabBody, table, combo);
+   var txtNombre=$('#empleCambiar');
+   var txtId=$('#txtCambiar');
+   
+   buscarUsuario(txtBusca, imagen, tabBody, table, txtNombre, txtId);
    
     </script>
 

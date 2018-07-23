@@ -54,7 +54,7 @@ public function equipos_padres($id)
     }
 
 
-    public function store(Request $request)
+    public function store(EquiposFormRequest $request)
     {
       $equipos=new EquiposModel;
       $equipos->nombre=$request->get('equipo');
@@ -73,7 +73,7 @@ public function equipos_padres($id)
     }
 
 
-    public function update(Request $request, $id)
+    public function update(EquiposFormRequest $request, $id)
     {
       $equipos=EquiposModel::findOrFail($id);
       $equipos->nombre=$request->get('nombre');
