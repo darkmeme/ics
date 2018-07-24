@@ -1,6 +1,5 @@
-<div class="modal fade" aria-hidden="true" role="dialog" tabindex="-1" id="modal-edit-{{$causa->id}}"> 
-    {!!Form::model($causas,['method'=>'PATCH','route'=>['causas.update',$causa->id]])!!}
-    {{Form::token()}}
+<div class="modal fade" aria-hidden="true" role="dialog" id="modalEdit">
+
     <div class="modal-dialog modal-sm">
     <div class="modal-content">
     <div class="modal-header no-padding">
@@ -8,21 +7,20 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
             <span class="white">&times;</span>
           </button>
-           Editar Causa
+          Editar Causa
         </div>
       </div>
-    
-    <div class="modal-body">
+
+      <div class="modal-body">
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" name="nombre" class="form-control" value="{{$causa->nombre}}" required maxlength="50">
+      <input id="txtCausa" type="text" class="form-control" required maxlength="50">
     </div>
-    </div>
-
-    <div class="modal-footer no-margin-top">
-        <button type="submit" class="btn btn-sm btn-success pull-left">
+    
+      <div class="modal-footer no-margin-top">
+        <button class="btn btn-sm btn-success pull-left edit">
           <i class="ace-icon fa fa-check"></i>
-          Editar
+          Guardar
         </button>
         <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
           <i class="ace-icon fa fa-times"></i>
@@ -30,7 +28,8 @@
         </button>
       </div>
 
-    {!!Form::close()!!}
-  </div>
+        </div>
+      </div>
+    </div>
+      
 </div>
-

@@ -14,10 +14,10 @@
     </div>
 
     <div class="table-header">
-      Lista de Plantas"
+      Lista de Plantas
     </div>
 
-      <table class="table text-center table-striped table-hover" id="table-plantas">
+      <table class="table text-center table-striped table-hover" id="datatable">
         <thead>
           <th class="text-center">Id</th>
           <th class="text-center">Nombre</th>
@@ -27,7 +27,7 @@
         @foreach ($plantas as $plant)
         <tr class="item{{$plant->id}}">
           <td>{{$plant->id}}</td>
-          <td><div id="nombre{{$plant->id}}">{{$plant->nombre}}</div></td>
+          <td id="nombre">{{$plant->nombre}}</td>
           <td>
           <a class="btn btn-link" href="{{URL::action('PlantasController@show',$plant->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
@@ -35,10 +35,10 @@
               <button class="btn btn-link btn-editar" data-id="{{$plant->id}}" data-planta="{{$plant->nombre}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
                 </button>
-                @can('Borrar')
-              <button class="btn btn-link btn-delete" data-id="{{$plant->id}}" data-nombre="{{$plant->nombre}}">       
+                <button class="btn btn-link btn-delete" data-id="{{$plant->id}}" data-nombre="{{$plant->nombre}}">       
                 <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"> </i>
                 </button>  
+                @can('Borrar')
               @else
               @endcan
             </div>
@@ -56,51 +56,12 @@
 
 
 @section('scripts')
+@include('ScriptDataTable')
 <script type="text/javascript">
 //script para cargar estilo y botones de jQuery DataTable
+estiloTabla('#datatable');
+
 $(document).ready(function() {
-
-  var table = $('#table-plantas').DataTable({
-    "aaSorting": [[ 0, "desc" ]],
-  });
-
-  new $.fn.dataTable.Buttons( table, {
-      buttons: [
-        {
-          "extend": "pdf",
-          "titleAttr": 'Exportar a PDF',
-          "messageTop": 'Reporte de Plantas.',
-          "filename": 'Reporte de plantas',
-          "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-        },
-        {
-          "extend": "copy",
-          "titleAttr": 'Copiar a Porta Papeles',
-          "text": "<i class='fa fa-copy bigger-110 pink'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-        },
-        {
-          "extend": "excel",
-          "titleAttr": 'Exportar a Excel',
-          "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-        },
-        {
-          "extend": 'print',
-          "titleAttr": 'Imprimir Documento',
-          "text": "<i class='fa fa-print bigger-110 grey'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-        },
-        {
-          "extend": 'colvis',
-          "titleAttr": 'Ocultar Columnas',
-          "text": "ocultar",
-          "className": "btn btn-white btn-primary  btn-bold",
-        } ]
-  } );
-
-} );//termina document ready
 
 //script para eliminar con modal
 $(document).on('click', '.btn-delete', function() {
@@ -138,14 +99,14 @@ $('.modal-footer').on('click', '.eliminar', function(){
 
 //editar con modal
 $(document).on('click', '.btn-editar', function() { 
-         // editar = editado;
-          $('#txtPlanta').val($(this).data('planta'));
+         
+          id = $(this).data('id');
+          fila = $('.item'+id);
+          $('#txtPlanta').val(fila.find('#nombre').text());
          // alert('se capturo la planta '+id );
           $('#modalEditPlanta').modal('show');
           //$('#txtPlanta').focus();
-          id = $(this).data('id');
-          boton = $(this);
-
+          
         });
 
         $('.modal-footer').on('click', '.edit', function() {
@@ -170,8 +131,9 @@ $(document).on('click', '.btn-editar', function() {
                     } else {
                         $('#modalEditPlanta').modal('hide');
                         //alert('valor del data antes de editar: '+ boton.data('planta'));
-                        $('#nombre'+data.id).text(data.nombre);  
-                        boton.data('planta', data.nombre);
+                        //setea en valor editado en la tablar cargada
+                        fila.find("#nombre").text(data.nombre);  
+                       // boton.data('planta', data.nombre);
                         //location.reload();    
                        // alert('valor del data despues de editar: '+ boton.data('planta'));                 
                         toastr.success('Se ha Modificado Correctamente!', 'Aviso!', {timeOut: 5000});
@@ -180,6 +142,8 @@ $(document).on('click', '.btn-editar', function() {
                 }
             });
         });
+
+} );//termina document ready
 
 </script>
 @endsection
