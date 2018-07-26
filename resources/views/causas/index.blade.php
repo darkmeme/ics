@@ -31,13 +31,12 @@
           <td class="text-center">{{$causa->nombre}}</td>
           <td class="text-center">
             <div class="action-buttons col-lg-12">
-            <button class="btn btn-link btn-editar" data-id="{{$causa->id}}" data-causa="{{$causa->nombre}}">
+            <a class="green btn-editar" data-id="{{$causa->id}}" data-causa="{{$causa->nombre}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
-           </button>
-
-              <button class="btn btn-link btnBorrar" data-id="{{$causa->id}}" data-nombre="{{$causa->nombre}}">       
-                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"> </i>
-                </button>              
+              </a>
+              <a class="red btnBorrar" " href="#" data-id="{{$causa->id}}" data-nombre="{{$causa->nombre}}">
+                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+              </a>                        
               @can('Borrar')
               @else
               @endcan

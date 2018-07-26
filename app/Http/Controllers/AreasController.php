@@ -78,26 +78,17 @@ class AreasController extends Controller
       $areas->nombre=$request->get('nombre');
       $areas->planta_id=$request->get('planta_id');
       $areas->update();
-      Toastr::success('Se editó correctamente el area');
-      return Redirect::to('areas');
+      return response()->json($areas);
     }
 
 
     public function destroy($id)
     {
-      //confirmar si esta en uso en alguna tarjeta
-      $tarjeta=TarjetasModel::where('area_id',$id)->get()->first();
-      $equipo=EquiposModel::where('area_id',$id)->get()->first();
-      if (count($tarjeta)>0 or (count($equipo)>0)){
-        Toastr::error('No se puede borrar esta area, esta en uso' ,'Error');
-        Return Redirect::to('areas');
-      }
-      else{
+
       $areas=AreasModel::findOrFail($id);
       $areas->Delete();
-      Toastr::success('Area eliminada correctamente');
-      return Redirect::to('areas');
-    }
+      return response()->json($areas);
+    
     }
 
 }

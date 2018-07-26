@@ -50,7 +50,13 @@ new $.fn.dataTable.Buttons( table, {
         "exportOptions": {
                   "columns": ':visible'
               }
-      }
+      },
+      {
+        "extend": 'colvis',
+        "titleAttr": 'Ocultar Columnas',
+        "text": "ocultar",
+        "className": "btn btn-white btn-primary  btn-bold",
+      } 
        ]
 } );
 

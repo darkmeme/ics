@@ -144,12 +144,12 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
-                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
-              </button>
-              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
-                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
-              </button>
+              <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200"></i>
+              </a>
+              <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+              </a>
               @can('Borrar')
               @else
               @endcan
@@ -221,12 +221,12 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
-                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
-              </button>
-              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
-                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
-              </button>
+              <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200"></i>
+              </a>
+              <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+              </a>
               @can('Borrar')
               @else
               @endcan
@@ -282,12 +282,12 @@
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
 
-              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
-                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
-              </button>
-              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
-                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
-              </button>
+              <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200"></i>
+              </a>
+              <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+              </a>
               @can('Borrar')
               @else
               @endcan

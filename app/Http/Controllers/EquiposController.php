@@ -35,7 +35,9 @@ public function equipos_padres($id)
   public function index(Request $request)
   {
     $equipos=EquiposModel::All();
-    return view('equipos.index',compact('equipos'));
+    $plantas=PlantasModel::All();
+    $areas=AreasModel::orderBy('id',"DESC")->get();
+    return view('equipos.index', compact('equipos', 'plantas', 'areas'));
   }
 
 
@@ -54,7 +56,7 @@ public function equipos_padres($id)
     }
 
 
-    public function store(EquiposFormRequest $request)
+    public function store(Request $request)
     {
       $equipos=new EquiposModel;
       $equipos->nombre=$request->get('equipo');
@@ -73,32 +75,23 @@ public function equipos_padres($id)
     }
 
 
-    public function update(EquiposFormRequest $request, $id)
+    public function update(Request $request, $id)
     {
       $equipos=EquiposModel::findOrFail($id);
       $equipos->nombre=$request->get('nombre');
       $equipos->area_id=$request->get('area_id');
       $equipos->update();
-      Toastr::success('Equipo editado correctamente');
-      return Redirect::to('equipos');
+      return response()->json($equipos);
     }
 
 
 
     public function destroy($id)
     {
-      //confirmar si esta en uso en alguna tarjeta
-      $tarjeta=TarjetasModel::where('equipo_id',$id)->get()->first();
-      $subequipo=EquiposModel::where('equipo_id',$id)->get()->first();
-      if (count($tarjeta)>0 or (count($subequipo)>0)){
-        Toastr::error('No se puede borrar este equipo, esta en uso' ,'Error');
-        Return Redirect::to('equipos');
-      }
-      else{
+      
       $equipos=EquiposModel::findOrFail($id);
       $equipos->Delete();
-      Toastr::success('Equipo eliminado correctamente');
-      Return Redirect::to('equipos');
-      }
+      return response()->json($equipos);
+      
     }
 }

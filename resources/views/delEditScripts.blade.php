@@ -88,7 +88,7 @@ $('#modal-usuario').modal('show');
 
 function operacionesDE(ruta){
 
-    //editar tarjeta con modal
+//editar tarjeta con modal
 //funcion para abrir modal y mandarle datos para edicion
 $(document).on('click', '.btnEdit', function() { 
 

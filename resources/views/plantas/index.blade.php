@@ -29,19 +29,23 @@
           <td>{{$plant->id}}</td>
           <td id="nombre">{{$plant->nombre}}</td>
           <td>
-          <a class="btn btn-link" href="{{URL::action('PlantasController@show',$plant->id)}}">
+          <div class="action-buttons">
+          <a class="blue" href="{{URL::action('PlantasController@show',$plant->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
-              </a>              
-              <button class="btn btn-link btn-editar" data-id="{{$plant->id}}" data-planta="{{$plant->nombre}}">
-                <i class="ace-icon fa fa-pencil bigger-200"></i>
-                </button>
-                <button class="btn btn-link btn-delete" data-id="{{$plant->id}}" data-nombre="{{$plant->nombre}}">       
-                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"> </i>
-                </button>  
-                @can('Borrar')
-              @else
-              @endcan
-            </div>
+              </a>
+
+            <a class="green btn-editar" href="#" data-id="{{$plant->id}}" data-planta="{{$plant->nombre}}">
+              <i class="ace-icon fa fa-pencil bigger-200"></i>
+            </a>
+          
+            <a class="red btn-delete" href="#" data-id="{{$plant->id}}" data-nombre="{{$plant->nombre}}">
+             <i class="ace-icon fa fa-trash-o bigger-200"></i>
+            </a>
+            @can('borrar')
+            @else
+            @endcan
+          </div>
+                     
           </td>
         </tr>
         @endforeach
