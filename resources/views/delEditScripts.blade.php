@@ -130,8 +130,8 @@ $('.modal-footer').on('click', '.editar', function() {
           } else {
               $('#edit-tarjeta').modal('hide');
              
-              fila.find("td:eq(6)").html(prioridad);
-              fila.find("td:eq(7)").html(desc);
+              fila.find(".pri").text(prioridad);
+              fila.find(".des").text(desc);
               boton.data('prioridad', prioridad);
               boton.data('desc', desc);
              // location.reload();                                           

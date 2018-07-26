@@ -147,8 +147,8 @@
           <td>{{$tr->created_at}}</td>
           <td>{{$tr->user->name}}</td>
           <td>{{$tr->equipo->nombre}}</td>
-          <td>{{$tr->prioridad}}</td>
-          <td>{{$tr->descripcion_reporte}}</td>
+          <td class="pri">{{$tr->prioridad}}</td>
+          <td class="des">{{$tr->descripcion_reporte}}</td>
           <td class="td-status"><span class="label label-sm label-warning">{{$tr->status}}</span></td>
           <td>
             <div class="action-buttons">
@@ -205,8 +205,8 @@
           <td>{{$t->created_at}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
-          <td>{{$t->prioridad}}</td>          
-          <td>{{$t->descripcion_reporte}}</td>          
+          <td class="pri">{{$t->prioridad}}</td>          
+          <td class="des">{{$t->descripcion_reporte}}</td>          
           <td><span class="label label-sm label-success">{{$t->status}}</span>
           </td>
           <td>@if(isset($t->reasignado->name))
@@ -272,8 +272,8 @@
           <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->descripcion_reporte}}</td>
+          <td class="pri">{{$t->prioridad}}</td>
+          <td class="des">{{$t->descripcion_reporte}}</td>
           <td><span class="label label-sm label-success">{{$t->status}}</span>
           </td>
           <td>

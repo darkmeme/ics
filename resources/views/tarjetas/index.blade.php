@@ -135,8 +135,8 @@
           <td>{{$t->equipo->nombre}}</td>
           <td>{{$t->categoria->nombre}}</td>
           <td>{{$t->created_at->format('d-m-Y')}}</td>
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->descripcion_reporte}}</td>
+          <td class="pri">{{$t->prioridad}}</td>
+          <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->user->name}}</td>
           <td class="td-status"><span class="label label-sm label-warning">{{$t->status}}</span></td>
           <td>
@@ -195,15 +195,10 @@
           <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
-          {{--<td>{{$t->turno}}</td>--}}
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->descripcion_reporte}}</td>
+          <td class="pri">{{$t->prioridad}}</td>
+          <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->categoria->nombre}}</td>
-          {{--<td>{{$t->evento->nombre}}</td>--}}
-          {{--<td>{{$t->causa->nombre}}</td>--}}
-          {{--<td>{{$t->solucion_implementada}}</td>--}}
-          {{--<td>{{$t->fecha_cierre}}</td>--}}
-          {{--<td>{{$t->finalizado}}</td>--}}
+          
           <td><span class="label label-sm label-success">{{$t->status}}</span>
           </td>
           <td>@if(isset($t->reasignado->name))
@@ -270,8 +265,8 @@
           <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->descripcion_reporte}}</td>
+          <td class="pri">{{$t->prioridad}}</td>
+          <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->categoria->nombre}}</td>
           {{--<td>{{$t->finalizado}}</td>--}}
           <td><span class="label label-sm label-success">{{$t->status}}</span>
