@@ -6,7 +6,7 @@
     <div class="tableTools-container">
       <div class="row">
       <div class="topnav">
-  <a class="active link-crear" href="#" id="">Crear Nueva Tarjeta Amarilla <i class="fa fa-plus"></i></a>
+  <a class="active link-crear" href="#">Crear Nueva Tarjeta Amarilla <i class="fa fa-plus"></i></a>
   
 </div>   
       </div>
@@ -135,8 +135,8 @@
           <td>{{$t->equipo->nombre}}</td>
           <td>{{$t->categoria->nombre}}</td>
           <td>{{$t->created_at->format('d-m-Y')}}</td>
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->descripcion_reporte}}</td>
+          <td class="pri">{{$t->prioridad}}</td>
+          <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->user->name}}</td>
           <td class="td-status"><span class="label label-sm label-warning">{{$t->status}}</span></td>
           <td>
@@ -144,12 +144,12 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
-                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
-              </button>
-              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
-                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
-              </button>
+              <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200"></i>
+              </a>
+              <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+              </a>
               @can('Borrar')
               @else
               @endcan
@@ -195,15 +195,10 @@
           <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
-          {{--<td>{{$t->turno}}</td>--}}
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->descripcion_reporte}}</td>
+          <td class="pri">{{$t->prioridad}}</td>
+          <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->categoria->nombre}}</td>
-          {{--<td>{{$t->evento->nombre}}</td>--}}
-          {{--<td>{{$t->causa->nombre}}</td>--}}
-          {{--<td>{{$t->solucion_implementada}}</td>--}}
-          {{--<td>{{$t->fecha_cierre}}</td>--}}
-          {{--<td>{{$t->finalizado}}</td>--}}
+          
           <td><span class="label label-sm label-success">{{$t->status}}</span>
           </td>
           <td>@if(isset($t->reasignado->name))
@@ -221,12 +216,12 @@
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
-              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
-                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
-              </button>
-              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
-                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
-              </button>
+              <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200"></i>
+              </a>
+              <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+              </a>
               @can('Borrar')
               @else
               @endcan
@@ -270,8 +265,8 @@
           <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
-          <td>{{$t->prioridad}}</td>
-          <td>{{$t->descripcion_reporte}}</td>
+          <td class="pri">{{$t->prioridad}}</td>
+          <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->categoria->nombre}}</td>
           {{--<td>{{$t->finalizado}}</td>--}}
           <td><span class="label label-sm label-success">{{$t->status}}</span>
@@ -282,12 +277,12 @@
                 <i class="ace-icon fa fa-eye bigger-200"></i>
               </a>
 
-              <button class="btn btn-link btnEdit" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
-                <i class="ace-icon fa fa-pencil bigger-200" style="color: green;"></i>
-              </button>
-              <button class="btn btn-link btn-borrar" data-id="{{$t->id}}">
-                <i class="ace-icon fa fa-trash-o bigger-200" style="color: red;"></i>
-              </button>
+              <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
+                <i class="ace-icon fa fa-pencil bigger-200"></i>
+              </a>
+              <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
+                <i class="ace-icon fa fa-trash-o bigger-200"></i>
+              </a>
               @can('Borrar')
               @else
               @endcan

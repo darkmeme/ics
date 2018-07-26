@@ -15,7 +15,7 @@
     <div class="modal-body">
     <div class="form-group">
       <label for="nombre">Evento</label>
-      <input type="text" name="eventos" class="form-control" placeholder="Eventos..." required>
+      <input type="text" name="eventos" class="form-control" placeholder="Eventos..." required maxlength="50">
     </div>
     </div>
 

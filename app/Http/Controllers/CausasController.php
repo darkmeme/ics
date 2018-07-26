@@ -61,7 +61,7 @@ class CausasController extends Controller
       $causas=CausasModel::findOrFail($id);
       $causas->nombre=$request->get('nombre');
       $causas->update();
-      return Redirect::to('causas');
+      return response()->json($causas);
     }
 
     public function destroy($id)
@@ -69,6 +69,6 @@ class CausasController extends Controller
       $causas=CausasModel::findOrFail($id);
       $causas->Delete();
       //Post::destroy($id);
-      return Redirect::to('causas');
+      return response()->json($causas);
     }
 }

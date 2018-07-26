@@ -235,14 +235,6 @@ body {
 								</a>
 								<b class="arrow"></b>
 							</li>
-
-							<li class="">
-								<a href="/equipos/create">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Crear Nuevo
-								</a>
-								<b class="arrow"></b>
-							</li>
 						</ul>
 					</li>
 

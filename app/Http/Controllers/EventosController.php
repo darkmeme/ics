@@ -52,26 +52,18 @@ class EventosController extends Controller
       $eventos=EventosModel::findOrFail($id);
       $eventos->Nombre=$request->get('nombre');
       $eventos->update();
-      Toastr::success('Evento editado correctamente');
-      return Redirect::to('eventos');
+      
+      return response()->json($eventos);
     }
 
     public function destroy($id)
     {
-      //confirmar si esta en uso en alguna tarjeta
-      $tarjeta=TarjetasModel::where('evento_id',$id)->get()->first();
-      if (count($tarjeta)>0){
-        //Session::flash('message','No se puede eliminar el evento');
-      Toastr::error('No se puede borrar este evento, esta siendo usado en una tajeta' ,'Error');
-        Return Redirect::to('eventos');
-      
-      }
-      else{
+
         $eventos=EventosModel::findOrFail($id);
         $eventos->Delete();
-        Toastr::success('Evento eliminado correctamente');
-        Return Redirect::to('eventos');
-      }
+        
+        return response()->json($eventos);
+      
       
     }
 }

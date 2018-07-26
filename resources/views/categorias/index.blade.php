@@ -15,7 +15,7 @@
       </div>
 
       <div class="table-header">
-        Lista de Categorias"
+        Lista de Categorias
       </div>
 
         <table class="table text-center table-striped" id="table-categorias">
@@ -26,16 +26,16 @@
         </thead>
 
         @foreach ($categorias as $cat)
-        <tr>
+        <tr class="item{{$cat->id}}">
           <td>{{$cat->id}}</td>
-          <td>{{$cat->nombre}}</td>
+          <td id="cat">{{$cat->nombre}}</td>
           <td>
             <div class="action-buttons">            
-              <a class="green" data-target="#modal-edit-{{$cat->id}}" data-toggle="modal">
+              <a class="green btn-edit" href="#" data-id="{{$cat->id}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
               
-              <a class="red" href="" data-target="#modal-delete-{{$cat->id}}" data-toggle="modal">
+              <a class="red btn-del" href="#" data-id="{{$cat->id}}">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
               @can('borrar')
@@ -44,63 +44,103 @@
             </div>
           </td>
         </tr>
-        @include('categorias.modalBorrar')
-        @include('categorias.modalEdit')
         @endforeach
       </table>
     </div>
 </div>
+@include('categorias.modalEdit')
+@include('categorias.modalBorrar')
 @include('categorias.modalCreate')
 @endsection
 
 @section('scripts')
+@include('ScriptDataTable')
+
 <script type="text/javascript">
-//script para cargar estilo y botones de jQuery DataTable
-$(document).ready(function() {
+estiloTabla('#table-categorias');
 
-  var table = $('#table-categorias').DataTable({
-    "aaSorting": [[ 0, "desc" ]],
-  });
+$('.btn-del').click(function (){
+         id = $(this).data('id');
+         fila = $('.item' + id);   
+         $('.nombre').text(fila.find("td:eq(1)").html());
+           
+         $('#modal-delete').modal('show');
+        
+        });
 
-  new $.fn.dataTable.Buttons( table, {
-      buttons: [
-        {
-          "extend": "pdf",
-          "titleAttr": 'Exportar a PDF',
-          "messageTop": 'Reporte de Categorias.',
-          "filename": 'Reporte de Categorias',
-          "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-        },
-        {
-          "extend": "copy",
-          "titleAttr": 'Copiar a Porta Papeles',
-          "text": "<i class='fa fa-copy bigger-110 pink'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-        },
-        {
-          "extend": "excel",
-          "titleAttr": 'Exportar a Excel',
-          "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-        },
-        {
-          "extend": 'print',
-          "titleAttr": 'Imprimir Documento',
-          "text": "<i class='fa fa-print bigger-110 grey'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-        },
-        {
-          "extend": 'colvis',
-          "titleAttr": 'Ocultar Columnas',
-          "text": "ocultar",
-          "className": "btn btn-white btn-primary  btn-bold",
-        } ]
-  } );
+   //se ejecuta la peticion ajax al hacer clic al boton eliminar del modal  
+ $('.modal-footer').on('click', '.del', function(){
 
-  table.buttons().container()
-      .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
-} );
+$.ajax({
+
+     type: 'DELETE',
+     url:  'categorias/' + id,
+     data: {
+     },
+     headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  },
+    success: function(data){
+      toastr.success('Categoria Borrada Correractamente!', 'Eliminando Categoria', {timeOut: 5000});
+      $('#modal-delete').modal('hide');
+     fila.fadeOut(600);          
+      },
+
+    error: function(){
+        toastr.error('No se puede borrar la categoria porque esta en uso!', 'Eliminando Categoria', {timeOut: 5000});
+        $('#modal-delete').modal('hide');
+        },
+});
+
+});     
+
+
+//script para editar
+//funcion para mandar datos y abrir el modal
+$('.btn-edit').click(function (){
+
+id = $(this).data('id');
+fila = $('.item' + id);   
+nombre = fila.find("#cat");
+$('.nombre').val(nombre.text());           
+$('#modal-edit').modal('show');        
+});
+//funcion para hacer l apeticion ajax para editar
+$('.modal-footer').on('click', '.edit', function() {
+  nombreEdited = $('.nombre').val();
+ $.ajax({
+     type: 'PUT',
+     url: 'categorias/' + id,
+     data: {                    
+         'id': id,
+         'nombre': nombreEdited                           
+     },
+     headers: {
+     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     },
+     success: function(data) {
+      
+         if ((data.errors)) {
+             setTimeout(function () {
+                 $('#modal-edit').modal('show');
+                 toastr.error('Algo ha salido mal!', 'alerta de Error', {timeOut: 5000});
+             }, 500);
+             
+         } else {
+             
+             $('#modal-edit').modal('hide');
+             nombre.text(nombreEdited);                                                       
+             toastr.success('Categoria modificada Correctamente!', 'Aviso!', {timeOut: 5000});                                    
+         }
+     },
+     error: function(){
+         $('#modal-edit').modal('hide');
+         toastr.error('Algo ha salido mal!', 'alerta de Error', {timeOut: 5000});
+     }
+ });
+});
+
+
 </script>
 
 @endsection

@@ -16,7 +16,7 @@
     <div class="modal-body">
     <div class="form-group">
       <label for="nombre">Causa</label>
-      <input type="text" name="causa" class="form-control" required placeholder="Causas..." required>
+      <input type="text" name="causa" class="form-control" required placeholder="Causas..." maxlength="50">
     </div>
     </div>
     <div class="modal-footer no-margin-top">

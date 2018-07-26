@@ -1,24 +1,25 @@
-@extends('layouts.admin')
-@section('contenido')
-<br>
-<div class="container">
-<br>
-<div class="col-lg-8 col-xs-12 col-md-8 col-lg-offset-1 col-md-offset-1">
-    <div class="panel panel-primary">
-    <div class="panel-heading">Crear Nuevo Equipo</div>
-    <div class="container">
-    <div class="col-lg-6 col-xs-12 col-md-6 col-sm-8 col-lg-offset-0">
+
+<div class="modal fade" aria-hidden="true" role="dialog" id="modalCreate">
+
     {!!Form::open(array('url'=>'equipos','method'=>'POST','autocomplete'=>'off'))!!}
     {{Form::token()}}
+    <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+    <div class="modal-header no-padding">
+        <div class="table-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <span class="white">&times;</span>
+          </button>
+          Crear Nuevo Equipo
+        </div>
+      </div>
 
-    <div class="form-group{{ $errors->has('equipo') ? ' has-error' : '' }}">
+    <div class="modal-body">
+    
+    <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" name="equipo" value="{{old('nsd_220')}}" class="form-control" placeholder="Nombre..." required>
-      @if ($errors->has('equipo'))
-            <span class="help-block">
-                <strong>{{ $errors->first('equipo') }}</strong>
-            </span>
-        @endif
+      <input type="text" name="equipo" class="form-control" placeholder="Nombre..." required maxlength="50">
+     
     </div>
 
     <div class="form-group">
@@ -26,8 +27,7 @@
       <div class="col-sm-10">
         <div class="form-check">
           <label class="form-check-label">
-            <input class="form-check-input" name="combo-padre" value="1" type="checkbox"> Padre
-          </label>
+            <input class="form-check-input" name="combo-padre" value="1" type="checkbox"> Padre </label>
         </div>
       </div>
     </div>
@@ -56,20 +56,21 @@
       </select>
     </div>
 
-
-    <div class="form-group">
-      <button class="btn btn-primary" type="submit">Guardar<i class="fa fa-check"></i> </button>
-      <a href="/equipos"><button class="btn btn-danger" type="button">Cancelar<i class="fa fa-times"></i></button></a>
-       </div>
-
-          </div>
-        </div>
+        <div class="modal-footer no-margin-top">
+        <button type="submit" class="btn btn-sm btn-success pull-left">
+          <i class="ace-icon fa fa-check"></i>
+          Guardar
+        </button>
+        <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+          <i class="ace-icon fa fa-times"></i>
+          Cerrar
+        </button>
       </div>
-    </div>
-  </div>
-    {!!Form::close()!!}
-@endsection
 
-@section('scripts')
-<script src="{{asset('js/combox.js')}}"></script>
-@endsection
+</div>
+</div>
+</div>
+{!!Form::close()!!}
+</div>
+
+

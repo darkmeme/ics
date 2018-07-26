@@ -55,7 +55,7 @@ role="dialog" id="edit-tarjeta">
               <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
-                  <textarea name="descripcion_reporte" class="descripcion" rows="5" cols="30"></textarea>
+                  <textarea name="descripcion_reporte" class="descripcion" rows="5" cols="30" required></textarea>
                 </div>
               </div>
             </div>
