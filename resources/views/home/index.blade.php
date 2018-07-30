@@ -1,14 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="{{asset('hmcss/main_styles.css')}}" rel="stylesheet">
 
 <style media="screen">
   .logo { padding: 5px; margin: 30px; border: 0px solid black; float: right; width: 150px; }
   .logo2 { position:relative; top 155px; left: 15px; float: left; width: 450px; }
   body {
 background-color: white;
+background-image: url("{{asset('images/bg.jpg')}}");
    }
+
+
+   
+   
 </style>
+
 <div class="row">
   <div class="col-lg-2">
 <img class="logo" src="images/logo.png" id="logo">
@@ -16,82 +23,53 @@ background-color: white;
 </div>
 
 
-  <div class="container">
-    
-      <div class="row">
-    <div class="col-lg-12 col-md-11 col-xs-11 pull-right">
-    <h3 class="header smaller text-center lighter blue">Bienvenido al Sistema de Reportes CIC</h3>
-     </div>
-    </div>
-
+  
     <br>
-    <style media="screen">
-    .amarillo{ background-color:yellow;}
-    </style>
+   
+<div class="hero_boxes">
+		<div class="hero_boxes_inner">
+			<div class="container">
+				<div class="row">
+          
+					<div class="col-lg-3 col-md-6 col-sm-6 hero_box_col">
+						<div class="hero_box d-flex flex-row align-items-center justify-content-start">
+							<div class="hero_box_content">
+								<h2 class="hero_box_title">Tarjetas Amarillas</h2>
+								<a href="/tarjetas" class="hero_box_link">ver todas las tarjetas amarillas</a>
+							</div>
+						</div>
+					</div>
+          
+					<div class="col-lg-3 col-md-6 col-sm-6 hero_box_col">
+						<div class="hero_box d-flex flex-row align-items-center justify-content-start">
+							<div class="hero_box_content">
+								<h2 class="hero_box_title">Tarjetas Rojas</h2>
+								<a href="/tarjetas-rojas" class="hero_box_link">ver todas las tarjetas rojas</a>
+							</div>
+						</div>
+					</div>
+          
+					<div class="col-lg-3 col-md-6 col-sm-6 hero_box_col">
+						<div class="hero_box d-flex flex-row align-items-center justify-content-start">
+							<div class="hero_box_content">
+								<h2 class="hero_box_title">Energia</h2>
+								<a href="/medidores" class="hero_box_link">ver todas las lecturas</a>
+							</div>
+						</div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6 col-sm-6 hero_box_col">
+						<div class="hero_box d-flex flex-row align-items-center justify-content-start">
+							<div class="hero_box_content">
+								<h2 class="hero_box_title">Calidad</h2>
+								<a href="#" class="hero_box_link">ver todas las lecturas</a>
+							</div>
+						</div>
+					</div>
 
+				</div>
+			</div>
+		</div>
+	</div>
 
-
-  <div class="row">
-  <div class="col-lg-1 col-xs-1 col-md-1"></div>
-  <div class="col-lg-11 col-md-11 col-xs-11">
-
-      <div class="col-lg-3 col-md-3 ">
-    <div class="panel panel-warning">
-      <div class="panel-heading">
-        <h3 class="panel-title">Tarjetas Amarillas</h3>
-      </div>
-      <div class="panel-body">
-        Modulo de Tarjetas Amarillas
-      </div>
-      <div class="center-block" style="width:100px;">
-      <a href="/tarjetas">Acceder...</a>
-      </div>
-    </div>
-      </div>
-
-
-    <div class="col-lg-3 col-md-3">
-  <div class="panel panel-danger">
-    <div class="panel-heading">
-      <h3 class="panel-title">Tarjetas Rojas</h3>
-    </div>
-    <div class="panel-body">
-      Modulo de Tarjetas Rojas
-    </div>
-    <div class="center-block" style="width:100px;">
-    <a href="/tarjetas-rojas">Acceder...</a>
-    </div>
-  </div>
-    </div>
-
-    <div class="col-lg-3 col-md-3">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Energia</h3>
-    </div>
-    <div class="panel-body">
-      Modulo de lecturas de Energia
-    </div>
-    <div class="center-block" style="width:100px;">
-    <a href="/medidores">Acceder...</a>
-    </div>
-  </div>
-    </div>
-
-    <div class="col-lg-3 col-md-3">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Calidad</h3>
-    </div>
-    <div class="panel-body">
-      Modulo de Calidad
-    </div>
-    <div class="center-block" style="width:100px;">
-    <a href="/">Acceder...</a>
-    </div>
-     </div>
-    </div>
-    </div>
-   </div>
-   </div>
 @endsection

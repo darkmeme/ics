@@ -51,7 +51,7 @@ Route::delete('/permisos-borrar/{id}/', 'RolesController@delete_permission');
 Route::get('/permisos-asignar', 'RolesController@asignar_permiso');
 Route::get('/roles-asignar', 'RolesController@asignar_rol');
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'TarjetasController@index');
 Route::get('/reportes/{id}/','TarjetasController@pdf');
 //Route::get('reporte', 'RolesController@pdf');//->name('roles.pdf');
 //ruta para las peticiones ajax

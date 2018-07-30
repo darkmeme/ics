@@ -15,6 +15,7 @@
 		<link href="{{asset('assets/font-awesome/4.2.0/css/font-awesome.min.css')}}" rel="stylesheet">
 		<link href="{{asset('css/app.css')}}" rel="stylesheet">
 		<link href="{{asset('css/jquery-ui.min.css')}}" rel="stylesheet">
+		
 		<!-- page specific plugin styles -->
 
 		<!-- text fonts -->
