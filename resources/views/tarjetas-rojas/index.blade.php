@@ -122,7 +122,7 @@
     Listado de todas las tarjetas rojas
   </div>
 <div class="table-responsive">
-@include('tarjetas-rojas.search')
+@include('tarjetas-rojas.filtro-fecha')
 
       <table class="table text-center table-striped" id="table-tt">
         <thead>
@@ -144,7 +144,7 @@
           <td>{{$tr->id}}</td>
           <td>{{$tr->area->nombre}}</td>
           <td>{{$tr->planta->nombre}}</td>
-          <td>{{$tr->created_at}}</td>
+          <td>{{$tr->created_at->format('d-m-Y')}}</td>
           <td>{{$tr->user->name}}</td>
           <td>{{$tr->equipo->nombre}}</td>
           <td class="pri">{{$tr->prioridad}}</td>
@@ -332,6 +332,50 @@ estiloTabla('#table-tc');
 
 //var tablaTa = $('#table-ta');
 estiloTabla('#table-ta');
+
+//funciones para usar el componene datepicker de Jquery Ui
+  var txtInicio = $( "#fini" );
+  var txtFin = $( "#ffin" );
+
+$( function() {
+  txtInicio.datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+
+  $( function() {
+    txtFin.datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  
+  //seccion para quitar filtro por fecha
+  
+   if(txtInicio.val() === '' && txtFin.val() === ''){
+    $('.btnban').attr('disabled', true);
+   }else{
+    $('.btnban').attr('disabled', false);
+   }
+
+   $('.btnban').click(function(){ 
+  txtInicio.val('');
+  txtFin.val('');
+  });
+
+  //seccion para setear en el select el valor que se mando para el filtro por status
+    
+    select = '{{$status}}';
+    if(select === ""){
+      $('#combo').val('def');
+    }else{
+      $('#combo').val(select);
+    }
+  
+    if($('#combo').val() === 'def'){
+      $('.btnres').attr('disabled', true);
+      
+    }else{
+       $('.btnres').attr('disabled', false);
+      }
+    $('.btnres').click(function(){ 
+     $('#combo').val('def');
+  });
 
 </script>
 

@@ -32,9 +32,26 @@ class TarjetasRojasController extends Controller
         $plantas=PlantasModel::ALL();
         $pendientes=$totalTarjetas-$totalFinalizadas;
 
-        $filtro=trim($request->get('buscar'));
-        $tarjetasRojas=TarjetasRojas::where('status','LIKE','%'.$filtro.'%')->get();
-
+        //filtro por rango de fechas
+        $inicio=$request->get('inicio');
+        $fin=$request->get('fin');
+        $status=$request->get('status');
+  
+        $tar = TarjetasRojas::query();
+        if(($inicio != '') and ($fin != '')){        
+          $tar->whereBetween('created_at', [$inicio, $fin])->get();
+       
+        }  
+        //filtro de tarjetas por status  
+        if($status == null || $status == 'def'){
+  
+            }
+        else{
+          $tar->where('status', $status);
+        }     
+  
+         $tarjetasRojas = $tar->get();  
+  
         //seccion para cargar todas la tarjetas rojas creadas por un usuario
         $user_actual=Auth::user()->id;
         $tarjetas=TarjetasRojas::where('user_id',$user_actual)->get();
@@ -44,7 +61,9 @@ class TarjetasRojasController extends Controller
         ->orWhereIn('user_reasignado', [$user_actual])
         ->get();
 
-        return view('tarjetas-rojas.index',compact('tarjetasRojas','tarjetasAsig','filtro','plantas','tarjetas', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));
+        return view('tarjetas-rojas.index',compact('tarjetasRojas','tarjetasAsig','filtro','plantas',
+        'tarjetas', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas',
+        'pendientes', 'inicio', 'fin', 'status'));
     }
 
     /*     **Funciones no necesarias ya, ahora todo se manda al index**!

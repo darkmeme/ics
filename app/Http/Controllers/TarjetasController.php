@@ -46,7 +46,8 @@ class TarjetasController extends Controller
       if(($inicio != '') and ($fin != '')){        
         $tar->whereBetween('created_at', [$inicio, $fin])->get();
      
-      }    
+      }  
+      //filtro de tarjetas por status  
       if($status == null || $status == 'def'){
 
           }

@@ -318,6 +318,9 @@ estiloTabla('#table-creadas');
 estiloTabla('#table-asignadas');
 
 //funciones para usar el componene datepicker de Jquery Ui
+  var txtInicio = $( "#fini" );
+  var txtFin = $( "#ffin" );
+
  $( function() {
   txtInicio.datepicker({ dateFormat: 'yy-mm-dd' });
   } );
@@ -328,8 +331,7 @@ estiloTabla('#table-asignadas');
 
   
   //seccion para quitar filtro por fecha
-  var txtInicio = $( "#fini" );
-  var txtFin = $( "#ffin" );
+  
    if(txtInicio.val() === '' && txtFin.val() === ''){
     $('.btnban').attr('disabled', true);
    }else{
@@ -342,7 +344,6 @@ estiloTabla('#table-asignadas');
   });
 
   //seccion para setear en el select el valor que se mando para el filtro por status
- // $(ducument).ready(funtion (){
     
     select = '{{$status}}';
     if(select === ""){
@@ -360,8 +361,7 @@ estiloTabla('#table-asignadas');
     $('.btnres').click(function(){ 
      $('#combo').val('def');
   });
-  //});
- 
+  
    
 </script>
 
