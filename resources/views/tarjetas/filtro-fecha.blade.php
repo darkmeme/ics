@@ -2,7 +2,7 @@
 <form class="form-group" method="GET" action="{{ url('tarjetas') }}">
 {{ csrf_field() }}
 <div class="row">
-<div class="col-lg-8 col-xs-12 col-md-3 input-group input-group-sm">
+<div class="col-lg-8 col-xs-12 col-md-11 col-sm-12 input-group input-group-sm">
   <span class="input-group-addon" id="basic-addon1"><b> Filtrar por fechas </b></span>
   <input id="fini" type="text" name="inicio" class="form-control" value="{{$inicio}}" autocomplete="off" placeholder="fecha inicio.." readonly>
   <span class="input-group-addon"><i class="ace-icon fa fa-chevron-right"></i></span>

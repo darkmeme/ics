@@ -345,7 +345,11 @@ estiloTabla('#table-asignadas');
  // $(ducument).ready(funtion (){
     
     select = '{{$status}}';
-    $('#combo').val(select);
+    if(select === ""){
+      $('#combo').val('def');
+    }else{
+      $('#combo').val(select);
+    }
   
     if($('#combo').val() === 'def'){
       $('.btnres').attr('disabled', true);
