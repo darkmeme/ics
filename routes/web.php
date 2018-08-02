@@ -66,6 +66,9 @@ Route::get('/tarjetas-creadas', 'TarjetasRojasController@misTarjetasRojas');
 Route::get('/tarjetasR-asignadas', 'TarjetasRojasController@tarjetasRojasAsignadas');
 //ruta para confirmar usuario
 Route::get('/register/verify/{code}', 'GuestController@verify');
+//ruta para mostrar todas las tarjetas correspondiente a una Area
+Route::get('tarjetasArea/{area}', 'AreasController@show');
+
          
 
 

@@ -8,7 +8,7 @@
   </div> 
 
   <div class="table-header">
-    Listado de Tarjetas en esta Planta
+    Listado de Tarjetas en <b>{{$nombre}}</b>
   </div>
 
 <div class="row">
@@ -119,67 +119,11 @@
 @endsection
 
 @section('scripts')
+@include('ScriptDataTable')
 
 <script type="text/javascript">
-//script para cargar estilo y botones de jQuery DataTable
-$(document).ready(function() {
 
-  var table = $('#table-tarjetas-asignadas').DataTable({
-    "aaSorting": [[ 0, "desc" ]],
-  });
+estiloTabla('#table-tarjetas-asignadas');
 
-  new $.fn.dataTable.Buttons( table, {
-      buttons: [
-        {
-          "extend": "pdf",
-          "titleAttr": 'Exportar a PDF',
-          "messageTop": 'Reporte de mis tarjetas asignadas.',
-          "filename": 'Reporte de tarjetas',
-          "text": "<i class='fa fa-file-pdf-o bigger-110 red'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "orientation": 'landscape',
-              "  pageSize": 'Letter',
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": "copy",
-          "titleAttr": 'Copiar a Porta Papeles',
-          "text": "<i class='fa fa-copy bigger-110 pink'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": "excel",
-          "titleAttr": 'Exportar a Excel',
-          "text": "<i class='fa fa-file-excel-o bigger-110 green'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": 'print',
-          "titleAttr": 'Imprimir Documento',
-          "text": "<i class='fa fa-print bigger-110 grey'></i>",
-          "className": "btn btn-white btn-primary  btn-bold",
-          "exportOptions": {
-                    "columns": ':visible'
-                }
-        },
-        {
-          "extend": 'colvis',
-          "titleAttr": 'Ocultar Columnas',
-          "text": "ocultar",
-          "className": "btn btn-white btn-primary  btn-bold",
-        } ]
-  } );
-
-  table.buttons().container()
-      .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
-} );
 </script>
 @endsection
