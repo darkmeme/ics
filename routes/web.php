@@ -51,7 +51,7 @@ Route::delete('/permisos-borrar/{id}/', 'RolesController@delete_permission');
 Route::get('/permisos-asignar', 'RolesController@asignar_permiso');
 Route::get('/roles-asignar', 'RolesController@asignar_rol');
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'TarjetasController@index');
 Route::get('/reportes/{id}/','TarjetasController@pdf');
 //Route::get('reporte', 'RolesController@pdf');//->name('roles.pdf');
 //ruta para las peticiones ajax
@@ -66,6 +66,9 @@ Route::get('/tarjetas-creadas', 'TarjetasRojasController@misTarjetasRojas');
 Route::get('/tarjetasR-asignadas', 'TarjetasRojasController@tarjetasRojasAsignadas');
 //ruta para confirmar usuario
 Route::get('/register/verify/{code}', 'GuestController@verify');
+//ruta para mostrar todas las tarjetas correspondiente a una Area
+Route::get('tarjetasArea/{area}', 'AreasController@show');
+
          
 
 

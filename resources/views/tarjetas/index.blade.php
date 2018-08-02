@@ -105,12 +105,12 @@
 
 <div class="tab-content">
   <div id="todas" class="tab-pane fade in active">
+
   <div class="table-header">
     Listado de todas las tarjetas Amarillas
   </div>
 <div class="table-responsive">
-
-@include('tarjetas.buscar')
+  @include('tarjetas.filtro-fecha')
 
       <table class="table text-center table-striped" id="table-tarjetas">
         <thead>
@@ -310,13 +310,59 @@
 @include('delEditScripts')
 
 <script type="text/javascript">
-
+//llamado de las funciones para editar y eliminar con Ajax
 operacionesDE('tarjetas/');
-
+//llamado de funciones para darle estilo con Datatable a las tablas.
 estiloTabla('#table-tarjetas');
 estiloTabla('#table-creadas');
 estiloTabla('#table-asignadas');
 
+//funciones para usar el componene datepicker de Jquery Ui
+  var txtInicio = $( "#fini" );
+  var txtFin = $( "#ffin" );
+
+ $( function() {
+  txtInicio.datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+
+  $( function() {
+    txtFin.datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+
+  
+  //seccion para quitar filtro por fecha
+  
+   if(txtInicio.val() === '' && txtFin.val() === ''){
+    $('.btnban').attr('disabled', true);
+   }else{
+    $('.btnban').attr('disabled', false);
+   }
+
+   $('.btnban').click(function(){ 
+  txtInicio.val('');
+  txtFin.val('');
+  });
+
+  //seccion para setear en el select el valor que se mando para el filtro por status
+    
+    select = '{{$status}}';
+    if(select === ""){
+      $('#combo').val('def');
+    }else{
+      $('#combo').val(select);
+    }
+  
+    if($('#combo').val() === 'def'){
+      $('.btnres').attr('disabled', true);
+      
+    }else{
+       $('.btnres').attr('disabled', false);
+      }
+    $('.btnres').click(function(){ 
+     $('#combo').val('def');
+  });
+  
+   
 </script>
 
 @endsection

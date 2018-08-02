@@ -39,14 +39,16 @@ class PlantasController extends Controller
 
     public function show(Request $request, $id)
     {
-      $tarjetasP = PlantasModel::find($id)->tarjetas;
+      $planta = PlantasModel::find($id);
+      $nombre = $planta->nombre;
+      $tarjetasP = $planta->tarjetas;
       $totalTarjetas=$tarjetasP->count();
-      $TarjetasFinalizadas=PlantasModel::find($id)->tarjetas->where('status','Finalizada')->count();
-      $TarjetasAsignadas=PlantasModel::find($id)->tarjetas->where('status','Asignada')->count();
-      $TarjetasReasignadas=PlantasModel::find($id)->tarjetas->where('status','Reasignada')->count();
+      $TarjetasFinalizadas=$planta->tarjetas->where('status','Finalizada')->count();
+      $TarjetasAsignadas=$planta->tarjetas->where('status','Asignada')->count();
+      $TarjetasReasignadas=$planta->tarjetas->where('status','Reasignada')->count();
      
          return view('plantas.tarjetas-planta', compact('tarjetasP', 'totalTarjetas','TarjetasFinalizadas',
-         'TarjetasAsignadas','TarjetasReasignadas'));
+         'TarjetasAsignadas','TarjetasReasignadas', 'nombre'));
      
     }
 
