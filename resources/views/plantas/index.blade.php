@@ -38,10 +38,10 @@
               <i class="ace-icon fa fa-pencil bigger-200"></i>
             </a>
           
+            @can('borrar')
             <a class="red btn-delete" href="#" data-id="{{$plant->id}}" data-nombre="{{$plant->nombre}}">
              <i class="ace-icon fa fa-trash-o bigger-200"></i>
             </a>
-            @can('borrar')
             @else
             @endcan
           </div>

@@ -35,10 +35,10 @@
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
               
+              @can('borrar')
               <a class="red btn-del" href="#" data-id="{{$cat->id}}">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
-              @can('borrar')
               @else
               @endcan
             </div>

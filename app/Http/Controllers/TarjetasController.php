@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use \App\Mail\AsignarTarjeta;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\TarjetasRequest;
+use Illuminate\Support\Carbon;
 use Image;
 
 
@@ -41,7 +42,7 @@ class TarjetasController extends Controller
       $inicio=$request->get('inicio');
       $fin=$request->get('fin');
       $status=$request->get('status');
-
+    
       $tar = TarjetasModel::query();
       if(($inicio != '') and ($fin != '')){        
         $tar->whereBetween('created_at', [$inicio, $fin])->get();

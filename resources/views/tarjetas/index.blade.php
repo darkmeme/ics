@@ -147,10 +147,10 @@
               <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
+              @can('Borrar')
               <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
-              @can('Borrar')
               @else
               @endcan
             </div>
@@ -219,10 +219,10 @@
               <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
+              @can('Borrar')
               <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
-              @can('Borrar')
               @else
               @endcan
 
@@ -280,10 +280,10 @@
               <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
+              @can('Borrar')
               <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
-              @can('Borrar')
               @else
               @endcan
             </div>
@@ -322,11 +322,11 @@ estiloTabla('#table-asignadas');
   var txtFin = $( "#ffin" );
 
  $( function() {
-  txtInicio.datepicker({ dateFormat: 'yy-mm-dd' });
+  txtInicio.datepicker({ dateFormat: 'dd-mm-yy' });
   } );
 
   $( function() {
-    txtFin.datepicker({ dateFormat: 'yy-mm-dd' });
+    txtFin.datepicker({ dateFormat: 'dd-mm-yy' });
   } );
 
   

@@ -34,10 +34,10 @@
             <a class="green btn-editar" data-id="{{$causa->id}}" data-causa="{{$causa->nombre}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
+              @can('Borrar')
               <a class="red btnBorrar" " href="#" data-id="{{$causa->id}}" data-nombre="{{$causa->nombre}}">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>                        
-              @can('Borrar')
               @else
               @endcan
             </div>

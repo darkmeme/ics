@@ -158,10 +158,10 @@
               <a class="green btnEdit" href="#" data-id="{{$tr->id}}" data-prioridad="{{$tr->prioridad}}" data-desc="{{$tr->descripcion_reporte}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
+              @can('borrar')
               <a class="red btn-borrar" href="#" data-id="{{$tr->id}}">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
-              @can('borrar')
               @else
               @endcan
 
@@ -227,11 +227,10 @@
               <a class="green btnEdit" href="#" data-id="{{$t->id}}" data-prioridad="{{$t->prioridad}}" data-desc="{{$t->descripcion_reporte}}">
                 <i class="ace-icon fa fa-pencil bigger-200"></i>
               </a>
+              @can('borrar')
               <a class="red btn-borrar" href="#" data-id="{{$t->id}}">
                 <i class="ace-icon fa fa-trash-o bigger-200"></i>
               </a>
-
-              @can('borrar')
               @else
               @endcan
 
