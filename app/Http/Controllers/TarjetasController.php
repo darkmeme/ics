@@ -44,7 +44,9 @@ class TarjetasController extends Controller
       $status=$request->get('status');
     
       $tar = TarjetasModel::query();
-      if(($inicio != '') and ($fin != '')){        
+      if(($inicio != '') and ($fin != '')){ 
+        $inicio = date("Y-m-d", strtotime($inicio)); 
+        $fin = date("Y-m-d", strtotime($fin));      
         $tar->whereBetween('created_at', [$inicio, $fin])->get();
      
       }  
@@ -131,7 +133,7 @@ public function tarjetas_asignadas(Request $request){
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(311);
+      $tarjetas->user_asignado=(3);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();
