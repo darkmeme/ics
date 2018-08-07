@@ -8,7 +8,7 @@
   </div> 
 
   <div class="table-header">
-    Listado de Tarjetas en <b>{{$nombre}}</b>
+    Listado de Tarjetas en <b>{{$nombre}}</b> 
   </div>
 
 <div class="row">
@@ -94,7 +94,7 @@
           <th class="text-center" WIDTH="100">Opciones </th>
         </thead>
 
-        @foreach ($tarjetasP as $t)
+        @foreach ($areaTarjetas as $t)
         <tr>
           <td>{{$t->id}}</td>         
           <td>{{$t->planta->nombre}}</td>
@@ -126,4 +126,5 @@
 estiloTabla('#table-tarjetas-asignadas');
 
 </script>
+
 @endsection

@@ -47,12 +47,27 @@ class AreasController extends Controller
       return $areas;
     }
 
-    public function create()
+    //no necesaria ya que se crea mediante modal y los datos de plantas se envian a index
+    /*public function create()
     {
         $plantas=PlantasModel::All();
         return view('areas.create',compact('plantas'));
-    }
+    }*/
 
+    public function show(Request $request, $id)
+    {
+      $area = AreasModel::find($id);
+      $nombre = $area->nombre;
+      $areaTarjetas =$area->tarjetasA;
+      $totalTarjetas=$areaTarjetas->count();
+      $TarjetasFinalizadas=$area->tarjetasA->where('status','Finalizada')->count();
+      $TarjetasAsignadas=$area->tarjetasA->where('status','Asignada')->count();
+      $TarjetasReasignadas=$area->tarjetasA->where('status','Reasignada')->count();
+     
+         return view('areas.tarjetas-area', compact('areaTarjetas', 'totalTarjetas','TarjetasFinalizadas',
+         'TarjetasAsignadas','TarjetasReasignadas', 'nombre'));
+     
+    }
 
     public function store(Request $request)
     {

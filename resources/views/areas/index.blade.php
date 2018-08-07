@@ -39,14 +39,18 @@
                          </td>
                          <td class="text-center">
                               <div class="action-buttons">
+                              <a class="blue" href="{{URL::action('AreasController@show',$a->id)}}">
+                                <i class="ace-icon fa fa-eye bigger-200"></i>
+                              </a>
+
                               <a class="green btn-edit" data-id="{{$a->id}}">
                                 <i class="ace-icon fa fa-pencil bigger-200"></i>
                               </a>
                             
+                              @can('borrar')
                               <a class="red btn-del" href="#" data-id="{{$a->id}}">
                                <i class="ace-icon fa fa-trash-o bigger-200"></i>
                               </a>
-                              @can('borrar')
                               @else
                               @endcan
                             </div>

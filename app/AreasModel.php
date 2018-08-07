@@ -23,4 +23,13 @@ class AreasModel extends Model
       return $this->belongsTo('App\PlantasModel','subArea');
     }
 
+    public function tarjetasA()
+  {
+    return $this->hasMany('App\TarjetasModel', 'area_id');
+  }
+  public function tarjetasR()
+  {
+    return $this->hasMany('App\TarjetasRojas', 'area_id');
+  }
+
 }

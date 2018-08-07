@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use \App\Mail\AsignarTarjeta;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Http\Requests\TarjetasRequest;
+use Illuminate\Support\Carbon;
 use Image;
 
 
@@ -37,8 +38,26 @@ class TarjetasController extends Controller
       $totalReasignadas=TarjetasModel::where(['status' => 'Reasignada'])->count();
       $totalFinalizadas=TarjetasModel::where(['status' => 'Finalizada'])->count();
       $pendientes=$totalTarjetas-$totalFinalizadas;
-      $filtro=trim($request->get('buscar'));
-      $tarjetas=TarjetasModel::where('status','LIKE',''.$filtro.'%')->get();
+      //filtro por rango de fechas
+      $inicio=$request->get('inicio');
+      $fin=$request->get('fin');
+      $status=$request->get('status');
+    
+      $tar = TarjetasModel::query();
+      if(($inicio != '') and ($fin != '')){        
+        $tar->whereBetween('created_at', [$inicio, $fin])->get();
+     
+      }  
+      //filtro de tarjetas por status  
+      if($status == null || $status == 'def'){
+
+          }
+      else{
+        $tar->where('status', $status);
+      }     
+
+       $tarjetas = $tar->get();          
+     
       //datos para crear tarjeta con modal
       $plantas=PlantasModel::ALL();
       $eventos=EventosModel::ALL();
@@ -53,7 +72,9 @@ class TarjetasController extends Controller
         ->orWhereIn('user_reasignado', [$user_actual])
         ->get();
 
-     return view('tarjetas.index',compact('tarjetas','tarjetasC','tarjetasAsig','filtro', 'totalTarjetas', 'totalEmitidas','plantas','eventos','categorias','causas', 'totalReasignadas', 'totalFinalizadas', 'pendientes'));  
+     return view('tarjetas.index',compact('tarjetas','tarjetasC','tarjetasAsig',
+     'status', 'totalTarjetas', 'totalEmitidas','plantas','eventos','categorias',
+     'causas', 'totalReasignadas', 'totalFinalizadas', 'pendientes', 'inicio', 'fin'));  
     }
 
 /*    **Funciones no necesarias ya, ahora todo se manda al index**!
