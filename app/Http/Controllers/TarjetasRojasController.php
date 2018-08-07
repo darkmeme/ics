@@ -36,7 +36,7 @@ class TarjetasRojasController extends Controller
         $inicio=$request->get('inicio');
         $fin=$request->get('fin');
         $status=$request->get('status');
-  
+        //dd($inicio);
         $tar = TarjetasRojas::query();
         if(($inicio != '') and ($fin != '')){        
           $tar->whereBetween('created_at', [$inicio, $fin])->get();
@@ -101,6 +101,7 @@ class TarjetasRojasController extends Controller
 
     }
     */
+
 
     public function asignar(Request $request,$id)
     {

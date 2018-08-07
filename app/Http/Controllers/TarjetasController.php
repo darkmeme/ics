@@ -42,7 +42,7 @@ class TarjetasController extends Controller
       $inicio=$request->get('inicio');
       $fin=$request->get('fin');
       $status=$request->get('status');
-    
+    //dd($inicio);
       $tar = TarjetasModel::query();
       if(($inicio != '') and ($fin != '')){ 
         $inicio = date("Y-m-d", strtotime($inicio)); 

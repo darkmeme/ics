@@ -317,16 +317,17 @@ estiloTabla('#table-tarjetas');
 estiloTabla('#table-creadas');
 estiloTabla('#table-asignadas');
 
-//funciones para usar el componene datepicker de Jquery Ui
+
+//funciones para usar el componente datepicker de Jquery Ui
   var txtInicio = $( "#fini" );
   var txtFin = $( "#ffin" );
 
  $( function() {
-  txtInicio.datepicker({ dateFormat: 'dd-mm-yy' });
+  txtInicio.datepicker({ dateFormat: 'yy-mm-dd' });
   } );
 
   $( function() {
-    txtFin.datepicker({ dateFormat: 'dd-mm-yy' });
+    txtFin.datepicker({ dateFormat: 'yy-mm-dd' });
   } );
 
   
