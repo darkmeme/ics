@@ -56,6 +56,7 @@ class AreasController extends Controller
 
     public function show(Request $request, $id)
     {
+      //seccion para tarjetas amarillas
       $area = AreasModel::find($id);
       $nombre = $area->nombre;
       $areaTarjetas =$area->tarjetasA;
@@ -63,9 +64,19 @@ class AreasController extends Controller
       $TarjetasFinalizadas=$area->tarjetasA->where('status','Finalizada')->count();
       $TarjetasAsignadas=$area->tarjetasA->where('status','Asignada')->count();
       $TarjetasReasignadas=$area->tarjetasA->where('status','Reasignada')->count();
+      $pendientesA=$totalTarjetas-$TarjetasFinalizadas;
+
+      //seccion para tarjetas rojas
+      $areaRojas=$area->tarjetasR;
+      $totalRojas=$areaRojas->count();
+      $rojasFinalizadas=$area->tarjetasR->where('status','Finalizada')->count();
+      $rojasAsignadas=$area->tarjetasR->where('status','Asignada')->count();
+      $rojasReasignadas=$area->tarjetasR->where('status','Reasignada')->count();
+      $pendientesR=$totalRojas-$rojasFinalizadas;
      
          return view('areas.tarjetas-area', compact('areaTarjetas', 'totalTarjetas','TarjetasFinalizadas',
-         'TarjetasAsignadas','TarjetasReasignadas', 'nombre'));
+         'TarjetasAsignadas','TarjetasReasignadas', 'nombre', 'areaRojas', 'totalRojas', 'rojasFinalizadas',
+         'rojasAsignadas', 'rojasReasignadas', 'pendientesA', 'pendientesR'));
      
     }
 

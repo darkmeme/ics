@@ -45,8 +45,7 @@ class TarjetasController extends Controller
     //dd($inicio);
       $tar = TarjetasModel::query();
       if(($inicio != '') and ($fin != '')){ 
-        $inicio = date("Y-m-d", strtotime($inicio)); 
-        $fin = date("Y-m-d", strtotime($fin));      
+             
         $tar->whereBetween('created_at', [$inicio, $fin])->get();
      
       }  

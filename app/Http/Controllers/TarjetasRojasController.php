@@ -12,6 +12,7 @@ Use Session;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use \App\Mail\AsignarTarjetaRoja;
+use Illuminate\Support\Carbon;
 use Brian2694\Toastr\Facades\Toastr;
 
 class TarjetasRojasController extends Controller
@@ -38,7 +39,8 @@ class TarjetasRojasController extends Controller
         $status=$request->get('status');
         //dd($inicio);
         $tar = TarjetasRojas::query();
-        if(($inicio != '') and ($fin != '')){        
+        if(($inicio != '') and ($fin != '')){ 
+          
           $tar->whereBetween('created_at', [$inicio, $fin])->get();
        
         }  

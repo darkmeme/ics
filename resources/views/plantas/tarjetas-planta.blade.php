@@ -17,14 +17,14 @@
   </div> 
 
   <div class="table-header">
-    Listado de Tarjetas Amarillas en <b>{{$nombre}}</b>
+    Listado de Tarjetas Amarillas en la Planta: <b>{{$nombre}}</b>
   </div>
 
 <div class="row">
          <div class="col-lg-1 col-md-2">
          <a href="javascript:history.back()"><button class="btn btn-info" type="button">Regresar<i class="fa fa-arrow-circle-o-left"></i></button></a>
          </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
                             <div class="row">
@@ -40,7 +40,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
                             <div class="row">
@@ -56,7 +56,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
                             <div class="row">
@@ -72,7 +72,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
                             <div class="row">
@@ -88,7 +88,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
                             <div class="row">
@@ -109,13 +109,13 @@
 
 <div class="table-responsive">
 
-      <table class="table table-bordered text-center table-striped table-hover" id="table-tarjetas-asignadas">
+      <table class="table table-bordered text-center table-striped table-hover" id="table-ta">
         <thead>
-          <th>Numero</th>
-          <th>Planta</th>
-          <th>Fecha</th>                    
-          <th>Descripcion</th>
-          <th>Estatus</th>
+          <th class="text-center">Numero</th>
+          <th class="text-center">Planta</th>
+          <th class="text-center">Fecha</th>                    
+          <th class="text-center">Descripcion</th>
+          <th class="text-center">Estatus</th>
           <th class="text-center" WIDTH="100">Opciones </th>
         </thead>
 
@@ -152,14 +152,14 @@
   </div> 
 
   <div class="table-header">
-    Listado de Tarjetas Rojas en <b>{{$nombre}}</b>
+    Listado de Tarjetas Rojas en la Planta: <b>{{$nombre}}</b>
   </div>
 
 <div class="row">
          <div class="col-lg-1 col-md-2">
          <a href="javascript:history.back()"><button class="btn btn-info" type="button">Regresar<i class="fa fa-arrow-circle-o-left"></i></button></a>
          </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -175,7 +175,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -191,7 +191,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -207,7 +207,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -223,7 +223,7 @@
                         </div>                        
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -244,13 +244,13 @@
 
 <div class="table-responsive">
 
-      <table class="table table-bordered text-center table-striped table-hover" id="table-tarjetas-asignadas">
+      <table class="table table-bordered text-center table-striped table-hover" id="table-tr">
         <thead>
-          <th>Numero</th>
-          <th>Planta</th>
-          <th>Fecha</th>                    
-          <th>Descripcion</th>
-          <th>Estatus</th>
+          <th class="text-center">Numero</th>
+          <th class="text-center">Planta</th>
+          <th class="text-center">Fecha</th>                    
+          <th class="text-center">Descripcion</th>
+          <th class="text-center">Estatus</th>
           <th class="text-center" WIDTH="100">Opciones </th>
         </thead>
 
@@ -289,7 +289,8 @@
 
 <script type="text/javascript">
 
-estiloTabla('#table-tarjetas-asignadas');
+estiloTabla('#table-ta');
+estiloTabla('#table-tr');
 
 </script>
 @endsection
