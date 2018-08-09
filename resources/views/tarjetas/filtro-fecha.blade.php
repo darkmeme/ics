@@ -2,8 +2,14 @@
 <form class="form-group" method="GET" action="{{ url('tarjetas') }}">
 {{ csrf_field() }}
 <div class="row">
-<div class="col-lg-8 col-xs-12 col-md-11 col-sm-12 input-group input-group-sm">
-  <span class="input-group-addon" id="basic-addon1"><b> Filtrar por fechas </b></span>
+<div class="col-lg-10 col-xs-12 col-md-12 col-sm-12 input-group input-group-sm">
+
+  <span class="input-group-addon"><b> Filtrar por fechas por: </b></span>
+  <select id="tipo" name="fecha" class="form-control">
+  <option value="crea">Creacion</option>
+  <option value="fina">Finalizacion</option>
+  </select>
+  <span class="input-group-addon"><b> Seleccione las fechas </b></span>
   <input id="fini" type="text" name="inicio" class="form-control" value="{{$inicio}}" autocomplete="off" placeholder="fecha inicio.." readonly>
   <span class="input-group-addon"><i class="ace-icon fa fa-chevron-right"></i></span>
   <input id="ffin" type="text" name="fin" class="form-control" value="{{$fin}}" autocomplete="off" placeholder="fecha fin..." readonly>

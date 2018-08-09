@@ -37,11 +37,17 @@ class TarjetasRojasController extends Controller
         $inicio=$request->get('inicio');
         $fin=$request->get('fin');
         $status=$request->get('status');
+        $filtro=$request->get('fecha');
+
         //dd($inicio);
         $tar = TarjetasRojas::query();
         if(($inicio != '') and ($fin != '')){ 
           
-          $tar->whereBetween('created_at', [$inicio, $fin])->get();
+          if($filtro == 'crea'){
+            $tar->whereBetween('created_at', [$inicio, $fin])->get();
+          }else{
+            $tar->whereBetween('fecha_cierre', [$inicio, $fin])->get();
+          }
        
         }  
         //filtro de tarjetas por status  
@@ -65,7 +71,7 @@ class TarjetasRojasController extends Controller
 
         return view('tarjetas-rojas.index',compact('tarjetasRojas','tarjetasAsig','filtro','plantas',
         'tarjetas', 'totalTarjetas', 'totalEmitidas', 'totalReasignadas', 'totalFinalizadas',
-        'pendientes', 'inicio', 'fin', 'status'));
+        'pendientes', 'inicio', 'fin', 'status', 'filtro'));
     }
 
     /*     **Funciones no necesarias ya, ahora todo se manda al index**!

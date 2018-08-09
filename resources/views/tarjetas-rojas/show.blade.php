@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-lg-4 col-xs-12">
         <h5><strong>Status: </strong><span class="blue">{{$tarjetaR->status}}</span></h5>
-        <h5><strong>Fecha: </strong><span class="blue">{{$tarjetaR->created_at}}</span> </h5>
+        <h5><strong>Fecha: </strong><span class="blue">{{$tarjetaR->created_at->format('d-m-Y')}}</span> </h5>
         <h5><strong>Area: </strong><span class="blue">{{$tarjetaR->area->nombre}} </span></h5>
         <h5><strong>Planta: </strong><span class="blue">{{$tarjetaR->planta->nombre}} </span></h5>
         <h5><strong>Creada por: </strong><span class="blue">{{$tarjetaR->user->name}} </span></h5>
@@ -28,7 +28,7 @@
         <h5><strong>Descripcion del Reporte: </strong><span class="blue">{{$tarjetaR->descripcion_reporte}}</span> </h5>
         <h5><strong>Fecha de Cierre: </strong><span class="blue">
         @if(isset($tarjetaR->fecha_cierre))
-            {{$tarjetaR->fecha_cierre}} 
+            {{date('d-m-Y', strtotime($tarjetaR->fecha_cierre))}}   
           @else No Finalizada                   
           @endif
         </span> </h5>
@@ -63,7 +63,7 @@
       <a href=""data-target="#modal-responsable" data-toggle="modal"> <button class="btn btn-info">Cambiar Responsable</button></a>
       <a href=""data-target="#modal-asignar" data-toggle="modal"> <button class="btn btn-info">Reasignar</button></a>
       <a href=""data-target="#modal-finalizar" data-toggle="modal"> <button class="btn btn-info">Finalizar</button></a>
-      <a href="javascript:history.back()"> <button class="btn btn-info">Regresar</button></a>
+      <a href="javascript:history.back()"> <button class="btn btn-info regresar">Regresar</button></a>
       </div>
       <div class="row">
       <br>
