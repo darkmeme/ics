@@ -17,12 +17,9 @@
       .logo { padding: 5px; margin: 30px; border: 0px solid black; float: right; width: 100px; }
       .logo2 { position:relative; top: 300px; left: 15px; float: left; width: 450px; }
       body {
-		background-color: white;
+
 	     }
     </style>
-<div class="row">
-  <img class="logo" src="images/logo.png" id="logo">
-</div>
 
 <div class="col-lg-6 col-sm-6 col-lg-offset-3 col-sm-offset-2">
 {{--@if ($message = Session::get('success'))
@@ -38,8 +35,9 @@
   {{Session::get('success')}}
 </div>
 @endif
-
 </div>
+<br>
+<br>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -107,10 +105,6 @@
                 </div>
             </div>
         </div>
-
-    </div>
-    <div class="img-fluid row">
-      <img class="logo2" src="images/1.jpg">
     </div>
   </body>
 </html>
