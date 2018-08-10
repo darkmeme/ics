@@ -17,4 +17,9 @@ class PlantasModel extends Model
     return $this->hasMany('App\TarjetasModel', 'planta_id');
   }
 
+  public function tarjetasRojas()
+  {
+    return $this->hasMany('App\TarjetasRojas', 'planta_id');
+  }
+
 }

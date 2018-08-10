@@ -119,7 +119,11 @@
           <th class="text-center">Planta</th>
           <th class="text-center">Equipo</th>
           <th class="text-center">Categoria</th>
+          @if($filtro=='fina')
+          <th class="text-center">Fecha Cierre</th>
+          @else
           <th class="text-center">Fecha</th>
+          @endif
           <th class="text-center">Prioridad</th>
           <th class="text-center">Descripcion</th>
           <th class="text-center">Creada por</th>
@@ -134,7 +138,12 @@
           <td>{{$t->planta->nombre}}</td>
           <td>{{$t->equipo->nombre}}</td>
           <td>{{$t->categoria->nombre}}</td>
-          <td>{{$t->created_at->format('d-m-Y')}}</td>
+          @if($filtro=='fina')
+          <td>{{date('d-m-Y', strtotime($t->fecha_cierre))}} </td>              
+          @else 
+          <td>{{$t->created_at->format('d-m-Y')}}</td>                
+          @endif
+                    
           <td class="pri">{{$t->prioridad}}</td>
           <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->user->name}}</td>
@@ -268,7 +277,6 @@
           <td class="pri">{{$t->prioridad}}</td>
           <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->categoria->nombre}}</td>
-          {{--<td>{{$t->finalizado}}</td>--}}
           <td><span class="label label-sm label-success">{{$t->status}}</span>
           </td>
           <td>
@@ -342,6 +350,7 @@ estiloTabla('#table-asignadas');
    $('.btnban').click(function(){ 
   txtInicio.val('');
   txtFin.val('');
+  $('#tipo').val('crea');
   });
 
   //seccion para setear en el select el valor que se mando para el filtro por status
@@ -352,6 +361,13 @@ estiloTabla('#table-asignadas');
     }else{
       $('#combo').val(select);
     }
+
+    tipoFecha = '{{$filtro}}';
+    if(tipoFecha === ""){
+      $('#tipo').val('crea');
+    }else{
+      $('#tipo').val(tipoFecha);
+    }
   
     if($('#combo').val() === 'def'){
       $('.btnres').attr('disabled', true);
@@ -360,7 +376,7 @@ estiloTabla('#table-asignadas');
        $('.btnres').attr('disabled', false);
       }
     $('.btnres').click(function(){ 
-     $('#combo').val('def');
+      $('#combo').val('def');
   });
   
    

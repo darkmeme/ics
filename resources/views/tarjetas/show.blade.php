@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-lg-4 col-xs-12">
         <h5><strong>Status: </strong><span class="blue">{{$tarjetas->status}}</span></h5>
-        <h5><strong>Fecha: </strong><span class="blue">{{$tarjetas->created_at}}</span> </h5>
+        <h5><strong>Fecha: </strong><span class="blue">{{$tarjetas->created_at->format('d-m-Y')}}</span> </h5>
         <h5><strong>Area: </strong><span class="blue">{{$tarjetas->area->nombre}} </span></h5>
         <h5><strong>Planta: </strong><span class="blue">{{$tarjetas->planta->nombre}} </span></h5>
         <h5><strong>Nombre Empleado:</strong><span class="blue">{{$tarjetas->user->name}} </span></h5>
@@ -31,7 +31,7 @@
         <h5><strong>Descripcion del Reporte: </strong><span class="blue">{{$tarjetas->descripcion_reporte}}</span> </h5>
         <h5><strong>Fecha de Cierre: </strong><span class="blue">
         @if(isset($tarjetas->fecha_cierre))
-            {{$tarjetas->fecha_cierre}} 
+            {{date('d-m-Y', strtotime($tarjetas->fecha_cierre))}}  
           @else No Finalizada                  
           @endif
         </span> </h5>

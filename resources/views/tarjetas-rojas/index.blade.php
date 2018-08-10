@@ -129,7 +129,11 @@
           <th class="text-center">Numero</th>
           <th class="text-center">Area</th>
           <th class="text-center">Planta</th>
+          @if($filtro=='fina')
+          <th class="text-center">Fecha Cierre</th>
+          @else
           <th class="text-center">Fecha</th>
+          @endif
           <th class="text-center">Creada por</th>
           <th class="text-center">Equipo</th>
           <th class="text-center">Prioridad</th>
@@ -144,7 +148,12 @@
           <td>{{$tr->id}}</td>
           <td>{{$tr->area->nombre}}</td>
           <td>{{$tr->planta->nombre}}</td>
-          <td>{{$tr->created_at->format('d-m-Y')}}</td>
+          @if($filtro=='fina')
+          <td>{{date('d-m-Y', strtotime($tr->fecha_cierre))}} </td>              
+          @else 
+          <td>{{$tr->created_at->format('d-m-Y')}}</td>                
+          @endif
+
           <td>{{$tr->user->name}}</td>
           <td>{{$tr->equipo->nombre}}</td>
           <td class="pri">{{$tr->prioridad}}</td>
@@ -202,7 +211,7 @@
           <td>{{$t->id}}</td>
           <td>{{$t->area->nombre}}</td>
           <td>{{$t->planta->nombre}}</td>
-          <td>{{$t->created_at}}</td>
+          <td>{{$t->created_at->format('d-m-Y')}}</td>
           <td>{{$t->user->name}}</td>
           <td>{{$t->equipo->nombre}}</td>
           <td class="pri">{{$t->prioridad}}</td>          
@@ -355,6 +364,7 @@ $( function() {
    $('.btnban').click(function(){ 
   txtInicio.val('');
   txtFin.val('');
+  $('#tipo').val('crea');
   });
 
   //seccion para setear en el select el valor que se mando para el filtro por status
@@ -364,6 +374,13 @@ $( function() {
       $('#combo').val('def');
     }else{
       $('#combo').val(select);
+    }
+
+    tipoFecha = '{{$filtro}}';
+    if(tipoFecha === ""){
+      $('#tipo').val('crea');
+    }else{
+      $('#tipo').val(tipoFecha);
     }
   
     if($('#combo').val() === 'def'){

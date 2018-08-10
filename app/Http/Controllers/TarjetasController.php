@@ -42,10 +42,18 @@ class TarjetasController extends Controller
       $inicio=$request->get('inicio');
       $fin=$request->get('fin');
       $status=$request->get('status');
-    //dd($inicio);
+      $filtro=$request->get('fecha');
+
+     // dd($fin);
       $tar = TarjetasModel::query();
-      if(($inicio != '') and ($fin != '')){        
-        $tar->whereBetween('created_at', [$inicio, $fin])->get();
+      if(($inicio != '') and ($fin != '')){ 
+             
+        if($filtro == 'crea'){
+          $tar->whereBetween('created_at', [$inicio, $fin])->get();
+        }else{
+          $tar->whereBetween('fecha_cierre', [$inicio, $fin])->get();
+        }
+       
      
       }  
       //filtro de tarjetas por status  
@@ -74,7 +82,7 @@ class TarjetasController extends Controller
 
      return view('tarjetas.index',compact('tarjetas','tarjetasC','tarjetasAsig',
      'status', 'totalTarjetas', 'totalEmitidas','plantas','eventos','categorias',
-     'causas', 'totalReasignadas', 'totalFinalizadas', 'pendientes', 'inicio', 'fin'));  
+     'causas', 'totalReasignadas', 'totalFinalizadas', 'pendientes', 'inicio', 'fin', 'filtro'));  
     }
 
 /*    **Funciones no necesarias ya, ahora todo se manda al index**!
@@ -131,7 +139,7 @@ public function tarjetas_asignadas(Request $request){
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(311);
+      $tarjetas->user_asignado=(3);
       $tarjetas->status='Asignada';
     }
       $tarjetas->save();

@@ -1,7 +1,7 @@
 
 <style media="screen">
-.amarillo{ background-color:yellow;}
-.rojo{ background-color:red;}
+.amarillo{ background-color:#FAFAD2;}
+.rojo{ background-color:#CD5C5C;}
 
 .modal-right {
   position: absolute;

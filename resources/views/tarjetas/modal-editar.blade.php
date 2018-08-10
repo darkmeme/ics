@@ -47,7 +47,7 @@ role="dialog" id="edit-tarjeta">
 
             <div class="row">
             <div class="col-lg-10 offset-1">
-              <div class="color-etiquetas text-center">
+              <div class="text-center">
                 <p>DESCRIPCION DE LA ANOMALIA</p>
               </div>
               </div>
