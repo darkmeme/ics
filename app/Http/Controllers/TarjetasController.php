@@ -53,9 +53,10 @@ class TarjetasController extends Controller
         }else{
           $tar->whereBetween('fecha_cierre', [$inicio, $fin])->get();
         }
-       
-     
-      }  
+            
+      }  else{
+        $filtro = 'crea';
+      }
       //filtro de tarjetas por status  
       if($status == null || $status == 'def'){
 
