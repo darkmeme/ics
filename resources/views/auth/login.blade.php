@@ -12,13 +12,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   </head>
-  <body>
+  <body background="/img/4xxx.png">
     <style media="screen">
       .logo { padding: 5px; margin: 30px; border: 0px solid black; float: right; width: 100px; }
       .logo2 { position:relative; top: 300px; left: 15px; float: left; width: 450px; }
-      body {
-
-	     }
+      .titulo { color: #00008B; }
     </style>
 
 <div class="col-lg-6 col-sm-6 col-lg-offset-3 col-sm-offset-2">
@@ -37,6 +35,11 @@
 @endif
 </div>
 <br>
+<div class="row">
+<div class="col-lg-8 col-lg-offset-2">
+<h2 class="titulo">SISTEMA DE REPORTES COMPLEJO INDUSTRIAL COMAYAGUA</h2>
+</div>
+</div>
 <br>
     <div class="container">
         <div class="row">
