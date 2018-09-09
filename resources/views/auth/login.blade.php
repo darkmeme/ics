@@ -36,7 +36,7 @@
 </div>
 <br>
 <div class="row">
-<div class="col-lg-8 col-lg-offset-2">
+<div class="col-lg-10 col-xs-11 col-sm-12 col-md-12 col-lg-offset-2 col-md-offset-1 col-xs-offset-1">
 <h2 class="titulo">SISTEMA DE REPORTES COMPLEJO INDUSTRIAL COMAYAGUA</h2>
 </div>
 </div>
