@@ -15,6 +15,7 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
 </head>
 <body>
+       
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -30,7 +31,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                      Sistema de Reportes CIC
+                      Sistema de Reportes Complejo Industrial Comayagua
                         <!--{{ config('app.name', 'Laravel') }}-->
                     </a>
                 </div>
@@ -73,6 +74,7 @@
             </div>
         </nav>
         {!! Toastr::message() !!}
+        <br>
         @yield('content')
     </div>
 
