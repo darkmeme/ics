@@ -31,39 +31,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-book fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div>Emitidas: 
-                                         <h2>{{$totalEmitidas}}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-book fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div>Reasignadas: 
-                                         <h2>{{$totalReasignadas}}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="panel panel-warning">
+                    <div class="panel panel-success">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
@@ -112,6 +80,7 @@
 <div class="table-responsive">
   @include('tarjetas.filtro-fecha')
 
+
       <table class="table text-center table-striped" id="table-tarjetas">
         <thead>
           <th class="text-center">Numero</th>
@@ -147,7 +116,11 @@
           <td class="pri">{{$t->prioridad}}</td>
           <td class="des">{{$t->descripcion_reporte}}</td>
           <td>{{$t->user->name}}</td>
-          <td class="td-status"><span class="label label-sm label-warning">{{$t->status}}</span></td>
+          @if($t->status=='Pendiente')
+          <td class="td-status"><span class="label label-sm label-danger">{{$t->status}}</span></td>
+          @else
+          <td class="td-status"><span class="label label-sm label-success">{{$t->status}}</span></td>
+          @endif
           <td>
             <div class="action-buttons">
               <a class="blue" href="{{URL::action('TarjetasController@show',$t->id)}}">

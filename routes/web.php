@@ -41,7 +41,8 @@ Auth::routes();
 
 //ruta para petecion de usuario por medio de json
 Route::get('list-users/{filtro}', 'UsersController@users_json');
-
+//ruta para crear ajuste
+Route::get('/ajustes', 'AjustesController@ajuste');
 
 //Route::get('/', 'TarjetasController@mis_tarjetas');
 

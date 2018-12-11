@@ -23,8 +23,7 @@
 <span class="input-group-addon"><b> Filtrar por Status </b></span>
 <select id="combo" name="status" class="form-control">
 <option value="def">Todas las Tarjetas</option>
-<option value="Asignada">Asignadas</option>
-<option value="Reasignada">Reasignadas</option>
+<option value="Pendiente">Pendientes</option>
 <option value="Finalizada">Finalizadas</option>
 </select>
   <span class="input-group-btn"> 

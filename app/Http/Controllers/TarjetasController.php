@@ -34,8 +34,8 @@ class TarjetasController extends Controller
     public function index(Request $request)
     {
       $totalTarjetas=TarjetasModel::count();
-      $totalEmitidas=TarjetasModel::where(['status' => 'Asignada'])->count();
-      $totalReasignadas=TarjetasModel::where(['status' => 'Reasignada'])->count();
+      //$totalEmitidas=TarjetasModel::where(['status' => 'Asignada'])->count();
+      //$totalReasignadas=TarjetasModel::where(['status' => 'Reasignada'])->count();
       $totalFinalizadas=TarjetasModel::where(['status' => 'Finalizada'])->count();
       $pendientes=$totalTarjetas-$totalFinalizadas;
       //filtro por rango de fechas
@@ -82,8 +82,8 @@ class TarjetasController extends Controller
         ->get();
 
      return view('tarjetas.index',compact('tarjetas','tarjetasC','tarjetasAsig',
-     'status', 'totalTarjetas', 'totalEmitidas','plantas','eventos','categorias',
-     'causas', 'totalReasignadas', 'totalFinalizadas', 'pendientes', 'inicio', 'fin', 'filtro'));  
+     'status', 'totalTarjetas','plantas','eventos','categorias',
+     'causas', 'totalFinalizadas', 'pendientes', 'inicio', 'fin', 'filtro'));  
     }
 
 /*    **Funciones no necesarias ya, ahora todo se manda al index**!
@@ -131,17 +131,15 @@ public function tarjetas_asignadas(Request $request){
       $tarjetas->evento_id=$request->get('evento_id');
       $tarjetas->turno=$request->get('turno');
       $tarjetas->causa_id=$request->get('causa_id');
-      //$tarjetas->status='enviada';
-      //$tarjetas->user_finaliza=(1);
 // si la tajeta es electrica o mencanica se se asigna al planificador de mantenimiento
       if ($tarjetas->categoria->nombre=='Electrica' or $tarjetas->categoria->nombre=='Mecanica'){
-      $tarjetas->user_asignado=(32);
-      $tarjetas->status='Asignada';
+      $tarjetas->user_asignado=(353); //asignar a 353 -> Rivera
+      $tarjetas->status='Pendiente';
     }
 // si no la tarjeta se asigna al encargado de she
     else {
-      $tarjetas->user_asignado=(3);
-      $tarjetas->status='Asignada';
+      $tarjetas->user_asignado=(359);
+      $tarjetas->status='Pendiente';
     }
       $tarjetas->save();
       //se envia correo al usuario que se le asigno la tarjeta
@@ -206,7 +204,7 @@ public function asignar(TarjetasRequest $request,$id)
   else{
   //$user=User::where('id',$id)->get(['name']);
   $tarjeta->user_reasignado=$request->get('empleado_id');
-  $tarjeta->status='Reasignada';
+  //$tarjeta->status='Pendiente';
   $tarjeta->motivo_reasignado=$request->get('motivo');
   $tarjeta->update();
   //dd('llego el request'.' id tarjeta '. $id . ' id user '.$tarjeta->user_reasignado);
